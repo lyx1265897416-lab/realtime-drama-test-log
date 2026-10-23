@@ -62,7 +62,7 @@ footer{margin-top:40px;font-size:12px;color:var(--mute)}
 <body>
 <div class="wrap">
   <h1>实时生成测试记录 · Vivix W1 普通档 · 5+10 与 10+10</h1>
-  <p class="note">每条对应互动剧的一个选择点：观众在输入框里打一句自己的话（“她”），导演层写出男主的回话（“他”）和他做的那几下动作（“那一下”），两段并发生成后拼成一条完整视频放在卡片里。每条下面四个标记是用户定的标准：<b>画面有没有硬错误</b>、<b>主线有没有左右她</b>、<b>时延</b>（从提交到两段都就绪 ≤ 30 秒算过）、<b>有没有落在她身上的那一下</b>（绿 = 过，红 = 没过）。每组开头写清参数和计时口径。按剧集分区，新剧集的测试往下追加。</p>
+  <p class="note">每条对应互动剧的一个选择点：观众在输入框里打一句自己的话（“你”），导演层写出男主的回话（“他”）和他做的那几下动作（“那一下”），两段并发生成后拼成一条完整视频放在卡片里。每条下面四个标记是用户定的标准：<b>画面有没有硬错误</b>、<b>主线有没有左右她</b>、<b>时延</b>（从提交到两段都就绪 ≤ 30 秒算过）、<b>有没有落在她身上的那一下</b>（绿 = 过，红 = 没过）。每组开头写清参数和计时口径。按剧集分区，新剧集的测试往下追加。</p>
   <nav class="toc" id="toc"></nav>
   <div id="root"></div>
   <footer id="foot"></footer>
@@ -77,7 +77,7 @@ const card = c => `<div class="card">
   <h4>第 ${c.n} 条 · ${esc(c.label)}</h4>
   ${c.rule ? `<span class="rule">规则：${esc(c.rule)}</span>` : ''}
   <video controls playsinline preload="none" poster="${esc(c.poster)}" src="${esc(c.video)}"></video>
-  <p class="l">她：${esc(c.her)}</p>
+  <p class="l">你：${esc(c.her)}</p>
   <p class="l he">他：${esc(c.he)}</p>
   ${c.he_zh ? `<p class="l zh">${esc(c.he_zh)}</p>` : ''}
   <p class="l beat">那一下：${esc(c.beat)}</p>
