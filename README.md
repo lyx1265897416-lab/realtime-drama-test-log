@@ -4,6 +4,18 @@
 
 在线查看：https://lyx1265897416-lab.github.io/realtime-drama-test-log/
 
+## 预览
+
+在线体验：https://lyx1265897416-lab.github.io/realtime-drama-test-log/
+
+| 首页 | 播放中 |
+|:---:|:---:|
+| <img src="docs/preview/home.jpg" width="260" alt="首页截图"> | <img src="docs/preview/play.jpg" width="260" alt="播放中截图"> |
+
+关键画面：
+
+<img src="docs/preview/gallery.jpg" width="720" alt="关键画面">
+
 ## 结构
 
 - `index.html`：页面，只负责渲染，不用改。
