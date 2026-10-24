@@ -2,9 +2,9 @@ window.LOG = {
  "updated": "2026-10-23",
  "dramas": [
   {
-   "id": "magnus",
-   "title": "MAGNUS · 午夜车库",
-   "sub": "狼人 Alpha 男主 · 女主第一视角 · 8 个选择点 · 2026-10-22 / 23",
+   "id": "magnus-preset",
+   "title": "MAGNUS · 预设版",
+   "sub": "预设好剧情和结局 · 8 个选择点用实时生成测试 · 狼人 Alpha 男主 · 女主第一视角 · 2026-10-22 / 23",
    "links": [
     [
      "完整互动剧集（公开）",
