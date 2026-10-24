@@ -12,6 +12,7 @@
   - 每组：`{title, when, note, params: [[名, 值]], summary: [[名, 值]], cards}`
   - 每条卡片：`{n, label, video, poster, her, he, he_zh, beat, rule?, stats: [[名, 值]], marks: [[1/0, 标记名, 说明] × 4], job}`
 - `v/`：每条的完整视频（两段拼成一条，720p）和封面。
+- `film/`：每个剧集的完整成片（预设剧情 + 实时片段接在一起），附外挂中英字幕 `.vtt`；剧集对象里用 `films` 字段列出，`chapters` 给选择点跳转。
 
 ## 追加新剧集
 

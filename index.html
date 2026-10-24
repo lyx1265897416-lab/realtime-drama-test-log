@@ -5,96 +5,222 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Realtime Drama Test Log</title>
 <style>
-/* 测试记录板：深色、按剧集分区；每组先列参数和汇总，再 4 列卡片（视频 / 她 / 他 / 那一下 / 计时 / 四个标记）。 */
+/* 配色沿用 Vicky 资产库：暖白纸底、墨绿选中、赭石点缀、细线卡片。
+   版式分三层：完整成片（两版并排）→ 一眼对比 → 测试记录（标签页，一次只看一组，卡片只留缩略图 / 台词 / 四个标记，细节点开）。 */
 :root{
-  --bg:#121317; --card:#1c1d22; --card2:#24262c; --line:#2a2c33; --fg:#eceae6; --mute:#9a9ca3; --soft:#c6c4bf;
-  --ok:#2f9e6a; --okbg:rgba(47,158,106,.14); --bad:#d0504a; --badbg:rgba(208,80,74,.14); --gold:#e2b45a;
-  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Noto Sans SC","Helvetica Neue",Arial,sans-serif;
-  color-scheme:dark;
+  --bg:#f5f3ef; --panel:#fffdfa; --ink:#1f2422; --muted:#747a75; --line:#dfddd7; --soft:#eeeae4;
+  --accent:#8c5c48; --green:#263c32; --bronze:#ad7933;
+  --ok:#263c32; --okbg:#f4f8f2; --okline:#b8c7b5; --bad:#a33b32; --badbg:#f9eeec; --badline:#e6c3be;
+  --sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","PingFang SC","Noto Sans CJK SC",sans-serif;
+  color-scheme:light;
 }
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--fg);font-family:var(--sans);margin:0;-webkit-text-size-adjust:100%}
-.wrap{max-width:1240px;margin:0 auto;padding:28px max(16px,env(safe-area-inset-right,0px)) 56px max(16px,env(safe-area-inset-left,0px))}
-h1{font-size:22px;font-weight:700;margin:0 0 8px;letter-spacing:.01em;text-wrap:balance}
-.note{font-size:13px;line-height:1.7;color:var(--mute);margin:0;max-width:115ch}
-.note b{color:var(--soft);font-weight:500}
-hr{border:0;border-top:1px solid var(--line);margin:22px 0}
-nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0}
-nav.toc a{font-size:12.5px;color:var(--soft);text-decoration:none;background:var(--card);border-radius:999px;padding:6px 12px}
-nav.toc a:hover{color:var(--fg)}
-.drama{margin-top:8px}
-.drama>h2{font-size:18px;font-weight:700;margin:0 0 4px;letter-spacing:.02em}
-.drama>.sub{font-size:12.5px;color:var(--mute);margin:0 0 6px}
-.drama>.links{display:flex;flex-wrap:wrap;gap:12px;font-size:12.5px;margin:0 0 6px}
-.drama>.links a{color:var(--gold)}
-.group{margin-top:26px}
-.group h3{font-size:16px;font-weight:600;margin:0 0 4px}
-.group .when{font-size:12px;color:var(--mute);margin:0 0 10px;font-variant-numeric:tabular-nums}
-.params{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:6px;margin:0 0 10px}
-.params div{background:var(--card);border-radius:8px;padding:7px 10px;font-size:12px;line-height:1.5;color:var(--soft)}
-.params b{display:block;color:var(--mute);font-weight:500;font-size:11px}
-.sum{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:13px;color:var(--soft);margin:2px 0 14px}
-.sum span b{color:var(--fg);font-variant-numeric:tabular-nums}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);margin:0;-webkit-text-size-adjust:100%}
+.shell{max-width:1280px;margin:0 auto;padding:28px max(16px,env(safe-area-inset-right,0px)) 64px max(16px,env(safe-area-inset-left,0px))}
+.eyebrow{font-size:12px;letter-spacing:.15em;color:var(--accent);text-transform:uppercase}
+h1{font-size:clamp(28px,4vw,46px);line-height:1.06;margin:8px 0 10px;letter-spacing:-.035em;text-wrap:balance}
+.lead{font-size:14px;line-height:1.7;color:var(--muted);margin:0;max-width:92ch}
+.lead b{color:var(--ink);font-weight:600}
+.stats{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 0}
+.stat{background:var(--panel);border:1px solid var(--line);padding:11px 16px;border-radius:16px;min-width:118px;font-size:12px;color:var(--muted)}
+.stat b{display:block;font-size:20px;color:var(--ink);font-weight:650;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.bar{position:sticky;top:0;z-index:6;background:rgba(245,243,239,.97);padding:12px 0;margin:22px 0 0;border-bottom:1px solid var(--line);display:flex;gap:4px;flex-wrap:wrap}
+.tab{all:unset;cursor:pointer;border-radius:8px;padding:8px 13px;font-weight:600;font-size:14px;white-space:nowrap;color:var(--ink);display:inline-flex;align-items:center;justify-content:center}
+.tab:hover{background:var(--soft)}
+.tab[aria-selected=true]{background:var(--green);color:#fff}
+.tab:focus-visible,.chip:focus-visible,.thumb:focus-visible{outline:2px solid var(--bronze);outline-offset:2px}
+section.drama{padding-top:26px}
+.dhead{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:10px 24px;margin-bottom:18px}
+.dhead h2{font-size:26px;letter-spacing:-.02em;margin:4px 0 4px}
+.dhead p{margin:0;font-size:13px;color:var(--muted)}
+.dhead a{font-size:13px;color:var(--accent);font-weight:600;text-decoration:none;border-bottom:1px solid currentColor}
+h3{font-size:17px;margin:0 0 4px;letter-spacing:-.01em}
+.sub{font-size:12.5px;color:var(--muted);margin:0 0 14px;line-height:1.6}
+/* 完整成片 */
+.films{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:820px){.films{grid-template-columns:minmax(0,1fr)}}
+.film{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px;display:grid;grid-template-columns:minmax(0,240px) minmax(0,1fr);gap:16px;min-width:0}
+@media (max-width:560px){.film{grid-template-columns:minmax(0,1fr)}}
+.film video{width:100%;aspect-ratio:9/16;border-radius:12px;background:#111;display:block;object-fit:cover}
+.film .info{display:flex;flex-direction:column;gap:10px;min-width:0}
+.badge{align-self:flex-start;font-size:12px;font-weight:650;color:#fff;background:var(--accent);border-radius:7px;padding:3px 9px}
+.badge.alt{background:var(--green)}
+.film h4{font-size:18px;margin:0;letter-spacing:-.01em}
+.film .desc{font-size:12.5px;color:var(--muted);line-height:1.6;margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chip{all:unset;cursor:pointer;font-size:12px;border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:4px 10px;display:inline-flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.chip.ep{color:var(--muted);border-style:dashed}
+.chip.on{background:var(--green);border-color:var(--green);color:#fff}
+.kv{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:6px;margin-top:auto}
+.kv div{background:var(--bg);border-radius:10px;padding:7px 9px;font-size:11px;color:var(--muted);line-height:1.35}
+.kv b{display:block;font-size:14.5px;color:var(--ink);font-weight:650;font-variant-numeric:tabular-nums}
+/* 一眼对比 */
+.cmp{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-top:16px}
+.cmp table{border-collapse:collapse;width:100%;font-size:13px}
+.cmp th,.cmp td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+.cmp th{font-weight:500;color:var(--muted);font-size:12px;background:var(--bg)}
+.cmp tr:last-child td{border-bottom:0}
+.cmp td:first-child{color:var(--muted)}
+.cmp td b{font-weight:650}
+.cmp .win{color:var(--green);font-weight:650}
+.tw{overflow-x:auto}
+/* 测试记录 */
+.records{margin-top:34px}
+.seg{display:inline-flex;background:var(--soft);border-radius:10px;padding:3px;gap:2px;flex-wrap:wrap;margin:6px 0 14px}
+.seg .tab{font-size:13px;padding:7px 12px}
+.ghead{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;margin-bottom:8px}
+.ghead h3{margin:0}
+.ghead span{font-size:12.5px;color:var(--muted)}
+details.params{margin:0 0 12px}
+details.params>summary{cursor:pointer;font-size:12.5px;color:var(--accent);font-weight:600;width:fit-content;padding:2px 0;list-style:none}
+details.params>summary::-webkit-details-marker{display:none}
+details.params>summary::before{content:"＋ ";}
+details.params[open]>summary::before{content:"－ ";}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:6px;margin-top:8px}
+.pgrid div{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:7px 10px;font-size:12px;line-height:1.5}
+.pgrid b{display:block;color:var(--muted);font-weight:500;font-size:11px}
+.gsum{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
+.gsum span{font-size:12px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:4px 11px;color:var(--muted)}
+.gsum b{color:var(--ink);font-weight:650;font-variant-numeric:tabular-nums}
 .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
-@media (max-width:1040px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:1060px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:780px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:480px){.grid{grid-template-columns:minmax(0,1fr)}}
-.card{background:var(--card);border-radius:12px;padding:10px 10px 12px;display:flex;flex-direction:column;gap:8px;min-width:0}
-.card h4{font-size:13px;font-weight:600;margin:2px 2px 0;line-height:1.4}
-.rule{align-self:flex-start;font-size:11px;color:var(--gold);background:rgba(226,180,90,.12);border-radius:6px;padding:2px 7px;margin:0 2px}
-video{width:100%;aspect-ratio:9/16;border-radius:8px;background:#000;display:block;object-fit:cover}
-.l{font-size:12.5px;line-height:1.5;margin:0 2px;color:var(--soft)}
-.l.he{color:var(--fg);font-weight:500}
-.l.zh{color:var(--mute);font-size:12px;font-weight:400}
-.l.beat{color:var(--mute);font-size:12px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin:0 2px}
-.stats div{background:var(--card2);border-radius:6px;padding:4px 6px;font-size:10.5px;color:var(--mute);line-height:1.35}
-.stats b{display:block;font-size:12.5px;color:var(--fg);font-weight:600;font-variant-numeric:tabular-nums}
-.marks{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:2px 2px 0}
-.m{font-size:11.5px;line-height:1.35;border-radius:7px;padding:6px 8px;display:flex;flex-direction:column;gap:2px}
-.m b{font-weight:600}
-.m.ok{background:var(--okbg);color:#bfe8d3}.m.ok b{color:var(--ok)}
-.m.bad{background:var(--badbg);color:#f2c9c6}.m.bad b{color:var(--bad)}
-.job{font-size:10px;color:var(--mute);margin:0 2px;word-break:break-all;font-variant-numeric:tabular-nums}
-footer{margin-top:40px;font-size:12px;color:var(--mute)}
+@media (max-width:420px){.grid{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.thumb{all:unset;cursor:pointer;position:relative;display:block;aspect-ratio:9/16;background:#111 center/cover no-repeat}
+.thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.45),transparent 40%)}
+.thumb .play{position:absolute;left:12px;bottom:12px;z-index:1;width:38px;height:38px;border-radius:50%;background:rgba(255,253,250,.92);display:flex;align-items:center;justify-content:center}
+.thumb .len{position:absolute;right:10px;bottom:14px;z-index:1;color:#fff;font-size:12px;font-variant-numeric:tabular-nums}
+.card video{width:100%;aspect-ratio:9/16;display:block;background:#111;object-fit:cover}
+.body{padding:10px 12px 12px;display:flex;flex-direction:column;gap:7px}
+.ct{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:650}
+.ct small{font-size:11px;font-weight:600;color:var(--accent);background:#f3ebe6;border-radius:6px;padding:1px 6px}
+.say{font-size:12.5px;line-height:1.5;margin:0;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.say.he{color:var(--ink);-webkit-line-clamp:3}
+.say i{font-style:normal;font-weight:650;color:var(--ink);margin-right:3px}
+.marks{display:flex;flex-wrap:wrap;gap:4px}
+.mk{font-size:11px;border-radius:6px;padding:2px 7px;border:1px solid;font-variant-numeric:tabular-nums}
+.mk.ok{color:var(--ok);background:var(--okbg);border-color:var(--okline)}
+.mk.bad{color:var(--bad);background:var(--badbg);border-color:var(--badline)}
+details.more>summary{cursor:pointer;font-size:12px;color:var(--accent);font-weight:600;list-style:none;width:fit-content}
+details.more>summary::-webkit-details-marker{display:none}
+details.more>summary::after{content:" ↓"}
+details.more[open]>summary::after{content:" ↑"}
+.more .in{display:flex;flex-direction:column;gap:8px;margin-top:8px;font-size:12px;line-height:1.55;color:var(--muted)}
+.more .rule{color:var(--accent)}
+.sg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.sg div{background:var(--bg);border-radius:8px;padding:5px 7px;font-size:10.5px;line-height:1.35}
+.sg b{display:block;font-size:12.5px;color:var(--ink);font-variant-numeric:tabular-nums}
+.notes div{padding:5px 8px;border-radius:8px;margin-top:4px}
+.notes .ok{background:var(--okbg);color:var(--ok)}
+.notes .bad{background:var(--badbg);color:var(--bad)}
+.notes b{margin-right:4px}
+.job{font-size:10px;word-break:break-all;color:var(--muted)}
+footer{margin-top:44px;font-size:12px;color:var(--muted)}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <h1>实时生成测试记录 · Vivix W1 普通档 · 5+10 与 10+10</h1>
-  <p class="note">每条对应互动剧的一个选择点：观众在输入框里打一句自己的话（“你”），导演层写出男主的回话（“他”）和他做的那几下动作（“那一下”），两段并发生成后拼成一条完整视频放在卡片里。每条下面四个标记是用户定的标准：<b>画面有没有硬错误</b>、<b>主线有没有左右她</b>、<b>时延</b>（从提交到两段都就绪 ≤ 30 秒算过）、<b>有没有落在她身上的那一下</b>（绿 = 过，红 = 没过）。每组开头写清参数和计时口径。按剧集分区，新剧集的测试往下追加。</p>
-  <nav class="toc" id="toc"></nav>
-  <div id="root"></div>
+<div class="shell">
+  <div class="eyebrow">Realtime Drama · Test Log</div>
+  <h1>实时生成测试记录</h1>
+  <p class="lead">互动剧里，观众在选择点用自己的话对他说（“你”），导演层写出他的回话和动作，<b>Vivix W1 普通档</b>两段并发生成后接进剧情。每个剧集先放<b>两版完整成片</b>（预设剧情 + 实时片段接在一起），再放逐条测试记录。四个标记是用户定的标准：画面有没有硬错误、主线有没有左右她、时延（从提交到两段都就绪 ≤ 30 秒算过）、那一下有没有落在她身上。</p>
+  <div class="stats" id="stats"></div>
+  <nav class="bar" id="dtabs" role="tablist" aria-label="剧集"></nav>
+  <main id="root"></main>
   <footer id="foot"></footer>
 </div>
 <script src="data.js"></script>
 <script>
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const L = window.LOG;
-document.getElementById('toc').innerHTML = L.dramas.map(d => `<a href="#${esc(d.id)}">${esc(d.title)}</a>`).join('');
-document.getElementById('foot').textContent = '最后更新 ' + L.updated;
-const card = c => `<div class="card">
-  <h4>第 ${c.n} 条 · ${esc(c.label)}</h4>
-  ${c.rule ? `<span class="rule">规则：${esc(c.rule)}</span>` : ''}
-  <video controls playsinline preload="none" poster="${esc(c.poster)}" src="${esc(c.video)}"></video>
-  <p class="l">你：${esc(c.her)}</p>
-  <p class="l he">他：${esc(c.he)}</p>
-  ${c.he_zh ? `<p class="l zh">${esc(c.he_zh)}</p>` : ''}
-  <p class="l beat">那一下：${esc(c.beat)}</p>
-  <div class="stats">${c.stats.map(([k, v]) => `<div>${esc(k)}<b>${esc(v)}</b></div>`).join('')}</div>
-  <div class="marks">${c.marks.map(([ok, k, v]) => `<div class="m ${ok ? 'ok' : 'bad'}"><b>${esc(k)}</b>${esc(v)}</div>`).join('')}</div>
-  <p class="job">${esc(c.job)}</p>
-</div>`;
-document.getElementById('root').innerHTML = L.dramas.map(d => `<hr><section class="drama" id="${esc(d.id)}">
-  <h2>${esc(d.title)}</h2><p class="sub">${esc(d.sub)}</p>
-  ${d.links && d.links.length ? `<div class="links">${d.links.map(([t, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>`).join('')}</div>` : ''}
-  ${d.groups.map(g => `<div class="group">
-    <h3>${esc(g.title)}</h3><p class="when">${esc(g.when)}${g.note ? ' · ' + esc(g.note) : ''}</p>
-    <div class="params">${g.params.map(([k, v]) => `<div><b>${esc(k)}</b>${esc(v)}</div>`).join('')}</div>
-    <div class="sum">${g.summary.map(([k, v]) => `<span>${esc(k)} <b>${esc(v)}</b></span>`).join('')}</div>
-    <div class="grid">${g.cards.map(card).join('')}</div>
-  </div>`).join('')}
-</section>`).join('');
+const mmss = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
+const L = window.LOG, $ = id => document.getElementById(id);
+const allCards = L.dramas.flatMap(d => d.groups.flatMap(g => g.cards));
+$('stats').innerHTML = [['剧集', L.dramas.length], ['完整成片', L.dramas.reduce((n, d) => n + (d.films || []).length, 0)], ['测试条数', allCards.length], ['最后更新', L.updated]]
+  .map(([k, v]) => `<div class="stat">${k}<b>${esc(v)}</b></div>`).join('');
+$('foot').textContent = '新剧集的测试往 data.js 的 dramas 里追加；视频放在 v/ 和 film/。';
+
+const SVG_PLAY = '<svg viewBox="0 0 24 24" width="16" height="16" fill="#1f2422"><path d="M8 5.5v13l10.5-6.5z"/></svg>';
+const shortMark = m => m[1] === '时延' ? `时延 ${m[2].replace(' 秒', 's')}` : m[1] === '画面硬错误' ? '画面' : m[1];
+function card(c){
+  const len = (c.stats.find(s => s[0] === '方案') || [])[1] === '10+10' ? '0:20' : '0:15';
+  return `<article class="card">
+    <button class="thumb" style="background-image:url('${esc(c.poster)}')" data-src="${esc(c.video)}" aria-label="播放第 ${c.n} 条"><span class="play">${SVG_PLAY}</span><span class="len">${len}</span></button>
+    <div class="body">
+      <div class="ct">${String(c.n).padStart(2, '0')} · ${esc(c.label.split(' · ')[0])}<small>${esc(c.label.split(' · ')[1] || '')}</small></div>
+      <p class="say"><i>你</i>${esc(c.her)}</p>
+      <p class="say he"><i>他</i>${esc(c.he)}</p>
+      <div class="marks">${c.marks.map(m => `<span class="mk ${m[0] ? 'ok' : 'bad'}" title="${esc(m[1] + '：' + m[2])}">${m[0] ? '✓' : '✗'} ${esc(shortMark(m))}</span>`).join('')}</div>
+      <details class="more"><summary>细节</summary><div class="in">
+        ${c.rule ? `<div class="rule">规则：${esc(c.rule)}</div>` : ''}
+        ${c.he_zh ? `<div>${esc(c.he_zh)}</div>` : ''}
+        <div>那一下：${esc(c.beat)}</div>
+        <div class="sg">${c.stats.map(([k, v]) => `<div>${esc(k)}<b>${esc(v)}</b></div>`).join('')}</div>
+        <div class="notes">${c.marks.map(m => `<div class="${m[0] ? 'ok' : 'bad'}"><b>${esc(m[1])}</b>${esc(m[2])}</div>`).join('')}</div>
+        <div class="job">${esc(c.job)}</div>
+      </div></details>
+    </div>
+  </article>`;
+}
+function film(f, i){
+  const rt = f.chapters.filter(c => c[0] === 'rt'), ep = f.chapters.filter(c => c[0] === 'ep');
+  return `<div class="film">
+    <video controls playsinline preload="metadata" poster="${esc(f.poster)}" src="${esc(f.video)}"><track kind="subtitles" srclang="zh" label="中英" src="${esc(f.vtt)}" default></video>
+    <div class="info">
+      <span class="badge ${i ? 'alt' : ''}">${esc(f.mode)}</span>
+      <h4>${esc(f.title)}${f.duration ? ` <span style="color:var(--muted);font-weight:500;font-size:14px">· ${mmss(f.duration)}</span>` : ''}</h4>
+      <p class="desc">${esc(f.desc)}</p>
+      <div class="chips">${rt.map(c => `<button class="chip" data-t="${c[2]}" title="跳到 ${mmss(c[2])}">${esc(c[1])}</button>`).join('')}</div>
+      <div class="chips">${ep.map(c => `<button class="chip ep" data-t="${c[2]}">${esc(c[1])} · ${mmss(c[2])}</button>`).join('')}</div>
+      <div class="kv">${f.stats.map(([k, v]) => `<div>${esc(k)}<b>${esc(v)}</b></div>`).join('')}</div>
+    </div>
+  </div>`;
+}
+function compare(films){
+  if (films.length < 2) return '';
+  const rows = films[0].stats.map(([k], j) => [k, ...films.map(f => f.stats[j][1])]);
+  return `<div class="cmp"><div class="tw"><table><tr><th>一眼对比</th>${films.map(f => `<th>${esc(f.mode)}</th>`).join('')}</tr>
+    ${rows.map(r => `<tr><td>${esc(r[0])}</td>${r.slice(1).map(v => `<td><b>${esc(v)}</b></td>`).join('')}</tr>`).join('')}
+    <tr><td>成片里每条实时片段</td>${films.map(f => `<td><b>${f.mode === '10+10' ? '20 秒' : '15 秒'}</b></td>`).join('')}</tr></table></div></div>`;
+}
+function group(g){
+  return `<div class="ghead"><h3>${esc(g.title)}</h3><span>${esc(g.when)}</span></div>
+    ${g.note ? `<p class="sub">${esc(g.note)}</p>` : ''}
+    <details class="params"><summary>参数和计时口径</summary><div class="pgrid">${g.params.map(([k, v]) => `<div><b>${esc(k)}</b>${esc(v)}</div>`).join('')}</div></details>
+    <div class="gsum">${g.summary.map(([k, v]) => `<span>${esc(k)} <b>${esc(v)}</b></span>`).join('')}</div>
+    <div class="grid">${g.cards.map(card).join('')}</div>`;
+}
+function drama(d){
+  return `<section class="drama" id="${esc(d.id)}" role="tabpanel">
+    <div class="dhead"><div><div class="eyebrow">Drama</div><h2>${esc(d.title)}</h2><p>${esc(d.sub)}</p></div>
+      <div>${(d.links || []).map(([t, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)} ↗</a>`).join(' ')}</div></div>
+    ${d.films && d.films.length ? `<h3>完整成片</h3><p class="sub">预设剧情 + 每个选择点的实时片段，按观众实际走过的顺序接成一条；选择点前停 2.5 秒显示“你”说的话。字幕是外挂中英字幕，可在播放器里关。点下面的选择点直接跳过去。</p>
+      <div class="films">${d.films.map(film).join('')}</div>${compare(d.films)}` : ''}
+    <div class="records"><h3>测试记录</h3>
+      <div class="seg" role="tablist" aria-label="测试分组">${d.groups.map((g, i) => `<button class="tab" role="tab" data-g="${i}" aria-selected="${i === 0}">${esc(g.tab || g.title)}</button>`).join('')}</div>
+      <div class="gpanel">${group(d.groups[0])}</div>
+    </div>
+  </section>`;
+}
+let cur = 0;
+function render(){
+  $('dtabs').innerHTML = L.dramas.map((d, i) => `<button class="tab" role="tab" data-d="${i}" aria-selected="${i === cur}">${esc(d.title)}</button>`).join('');
+  $('root').innerHTML = drama(L.dramas[cur]);
+}
+render();
+document.addEventListener('click', e => {
+  const dt = e.target.closest('[data-d]'); if (dt){ cur = +dt.dataset.d; render(); return; }
+  const gt = e.target.closest('[data-g]');
+  if (gt){ const sec = gt.closest('section'); sec.querySelectorAll('[data-g]').forEach(b => b.setAttribute('aria-selected', b === gt));
+    sec.querySelector('.gpanel').innerHTML = group(L.dramas[cur].groups[+gt.dataset.g]); return; }
+  const ch = e.target.closest('.chip[data-t]');
+  if (ch){ const v = ch.closest('.film').querySelector('video'), t = +ch.dataset.t;
+    const go = () => { v.currentTime = t; v.play().catch(() => {}); };  // 元数据没到时先等它，否则跳转会被重置到 0
+    if (v.readyState >= 1) go(); else { v.addEventListener('loadedmetadata', go, {once: true}); v.load(); }
+    ch.closest('.film').querySelectorAll('.chip').forEach(x => x.classList.toggle('on', x === ch)); return; }
+  const th = e.target.closest('.thumb');
+  if (th){ const v = document.createElement('video'); v.src = th.dataset.src; v.controls = true; v.playsInline = true; v.autoplay = true; th.replaceWith(v); }
+});
 // 同一时间只放一条
 document.addEventListener('play', e => document.querySelectorAll('video').forEach(v => { if (v !== e.target) v.pause(); }), true);
 </script>
