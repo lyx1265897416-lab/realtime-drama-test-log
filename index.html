@@ -130,7 +130,7 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
   <main id="root"></main>
   <footer id="foot"></footer>
 </div>
-<script src="data.js?v=20261023-2"></script>
+<script src="data.js?v=20261023-3"></script>
 <script>
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const mmss = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
@@ -151,7 +151,7 @@ function card(c){
       <p class="say"><i>你</i>${esc(c.her)}</p>
       <p class="say he"><i>他</i>${esc(c.he)}</p>
       <div class="marks">${c.marks.map(m => `<span class="mk ${m[0] ? 'ok' : 'bad'}" title="${esc(m[1] + '：' + m[2])}">${m[0] ? '✓' : '✗'} ${esc(shortMark(m))}</span>`).join('')}</div>
-      <details class="more"><summary>细节</summary><div class="in">
+      <details class="more"${moreOpen ? ' open' : ''}><summary>细节</summary><div class="in">
         ${c.rule ? `<div class="rule">规则：${esc(c.rule)}</div>` : ''}
         ${c.he_zh ? `<div>${esc(c.he_zh)}</div>` : ''}
         <div>那一下：${esc(c.beat)}</div>
@@ -202,7 +202,7 @@ function drama(d){
     </div>
   </section>`;
 }
-let cur = 0;
+let cur = 0, moreOpen = false, syncing = false;
 function render(){
   $('dtabs').innerHTML = L.dramas.map((d, i) => `<button class="tab" role="tab" data-d="${i}" aria-selected="${i === cur}">${esc(d.title)}</button>`).join('');
   $('root').innerHTML = drama(L.dramas[cur]);
@@ -221,6 +221,13 @@ document.addEventListener('click', e => {
   const th = e.target.closest('.thumb');
   if (th){ const v = document.createElement('video'); v.src = th.dataset.src; v.controls = true; v.playsInline = true; v.autoplay = true; th.replaceWith(v); }
 });
+// 「细节」联动：展开一个就全部展开，收起一个就全部收起；切换分组后的新卡片沿用当前状态
+document.addEventListener('toggle', e => {
+  const d = e.target; if (syncing || !d.matches || !d.matches('details.more')) return;
+  moreOpen = d.open; syncing = true;
+  document.querySelectorAll('details.more').forEach(x => { if (x !== d) x.open = moreOpen; });
+  setTimeout(() => { syncing = false; }, 0);  // toggle 事件是异步派发的，等这一轮派发完再放开
+}, true);
 // 同一时间只放一条
 document.addEventListener('play', e => document.querySelectorAll('video').forEach(v => { if (v !== e.target) v.pause(); }), true);
 </script>
