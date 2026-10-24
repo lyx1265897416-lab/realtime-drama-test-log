@@ -29,3 +29,5 @@
 ## 追加新剧集
 
 往 `data.js` 的 `dramas` 数组末尾加一个剧集对象，视频放进 `v/`，命名 `<剧集id>-<条目id>.mp4`。当前数据由 `output/vivix-tests-20261022/build_log.py` 生成。
+
+每次更新 `data.js` 后，把 `index.html` 里 `data.js?v=…` 的版本号改一下，避免浏览器缓存到旧数据。
