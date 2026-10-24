@@ -145,7 +145,7 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
   <main id="root"></main>
   <footer id="foot"></footer>
 </div>
-<script src="data.js?v=20261024-sr"></script>
+<script src="data.js?v=20261024-lite"></script>
 <script>
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const mmss = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
@@ -180,7 +180,7 @@ function card(c){
 function film(f, i){
   const rt = f.chapters.filter(c => c[0] === 'rt'), ep = f.chapters.filter(c => c[0] === 'ep');
   return `<div class="film">
-    <video controls playsinline preload="metadata" poster="${esc(f.poster)}" src="${esc(f.video)}"><track kind="subtitles" srclang="zh" label="中英" src="${esc(f.vtt)}" default></video>
+    <video controls playsinline preload="none" poster="${esc(f.poster)}" src="${esc(f.video)}"><track kind="subtitles" srclang="zh" label="中英" src="${esc(f.vtt)}" default></video>
     <div class="info">
       <span class="badge ${i ? 'alt' : ''}">${esc(f.mode)}</span>
       <h4>${esc(f.title)}${f.duration ? ` <span style="color:var(--muted);font-weight:500;font-size:14px">· ${mmss(f.duration)}</span>` : ''}</h4>
@@ -209,7 +209,7 @@ function sample(x){
   const pick = x.chapters.filter(c => c[0] === 'pick'), ep = x.chapters.filter(c => c[0] === 'ep');
   return `<h3>${esc(x.title)}</h3><p class="sub">${esc(x.desc)}</p>
   <div class="sample film">
-    <div><video controls playsinline preload="metadata" poster="${esc(x.poster)}" src="${esc(x.video)}"><track kind="subtitles" srclang="zh" label="中英" src="${esc(x.vtt)}" default></video></div>
+    <div><video controls playsinline preload="none" poster="${esc(x.poster)}" src="${esc(x.video)}"><track kind="subtitles" srclang="zh" label="中英" src="${esc(x.vtt)}" default></video></div>
     <div class="info">
       <div class="chips">${pick.map(c => `<button class="chip" data-t="${c[2]}" title="跳到 ${mmss(c[2])}">${esc(c[1])}</button>`).join('')}</div>
       <div class="chips">${ep.map(c => `<button class="chip ep" data-t="${c[2]}">${esc(c[1])} · ${mmss(c[2])}</button>`).join('')}</div>
