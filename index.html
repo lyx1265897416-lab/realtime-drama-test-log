@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Realtime Drama Test Log</title>
+<title>realtime生成测试记录</title>
 <style>
 /* 配色沿用 Vicky 资产库：暖白纸底、墨绿选中、赭石点缀、细线卡片。
    版式分三层：完整成片（两版并排）→ 一眼对比 → 测试记录（标签页，一次只看一组，卡片只留缩略图 / 台词 / 四个标记，细节点开）。 */
@@ -138,7 +138,7 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
 <body>
 <div class="shell">
   <div class="eyebrow">Realtime Drama · Test Log</div>
-  <h1>实时生成测试记录</h1>
+  <h1>realtime生成测试记录</h1>
   <p class="lead">互动剧里，观众在选择点用自己的话对他说（“你”），导演层写出他的回话和动作，<b>Vivix W1 普通档</b>两段并发生成后接进剧情。每个剧集先放<b>两版完整成片</b>（预设剧情 + 实时片段接在一起），再放逐条测试记录。四个标记是用户定的标准：画面有没有硬错误、主线有没有左右她、时延（从提交到两段都就绪 ≤ 30 秒算过）、那一下有没有落在她身上。</p>
   <div class="stats" id="stats"></div>
   <nav class="bar" id="dtabs" role="tablist" aria-label="剧集"></nav>
