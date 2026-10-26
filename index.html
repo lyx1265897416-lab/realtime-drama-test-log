@@ -147,6 +147,29 @@ details.more[open]>summary::after{content:" ↑"}
 .notes .bad{background:var(--badbg);color:var(--bad)}
 .notes b{margin-right:4px}
 .job{font-size:10px;word-break:break-all;color:var(--muted)}
+/* 结论（结论先行，放在所有测试记录前面） */
+.verdict{margin:22px 0 0;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px 20px}
+.verdict .vh{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
+.verdict h2{font-size:20px;margin:0;letter-spacing:-.015em}
+.verdict .vtl{font-size:15px;line-height:1.65;margin:8px 0 14px;max-width:96ch}
+.verdict .vtl b{color:var(--green)}
+.vgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:900px){.vgrid{grid-template-columns:minmax(0,1fr)}}
+.vc{background:var(--bg);border-radius:12px;padding:12px 14px;font-size:12.5px;line-height:1.6;color:var(--ink)}
+.vc h3{font-size:14px;margin:0 0 2px}
+.vc .tag{display:inline-block;font-size:11px;font-weight:650;border-radius:6px;padding:1px 7px;margin-bottom:6px}
+.vc .tag.ok{color:var(--ok);background:var(--okbg);border:1px solid var(--okline)}
+.vc .tag.half{color:var(--accent);background:#f7eee8;border:1px solid #e3cbbd}
+.vc .tag.next{color:var(--muted);background:var(--panel);border:1px solid var(--line)}
+.vc ul{margin:0;padding-left:16px}
+.vc li{margin:3px 0}
+.vc li b{font-variant-numeric:tabular-nums}
+.vtab{border-collapse:collapse;width:100%;font-size:12.5px;margin-top:12px;font-variant-numeric:tabular-nums}
+.vtab th,.vtab td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+.vtab th{font-weight:500;color:var(--muted);font-size:11.5px}
+.vtab tr:last-child td{border-bottom:0}
+.vtab .w{color:var(--green);font-weight:650}
+.vnote{font-size:11.5px;color:var(--muted);margin:8px 0 0;line-height:1.55}
 footer{margin-top:44px;font-size:12px;color:var(--muted)}
 </style>
 </head>
@@ -156,6 +179,35 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
   <h1>realtime生成测试记录</h1>
   <p class="lead">互动剧里，观众在选择点用自己的话对他说（“你”），导演层写出他的回话和动作，<b>Vivix W1 普通档</b>两段并发生成后接进剧情。每个剧集先放<b>两版完整成片</b>（预设剧情 + 实时片段接在一起），再放逐条测试记录。四个标记是用户定的标准：画面有没有硬错误、主线有没有左右她、时延（从提交到两段都就绪 ≤ 30 秒算过）、那一下有没有落在她身上。</p>
   <div class="stats" id="stats"></div>
+  <section class="verdict" aria-labelledby="vt">
+    <div class="vh"><div class="eyebrow">结论 · 2026-10-26</div><h2 id="vt">选 5+10 还是 10+10</h2></div>
+    <p class="vtl">简单内容用 <b>5+10</b>；复杂内容<b>默认也先用 5+10</b>，只在需要多说几句、多演几拍的关键轮次切 <b>10+10</b>。原因：四个剧集里 10+10 的画面硬错误都比 5+10 多，而且主要出在 10 秒的第 1 段；剧情推进和“那一下”两种方案没有差别。</p>
+    <div class="vgrid">
+      <div class="vc"><span class="tag ok">判断成立</span><h3>简单内容（小猫这类）→ 5+10</h3><ul>
+        <li>无硬错误：预设版 5+10 <b>27/33</b>（82%），10+10 <b>15/22</b>（68%）；开放式 5+10 <b>8/14</b>，10+10 <b>5/14</b>。</li>
+        <li>一轮只有一个反应，10 秒的第 1 段没东西可演，只能塞“原位小动作”。多出来的几秒正是换猫、走开、机位漂移、约 3 秒画面崩坏出现的地方。</li>
+        <li>等待时间没有稳定差别：预设版 5+10 更快，开放式 10+10 更快，跟当时的负载有关，不作为选择依据。</li>
+      </ul></div>
+      <div class="vc"><span class="tag half">部分成立</span><h3>复杂内容（Magnus 这类）→ 按轮次选</h3><ul>
+        <li>10+10 的好处：第 1 段能同时放下回应和演绎，台词和表演更从容，适合吻戏、对峙、身份揭晓这类转折轮。</li>
+        <li>但现在稳定性更差：开放式 V0.15 无硬错误 5+10 <b>15/18</b>，10+10 <b>11/18</b>；上一版 <b>10/18</b> 对 <b>3/18</b>。能分清是哪一段的错误里，9 次出在 10+10 的第 1 段（车门、衬衫颜色、袖子变了）。</li>
+        <li>剧情没多走：两种方案演到的关键剧情一样（都到 K13），“那一下落到她”都是 <b>34/36</b>。</li>
+      </ul></div>
+      <div class="vc"><span class="tag next">下一步</span><h3>让 10+10 能用在复杂内容上</h3><ul>
+        <li>给 10+10 的第 1 段加首尾帧锁。小猫的修复验证 v6 用这个办法，4 轮 <b>4/4</b> 无硬错误。</li>
+        <li>加锁后用 Magnus 开放式再跑一遍 18 轮。10+10 的无硬错误追平 5+10，复杂内容再改为默认 10+10。</li>
+      </ul></div>
+    </div>
+    <div class="tw"><table class="vtab">
+      <tr><th>剧集 · 测试组</th><th>无硬错误 5+10</th><th>无硬错误 10+10</th><th>就绪中位 5+10</th><th>就绪中位 10+10</th></tr>
+      <tr><td>咪 · 预设版（新版 PE，同 11 句）</td><td class="w">10/11</td><td>8/11</td><td class="w">29.9 秒</td><td>43.2 秒</td></tr>
+      <tr><td>咪 · 开放式（模拟用户 14 轮）</td><td class="w">8/14</td><td>5/14</td><td>139.7 秒</td><td class="w">99.9 秒</td></tr>
+      <tr><td>Magnus · 预设版（整轮 + 时长测试）</td><td class="w">9/12</td><td>8/12</td><td>46.9 秒</td><td class="w">32.8 秒</td></tr>
+      <tr><td>Magnus · 开放式 V0.15（18 轮）</td><td class="w">15/18</td><td>11/18</td><td class="w">59.4 秒</td><td>63.8 秒</td></tr>
+      <tr><td>Magnus · 开放式上一版（18 轮）</td><td class="w">10/18</td><td>3/18</td><td class="w">57.7 秒</td><td>70.3 秒</td></tr>
+    </table></div>
+    <p class="vnote">口径：只算两种方案用同一版规则、同一组或同类输入的测试组；规则还在迭代的早期轮次、修复验证不计入。绿色是该项更好的一方。两种方案多数不在同一时段跑，就绪时间受 Vivix 负载影响较大。</p>
+  </section>
   <nav class="bar" id="dtabs" role="tablist" aria-label="剧集"></nav>
   <main id="root"></main>
   <footer id="foot"></footer>
