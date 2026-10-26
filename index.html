@@ -181,7 +181,7 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
   <div class="stats" id="stats"></div>
   <section class="verdict" aria-labelledby="vt">
     <div class="vh"><div class="eyebrow">结论 · 2026-10-26</div><h2 id="vt">选 5+10 还是 10+10</h2></div>
-    <p class="vtl">简单内容用 <b>5+10</b>；复杂内容看链路：<b>预设链路用 10+10</b>，<b>开放式链路目前用 5+10</b>。每一条都是综合画面错误、等待时间和内容量后，数据更支持的那个方案。</p>
+    <p class="vtl">简单内容用 <b>5+10</b>；复杂内容两条链路都用 <b>10+10</b>：预设链路一直是 10+10，开放式链路在 10+10 第 1 段加了首尾帧锁（V0.17b）之后追平并略好于 5+10，改用 10+10。每一条都是综合画面错误、等待时间和内容量后，数据更支持的那个方案。</p>
     <div class="vgrid">
       <div class="vc"><span class="tag ok">判断成立 · 5+10</span><h3>简单内容（小猫这类）· 预设链路和开放式链路</h3><ul>
         <li>画面更稳：无硬错误预设链路 5+10 <b>27/33</b>（82%），10+10 <b>15/22</b>（68%）；开放式链路 <b>8/14</b> 对 <b>5/14</b>。</li>
@@ -194,14 +194,16 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
         <li>多 5 秒内容不多等：5+10 等的其实是那段 10 秒，时长测试里第 2 段比第 1 段晚 <b>7–18 秒</b>；10+10 两段多数同时就绪。</li>
         <li>台词和表演多，第 1 段 10 秒能同时放下回应和演绎。</li>
       </ul></div>
-      <div class="vc"><span class="tag ok">判断成立 · 5+10（目前）</span><h3>复杂内容（Magnus 这类）· 开放式链路</h3><ul>
-        <li>画面更稳：无硬错误 V0.15 5+10 <b>15/18</b>，10+10 <b>11/18</b>；上一版 <b>10/18</b> 对 <b>3/18</b>。能分清是哪一段的错误里，9 次出在 10+10 的第 1 段（车门、衬衫颜色、袖子变了）。</li>
-        <li>等待没有优势：就绪中位 V0.15 5+10 <b>59.4 秒</b>，10+10 <b>63.8 秒</b>；上一版 <b>57.7</b> 对 <b>70.3 秒</b>。</li>
-        <li>剧情推进一样：两种都演到 K13，“那一下落到她”都是 <b>34/36</b>。10+10 多出的 5 秒没换来更多剧情。</li>
+      <div class="vc"><span class="tag ok">判断成立 · 10+10（V0.17b 起）</span><h3>复杂内容（Magnus 这类）· 开放式链路</h3><ul>
+        <li>画面略好：V0.17b 两组<b>同一时段并行跑、同一标准审片</b>，无硬错误 10+10 <b>12/18</b>，5+10 <b>11/18</b>。加锁前 10+10 一直落后（V0.15 <b>11/18</b> 对 <b>15/18</b>，上一版 <b>3/18</b> 对 <b>10/18</b>）。</li>
+        <li>第 1 段不再“自己发明”错误：V0.15 有 9 次出在 10+10 第 1 段（车门、衬衫颜色、袖子），这次 0 次。</li>
+        <li>多等几秒、多 5 秒内容：发送到两段都就绪中位 10+10 <b>77.2 秒</b>，5+10 <b>70.7 秒</b>（只算生成 41.3 对 39.3 秒）；折成每看 1 秒要等 <b>3.9</b> 对 <b>4.7 秒</b>。</li>
+        <li>剧情推进一样：两组都在第 14 轮演到 K13，吻戏第 11 对第 12 轮，“那一下落到你”都是 <b>18/18</b>。</li>
       </ul></div>
-      <div class="vc"><span class="tag next">下一步</span><h3>让开放式链路也能用 10+10</h3><ul>
-        <li>给 10+10 的第 1 段加首尾帧锁。小猫的修复验证 v6 用这个办法，4 轮 <b>4/4</b> 无硬错误。</li>
-        <li>加锁后用 Magnus 开放式再跑 18 轮：10+10 的无硬错误追平 5+10，开放式的复杂内容就改用 10+10，和预设链路一致。</li>
+      <div class="vc"><span class="tag next">下一步</span><h3>补上锁帧暴露的三个洞，再跑一轮确认</h3><ul>
+        <li>锁帧会把上一轮末帧的毛病放大成整整 10 秒：第 8 轮锁进了灰色影棚背景，第 12 轮锁进了贴脸大特写（皮肤显老），第 14 轮锁进了发强光的金瞳。锁之前先把末帧回正成标准近景（脸宽约占三分之一），末帧质检加一项“背景变成灰色影棚或纯色”。</li>
+        <li>两种方案共有的错：车内正对镜头坐像坐在对面（10+10 2 次、5+10 3 次），撕契约的纸上有满页字（各 1 次）。车内近景收尾也要写成三分之四侧脸；契约写成“没有字的素面纸”。</li>
+        <li>修完用 10+10 开放式再跑 18 轮，无硬错误稳定在 5+10 之上，就把这条结论从“V0.17b 起”改成定论。</li>
       </ul></div>
     </div>
     <div class="tw"><table class="vtab">
@@ -209,16 +211,18 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
       <tr><td>咪 · 预设版（新版 PE，同 11 句）</td><td class="w">10/11</td><td>8/11</td><td class="w">29.9 秒</td><td>43.2 秒</td><td class="w">5+10</td></tr>
       <tr><td>咪 · 开放式（模拟用户 14 轮）</td><td class="w">8/14</td><td>5/14</td><td>139.7 秒</td><td class="w">99.9 秒</td><td class="w">5+10</td></tr>
       <tr><td>Magnus · 预设版（整轮 + 时长测试）</td><td class="w">9/12</td><td>8/12</td><td>46.9 秒</td><td class="w">32.8 秒</td><td class="w">10+10</td></tr>
+      <tr><td>Magnus · 开放式 V0.17b（10+10 第 1 段首尾帧锁，同一时段 18 轮）</td><td>11/18</td><td class="w">12/18</td><td class="w">70.7 秒</td><td>77.2 秒</td><td class="w">10+10</td></tr>
+      <tr><td>Magnus · 开放式 V0.16（18 轮）</td><td class="w">15/18</td><td>12/18</td><td class="w">57.1 秒</td><td>68.5 秒</td><td class="w">5+10</td></tr>
       <tr><td>Magnus · 开放式 V0.15（18 轮）</td><td class="w">15/18</td><td>11/18</td><td class="w">59.4 秒</td><td>63.8 秒</td><td class="w">5+10</td></tr>
       <tr><td>Magnus · 开放式上一版（18 轮）</td><td class="w">10/18</td><td>3/18</td><td class="w">57.7 秒</td><td>70.3 秒</td><td class="w">5+10</td></tr>
     </table></div>
-    <p class="vnote">口径：只算两种方案用同一版规则、同一组或同类输入的测试组；规则还在迭代的早期轮次、修复验证不计入。绿色是该项更好的一方。两种方案多数不在同一时段跑，就绪时间受 Vivix 负载影响较大。</p>
+    <p class="vnote">口径：只算两种方案用同一版规则、同一组或同类输入的测试组；规则还在迭代的早期轮次、修复验证不计入。绿色是该项更好的一方。两种方案多数不在同一时段跑，就绪时间受 Vivix 负载影响较大；V0.17b 两组是同一时段并行跑的。V0.17b 的审片标准比之前严（车内正对镜头坐、手的袖口不对都算硬错误），跨版本比较只看同一版两组之间的差。</p>
   </section>
   <nav class="bar" id="dtabs" role="tablist" aria-label="剧集"></nav>
   <main id="root"></main>
   <footer id="foot"></footer>
 </div>
-<script src="data.js?v=20261026-magnus-v16"></script>
+<script src="data.js?v=20261026-magnus-v17b"></script>
 <script>
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const mmss = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
