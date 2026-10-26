@@ -151,7 +151,7 @@ details.more[open]>summary::after{content:" ↑"}
 .verdict{margin:22px 0 0;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px 20px}
 .verdict .vh{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
 .verdict h2{font-size:20px;margin:0;letter-spacing:-.015em}
-.verdict .vtl{font-size:15px;line-height:1.65;margin:8px 0 14px;max-width:96ch}
+.verdict .vtl{font-size:15px;line-height:1.65;margin:8px 0 14px}
 .verdict .vtl b{color:var(--green)}
 .vgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 @media (max-width:900px){.vgrid{grid-template-columns:minmax(0,1fr)}}
@@ -181,21 +181,22 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
   <div class="stats" id="stats"></div>
   <section class="verdict" aria-labelledby="vt">
     <div class="vh"><div class="eyebrow">结论 · 2026-10-26</div><h2 id="vt">选 5+10 还是 10+10</h2></div>
-    <p class="vtl">简单内容用 <b>5+10</b>；复杂内容<b>默认也先用 5+10</b>，只在需要多说几句、多演几拍的关键轮次切 <b>10+10</b>。原因：四个剧集里 10+10 的画面硬错误都比 5+10 多，而且主要出在 10 秒的第 1 段；剧情推进和“那一下”两种方案没有差别。</p>
+    <p class="vtl">简单内容用 <b>5+10</b>，复杂内容用 <b>10+10</b>。综合画面错误、等待时间和内容量来看：小猫这类一轮只有一个反应，多出的 5 秒只会变成重复和走样，5+10 错误更少、等得也更短；Magnus 这类角色设定和台词多，10+10 多给 5 秒内容却几乎不多等，表演放得下。10+10 目前第 1 段的画面错误偏多，要先给第 1 段加首尾帧锁。</p>
     <div class="vgrid">
       <div class="vc"><span class="tag ok">判断成立</span><h3>简单内容（小猫这类）→ 5+10</h3><ul>
-        <li>无硬错误：预设版 5+10 <b>27/33</b>（82%），10+10 <b>15/22</b>（68%）；开放式 5+10 <b>8/14</b>，10+10 <b>5/14</b>。</li>
-        <li>一轮只有一个反应，10 秒的第 1 段没东西可演，只能塞“原位小动作”。多出来的几秒正是换猫、走开、机位漂移、约 3 秒画面崩坏出现的地方。</li>
-        <li>等待时间没有稳定差别：预设版 5+10 更快，开放式 10+10 更快，跟当时的负载有关，不作为选择依据。</li>
+        <li>画面更稳：无硬错误预设版 5+10 <b>27/33</b>（82%），10+10 <b>15/22</b>（68%）；开放式 <b>8/14</b> 对 <b>5/14</b>。</li>
+        <li>等得更短：预设版就绪中位 5+10 <b>29.9 秒</b>，10+10 <b>43.2 秒</b>；30 秒内就绪 <b>6/11</b> 对 <b>1/11</b>。开放式两种都超过 100 秒，离目标都太远，不作为依据。</li>
+        <li>长了没内容：一轮只有一个反应，10 秒的第 1 段只能塞“原位小动作”，多出的几秒正是换猫、走开、机位漂移、约 3 秒画面崩坏出现的地方。</li>
       </ul></div>
-      <div class="vc"><span class="tag half">部分成立</span><h3>复杂内容（Magnus 这类）→ 按轮次选</h3><ul>
-        <li>10+10 的好处：第 1 段能同时放下回应和演绎，台词和表演更从容，适合吻戏、对峙、身份揭晓这类转折轮。</li>
-        <li>但现在稳定性更差：开放式 V0.15 无硬错误 5+10 <b>15/18</b>，10+10 <b>11/18</b>；上一版 <b>10/18</b> 对 <b>3/18</b>。能分清是哪一段的错误里，9 次出在 10+10 的第 1 段（车门、衬衫颜色、袖子变了）。</li>
-        <li>剧情没多走：两种方案演到的关键剧情一样（都到 K13），“那一下落到她”都是 <b>34/36</b>。</li>
+      <div class="vc"><span class="tag ok">判断成立</span><h3>复杂内容（Magnus 这类）→ 10+10</h3><ul>
+        <li>多 5 秒内容几乎不多等：5+10 等的其实是那段 10 秒。时长测试里第 2 段比第 1 段晚 <b>7–18 秒</b>，5 秒段省下的时间用不上；10+10 两段多数同时就绪。</li>
+        <li>等待持平或更短：预设版就绪中位 10+10 <b>32.8 秒</b>，5+10 <b>46.9 秒</b>，30 秒内就绪 <b>3/8</b> 对 <b>0/8</b>；开放式 V0.15 是 <b>63.8</b> 对 <b>59.4 秒</b>，多等 7%，内容多 33%。</li>
+        <li>表演放得下：角色设定和台词多，第 1 段 10 秒能同时放下回应和演绎；剧情推进不吃亏，两种都演到 K13，“那一下落到她”都是 <b>34/36</b>。</li>
+        <li>要先补的短板：画面硬错误更多，V0.15 无硬错误 <b>11/18</b> 对 <b>15/18</b>，主要出在 10 秒的第 1 段（车门、衬衫颜色、袖子变了）。</li>
       </ul></div>
-      <div class="vc"><span class="tag next">下一步</span><h3>让 10+10 能用在复杂内容上</h3><ul>
+      <div class="vc"><span class="tag next">下一步</span><h3>补齐 10+10 第 1 段的稳定性</h3><ul>
         <li>给 10+10 的第 1 段加首尾帧锁。小猫的修复验证 v6 用这个办法，4 轮 <b>4/4</b> 无硬错误。</li>
-        <li>加锁后用 Magnus 开放式再跑一遍 18 轮。10+10 的无硬错误追平 5+10，复杂内容再改为默认 10+10。</li>
+        <li>加锁后用 Magnus 开放式再跑 18 轮，确认 10+10 的无硬错误追平 5+10。</li>
       </ul></div>
     </div>
     <div class="tw"><table class="vtab">
