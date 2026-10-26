@@ -153,7 +153,7 @@ details.more[open]>summary::after{content:" ↑"}
 .verdict h2{font-size:20px;margin:0;letter-spacing:-.015em}
 .verdict .vtl{font-size:15px;line-height:1.65;margin:8px 0 14px}
 .verdict .vtl b{color:var(--green)}
-.vgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.vgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 @media (max-width:900px){.vgrid{grid-template-columns:minmax(0,1fr)}}
 .vc{background:var(--bg);border-radius:12px;padding:12px 14px;font-size:12.5px;line-height:1.6;color:var(--ink)}
 .vc h3{font-size:14px;margin:0 0 2px}
@@ -181,31 +181,36 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
   <div class="stats" id="stats"></div>
   <section class="verdict" aria-labelledby="vt">
     <div class="vh"><div class="eyebrow">结论 · 2026-10-26</div><h2 id="vt">选 5+10 还是 10+10</h2></div>
-    <p class="vtl">简单内容用 <b>5+10</b>，复杂内容用 <b>10+10</b>。综合画面错误、等待时间和内容量来看：小猫这类一轮只有一个反应，多出的 5 秒只会变成重复和走样，5+10 错误更少、等得也更短；Magnus 这类角色设定和台词多，10+10 多给 5 秒内容却几乎不多等，表演放得下。10+10 目前第 1 段的画面错误偏多，要先给第 1 段加首尾帧锁。</p>
+    <p class="vtl">简单内容用 <b>5+10</b>；复杂内容看链路：<b>预设链路用 10+10</b>，<b>开放式链路目前用 5+10</b>。每一条都是综合画面错误、等待时间和内容量后，数据更支持的那个方案。</p>
     <div class="vgrid">
-      <div class="vc"><span class="tag ok">判断成立</span><h3>简单内容（小猫这类）→ 5+10</h3><ul>
-        <li>画面更稳：无硬错误预设版 5+10 <b>27/33</b>（82%），10+10 <b>15/22</b>（68%）；开放式 <b>8/14</b> 对 <b>5/14</b>。</li>
-        <li>等得更短：预设版就绪中位 5+10 <b>29.9 秒</b>，10+10 <b>43.2 秒</b>；30 秒内就绪 <b>6/11</b> 对 <b>1/11</b>。开放式两种都超过 100 秒，离目标都太远，不作为依据。</li>
+      <div class="vc"><span class="tag ok">判断成立 · 5+10</span><h3>简单内容（小猫这类）· 预设链路和开放式链路</h3><ul>
+        <li>画面更稳：无硬错误预设链路 5+10 <b>27/33</b>（82%），10+10 <b>15/22</b>（68%）；开放式链路 <b>8/14</b> 对 <b>5/14</b>。</li>
+        <li>等得更短：预设链路就绪中位 5+10 <b>29.9 秒</b>，10+10 <b>43.2 秒</b>；30 秒内就绪 <b>6/11</b> 对 <b>1/11</b>。开放式链路 10+10 快一些（99.9 对 139.7 秒），但两种都远超 30 秒目标。</li>
         <li>长了没内容：一轮只有一个反应，10 秒的第 1 段只能塞“原位小动作”，多出的几秒正是换猫、走开、机位漂移、约 3 秒画面崩坏出现的地方。</li>
       </ul></div>
-      <div class="vc"><span class="tag ok">判断成立</span><h3>复杂内容（Magnus 这类）→ 10+10</h3><ul>
-        <li>多 5 秒内容几乎不多等：5+10 等的其实是那段 10 秒。时长测试里第 2 段比第 1 段晚 <b>7–18 秒</b>，5 秒段省下的时间用不上；10+10 两段多数同时就绪。</li>
-        <li>等待持平或更短：预设版就绪中位 10+10 <b>32.8 秒</b>，5+10 <b>46.9 秒</b>，30 秒内就绪 <b>3/8</b> 对 <b>0/8</b>；开放式 V0.15 是 <b>63.8</b> 对 <b>59.4 秒</b>，多等 7%，内容多 33%。</li>
-        <li>表演放得下：角色设定和台词多，第 1 段 10 秒能同时放下回应和演绎；剧情推进不吃亏，两种都演到 K13，“那一下落到她”都是 <b>34/36</b>。</li>
-        <li>要先补的短板：画面硬错误更多，V0.15 无硬错误 <b>11/18</b> 对 <b>15/18</b>，主要出在 10 秒的第 1 段（车门、衬衫颜色、袖子变了）。</li>
+      <div class="vc"><span class="tag ok">判断成立 · 10+10</span><h3>复杂内容（Magnus 这类）· 预设链路</h3><ul>
+        <li>画面持平：无硬错误 5+10 <b>9/12</b>，10+10 <b>8/12</b>。</li>
+        <li>等得更短：就绪中位 10+10 <b>32.8 秒</b>，5+10 <b>46.9 秒</b>；30 秒内就绪 <b>3/8</b> 对 <b>0/8</b>。</li>
+        <li>多 5 秒内容不多等：5+10 等的其实是那段 10 秒，时长测试里第 2 段比第 1 段晚 <b>7–18 秒</b>；10+10 两段多数同时就绪。</li>
+        <li>台词和表演多，第 1 段 10 秒能同时放下回应和演绎。</li>
       </ul></div>
-      <div class="vc"><span class="tag next">下一步</span><h3>补齐 10+10 第 1 段的稳定性</h3><ul>
+      <div class="vc"><span class="tag ok">判断成立 · 5+10（目前）</span><h3>复杂内容（Magnus 这类）· 开放式链路</h3><ul>
+        <li>画面更稳：无硬错误 V0.15 5+10 <b>15/18</b>，10+10 <b>11/18</b>；上一版 <b>10/18</b> 对 <b>3/18</b>。能分清是哪一段的错误里，9 次出在 10+10 的第 1 段（车门、衬衫颜色、袖子变了）。</li>
+        <li>等待没有优势：就绪中位 V0.15 5+10 <b>59.4 秒</b>，10+10 <b>63.8 秒</b>；上一版 <b>57.7</b> 对 <b>70.3 秒</b>。</li>
+        <li>剧情推进一样：两种都演到 K13，“那一下落到她”都是 <b>34/36</b>。10+10 多出的 5 秒没换来更多剧情。</li>
+      </ul></div>
+      <div class="vc"><span class="tag next">下一步</span><h3>让开放式链路也能用 10+10</h3><ul>
         <li>给 10+10 的第 1 段加首尾帧锁。小猫的修复验证 v6 用这个办法，4 轮 <b>4/4</b> 无硬错误。</li>
-        <li>加锁后用 Magnus 开放式再跑 18 轮，确认 10+10 的无硬错误追平 5+10。</li>
+        <li>加锁后用 Magnus 开放式再跑 18 轮：10+10 的无硬错误追平 5+10，开放式的复杂内容就改用 10+10，和预设链路一致。</li>
       </ul></div>
     </div>
     <div class="tw"><table class="vtab">
-      <tr><th>剧集 · 测试组</th><th>无硬错误 5+10</th><th>无硬错误 10+10</th><th>就绪中位 5+10</th><th>就绪中位 10+10</th></tr>
-      <tr><td>咪 · 预设版（新版 PE，同 11 句）</td><td class="w">10/11</td><td>8/11</td><td class="w">29.9 秒</td><td>43.2 秒</td></tr>
-      <tr><td>咪 · 开放式（模拟用户 14 轮）</td><td class="w">8/14</td><td>5/14</td><td>139.7 秒</td><td class="w">99.9 秒</td></tr>
-      <tr><td>Magnus · 预设版（整轮 + 时长测试）</td><td class="w">9/12</td><td>8/12</td><td>46.9 秒</td><td class="w">32.8 秒</td></tr>
-      <tr><td>Magnus · 开放式 V0.15（18 轮）</td><td class="w">15/18</td><td>11/18</td><td class="w">59.4 秒</td><td>63.8 秒</td></tr>
-      <tr><td>Magnus · 开放式上一版（18 轮）</td><td class="w">10/18</td><td>3/18</td><td class="w">57.7 秒</td><td>70.3 秒</td></tr>
+      <tr><th>剧集 · 测试组</th><th>无硬错误 5+10</th><th>无硬错误 10+10</th><th>就绪中位 5+10</th><th>就绪中位 10+10</th><th>更接近成立</th></tr>
+      <tr><td>咪 · 预设版（新版 PE，同 11 句）</td><td class="w">10/11</td><td>8/11</td><td class="w">29.9 秒</td><td>43.2 秒</td><td class="w">5+10</td></tr>
+      <tr><td>咪 · 开放式（模拟用户 14 轮）</td><td class="w">8/14</td><td>5/14</td><td>139.7 秒</td><td class="w">99.9 秒</td><td class="w">5+10</td></tr>
+      <tr><td>Magnus · 预设版（整轮 + 时长测试）</td><td class="w">9/12</td><td>8/12</td><td>46.9 秒</td><td class="w">32.8 秒</td><td class="w">10+10</td></tr>
+      <tr><td>Magnus · 开放式 V0.15（18 轮）</td><td class="w">15/18</td><td>11/18</td><td class="w">59.4 秒</td><td>63.8 秒</td><td class="w">5+10</td></tr>
+      <tr><td>Magnus · 开放式上一版（18 轮）</td><td class="w">10/18</td><td>3/18</td><td class="w">57.7 秒</td><td>70.3 秒</td><td class="w">5+10</td></tr>
     </table></div>
     <p class="vnote">口径：只算两种方案用同一版规则、同一组或同类输入的测试组；规则还在迭代的早期轮次、修复验证不计入。绿色是该项更好的一方。两种方案多数不在同一时段跑，就绪时间受 Vivix 负载影响较大。</p>
   </section>
