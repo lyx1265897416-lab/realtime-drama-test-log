@@ -219,6 +219,7 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
       <tr><td>Magnus · 开放式 V0.15（18 轮）</td><td class="w">15/18</td><td>11/18</td><td class="w">59.4 秒</td><td>63.8 秒</td><td class="w">5+10</td></tr>
       <tr><td>Magnus · 预设版 · 时长测试（同一时段、同一句输入各 4 次）</td><td class="w">3/4</td><td>2/4</td><td>29.9 秒</td><td class="w">29.1 秒</td><td class="w">5+10（持平）</td></tr>
       <tr><td>Magnus · 预设版 · 整轮（8 轮，不同时段）</td><td>6/8</td><td>6/8</td><td>46.9 秒</td><td class="w">32.8 秒</td><td>持平</td></tr>
+      <tr><td>Magnus · 观众第三视角 V1.1（女主按设定图 1、固定开场、景别灵活、空镜转场、段内快检；同 14 句）</td><td>12/14</td><td>12/14</td><td>126.5 秒</td><td class="w">115.3 秒（Vivix 排队慢）</td><td class="w">10+10</td></tr>
       <tr><td>Magnus · 观众第三视角 V1.0（同 14 句）</td><td>11/14</td><td class="w">13/14</td><td class="w">88.2 秒</td><td>96.7 秒</td><td class="w">10+10（待复测）</td></tr>
     </table></div>
     <p class="vnote">口径：只算两种方案用同一版规则、同一组或同类输入跑的测试组；规则还在迭代的早期轮次、修复验证、只测了一种方案的组（V0.17c、V0.17d 实验）不计入，V0.17b 的 10+10 组和 V0.16 两组已从网页隐藏，也不计入。绿色是该项更好的一方。多数组两种方案不在同一时段跑，就绪时间受 Vivix 负载影响；跨版本审片标准越来越严，只看同一版两组之间的差。</p>
@@ -227,12 +228,12 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
   <main id="root"></main>
   <footer id="foot"></footer>
 </div>
-<script src="data.js?v=20261027-magnus-v17d"></script>
+<script src="data.js?v=20261027-magnus-third-v11"></script>
 <script>
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const mmss = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
 const L = window.LOG, $ = id => document.getElementById(id);
-const VTTV = '20261027-011413';  // 字幕版本号：字幕改了就换一个，避免浏览器用缓存里的旧字幕
+const VTTV = '20261027-041911';  // 字幕版本号：字幕改了就换一个，避免浏览器用缓存里的旧字幕
 // 网页不显示的记录（Vicky 要求隐藏，本地存档保留）：按剧集 id + 分组标签 / 成片标题过滤，重建数据时即使被带回来也不显示
 const HIDE = {'magnus-open': ['上一版 · V0.17b · 10+10', '上一版 · V0.17b · 完整成片 · 10+10', '上一版 · V0.16 · 5+10', '上一版 · V0.16 · 10+10', '上一版 · V0.16 · 完整成片 · 5+10', '上一版 · V0.16 · 完整成片 · 10+10'],
   'mii-open': ['上一版 v2 · 5+10', '上一版 v2 · 10+10', 'v3.2 · 10+10', '上一版 v3.1 · 5+10', '完整成片 · v3.2 · 10+10']};
