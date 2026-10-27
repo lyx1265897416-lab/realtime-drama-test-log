@@ -212,6 +212,7 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
     </div>
     <div class="tw"><table class="vtab">
       <tr><th>剧集 · 测试组</th><th>无硬错误 5+10</th><th>无硬错误 10+10</th><th>就绪中位 5+10</th><th>就绪中位 10+10</th><th>更接近成立</th></tr>
+      <tr><td>Magnus · 观众第三视角 V1.0（修完的终版，同 14 句；10+10 锁帧遇 Vivix 间歇失败、自动重提）</td><td>11/14</td><td class="w">13/14</td><td class="w">88.2 秒</td><td>96.7 秒</td><td class="w">10+10</td></tr>
       <tr><td>咪 · 预设版（新版 PE，同 11 句）</td><td class="w">10/11</td><td>8/11</td><td class="w">29.9 秒</td><td>43.2 秒</td><td class="w">5+10</td></tr>
       <tr><td>咪 · 开放式（模拟用户 14 轮）</td><td class="w">8/14</td><td>5/14</td><td>139.7 秒</td><td class="w">99.9 秒</td><td class="w">5+10</td></tr>
       <tr><td>Magnus · 预设版（整轮 + 时长测试）</td><td class="w">9/12</td><td>8/12</td><td>46.9 秒</td><td class="w">32.8 秒</td><td class="w">10+10</td></tr>
@@ -227,7 +228,7 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
   <main id="root"></main>
   <footer id="foot"></footer>
 </div>
-<script src="data.js?v=20261027-hide-mii-open"></script>
+<script src="data.js?v=20261027-magnus-third"></script>
 <script>
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const mmss = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
