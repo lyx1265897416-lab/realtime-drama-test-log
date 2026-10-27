@@ -200,10 +200,6 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
         <li>多等几秒、多 5 秒内容：V0.17b 同一时段就绪中位 10+10 <b>77.2 秒</b>，5+10 <b>70.7 秒</b>；折成每看 1 秒要等 <b>3.9</b> 对 <b>4.7 秒</b>。</li>
         <li>剧情推进一样：V0.17b 两组都在第 14 轮到 K13；V0.17c 第 13 轮到 K13、第 11 轮吻戏，“那一下落到你”都是 <b>18/18</b>。</li>
       </ul></div>
-      <div class="vc"><span class="tag ok">已验证 · V0.17c</span><h3>锁帧暴露的问题修完了</h3><ul>
-        <li>上一轮末帧的毛病被锁进整整 10 秒：V0.17b <b>3</b> 次（灰色影棚、贴脸显老、金瞳发强光）→ V0.17c <b>0</b> 次。做法：末帧质检加“背景变成影棚或纯色”，锁帧前把贴脸特写往前回正、站远的裁到脸宽约三分之一；18 轮里 5 轮的末帧被回正。</li>
-        <li>车内正对镜头像坐在对面 <b>2 → 0</b>（并排坐的近景和收尾都写三分之四侧脸）；撕契约的纸满页字 <b>1 → 0</b>（写成素面纸）。</li>
-      </ul></div>
       <div class="vc"><span class="tag next">下一步</span><h3>第 2 段的随机错误和回正兜底</h3><ul>
         <li>剩下的 5 个硬错误都出在第 2 段中间，末帧质检看不到：车内座椅变酒红、你手上多戒指、车窗外像白天、西装变浅灰、Selene 成了低胸领口、手发黑显老。办法是第 2 段生成后抽中段 3 帧快检，严重问题重生成这一段（多等约 40 秒），或者把这几项写进对应镜头的提示词。</li>
         <li>两轮末尾 4.5 秒全是贴脸特写、没找到标准帧（这次没出事）：再往前找到第 2 段开头，仍然没有就修图拉远成近景。</li>
@@ -236,6 +232,8 @@ const L = window.LOG, $ = id => document.getElementById(id);
 // 网页不显示的记录（Vicky 要求隐藏，本地存档保留）：按剧集 id + 分组标签 / 成片标题过滤，重建数据时即使被带回来也不显示
 const HIDE = {'magnus-open': ['上一版 · V0.17b · 10+10', '上一版 · V0.17b · 完整成片 · 10+10'],
   'mii-open': ['上一版 v2 · 5+10', '上一版 v2 · 10+10', 'v3.2 · 10+10', '上一版 v3.1 · 5+10', '完整成片 · v3.2 · 10+10']};
+// 结论区只展示「判断成立」和「下一步」两类卡片（Vicky 2026-10-27），其他过程卡（已验证、已修复等）不显示
+document.querySelectorAll('.verdict .vc').forEach(c => { const t = (c.querySelector('.tag') || {}).textContent || ''; if (!/^(判断成立|下一步)/.test(t.trim())) c.remove(); });
 L.dramas.forEach(d => { const h = HIDE[d.id] || []; d.groups = d.groups.filter(g => !h.includes(g.tab)); d.films = (d.films || []).filter(f => !h.includes(f.title)); });
 // 在 Vicky 的 Mac 上：本机预览服务（127.0.0.1:8793，制作成果/test-log 软链到本仓库）连得上，就改从本机读视频、封面和字幕；
 // 实测这台 Mac 经代理到 GitHub Pages 只有几十 KB/s，视频一直转圈。其他人打开时连不上本机，照常走 GitHub。
