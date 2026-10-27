@@ -229,6 +229,7 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const mmss = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
 const L = window.LOG, $ = id => document.getElementById(id);
+const VTTV = '20261027-bilingual';  // 字幕版本号：字幕改了就换一个，避免浏览器用缓存里的旧字幕
 // 网页不显示的记录（Vicky 要求隐藏，本地存档保留）：按剧集 id + 分组标签 / 成片标题过滤，重建数据时即使被带回来也不显示
 const HIDE = {'magnus-open': ['上一版 · V0.17b · 10+10', '上一版 · V0.17b · 完整成片 · 10+10'],
   'mii-open': ['上一版 v2 · 5+10', '上一版 v2 · 10+10', 'v3.2 · 10+10', '上一版 v3.1 · 5+10', '完整成片 · v3.2 · 10+10']};
@@ -282,10 +283,10 @@ function kRange(v){
 function film(f, i){
   const ch = f.chapters.filter(c => c[0] === 'rt' || c[0] === 'ep').slice().sort((a, b) => a[2] - b[2]);
   const short = f.stats.filter(([, v]) => String(v).length <= 16), long = f.stats.filter(([, v]) => String(v).length > 16);
-  const chip = c => { const m = c[0] === 'rt' && /^第 ?(\d+) ?轮$/.exec(c[1]);
+  const chip = c => { const m = c[0] === 'rt' && (/^第 ?(\d+) ?轮$/.exec(c[1]) || /^Round (\d+)$/i.exec(c[1]));
     return `<button class="chip${c[0] === 'ep' ? ' ep' : ''}${m ? ' n' : ''}" data-t="${c[2]}" title="${esc(c[1])} · 跳到 ${mmss(c[2])}">${esc(m ? m[1] : c[1])}</button>`; };
   return `<div class="film">
-    <video controls playsinline preload="none" crossorigin="anonymous" poster="${esc(M(f.poster))}" src="${esc(M(f.video))}"><track kind="subtitles" srclang="zh" label="中英" src="${esc(M(f.vtt))}" default></video>
+    <video controls playsinline preload="none" crossorigin="anonymous" poster="${esc(M(f.poster))}" src="${esc(M(f.video))}"><track kind="subtitles" srclang="zh" label="中英" src="${esc(M(f.vtt))}?v=${VTTV}" default></video>
     <div class="info">
       <div class="fhead"><span class="badge ${i % 2 ? 'alt' : ''}">${esc(f.mode)}</span><h4>${esc(f.title)}${f.duration ? ` <small>· ${mmss(f.duration)}</small>` : ''}</h4></div>
       <p class="desc">${esc(f.desc)}</p>
@@ -313,7 +314,7 @@ function sample(x){
   const pick = x.chapters.filter(c => c[0] === 'pick'), ep = x.chapters.filter(c => c[0] === 'ep');
   return `<h3>${esc(x.title)}</h3><p class="sub">${esc(x.desc)}</p>
   <div class="sample film">
-    <div><video controls playsinline preload="none" crossorigin="anonymous" poster="${esc(M(x.poster))}" src="${esc(M(x.video))}"><track kind="subtitles" srclang="zh" label="中英" src="${esc(M(x.vtt))}" default></video></div>
+    <div><video controls playsinline preload="none" crossorigin="anonymous" poster="${esc(M(x.poster))}" src="${esc(M(x.video))}"><track kind="subtitles" srclang="zh" label="中英" src="${esc(M(x.vtt))}?v=${VTTV}" default></video></div>
     <div class="info">
       <div class="chips">${pick.map(c => `<button class="chip" data-t="${c[2]}" title="跳到 ${mmss(c[2])}">${esc(c[1])}</button>`).join('')}</div>
       <div class="chips">${ep.map(c => `<button class="chip ep" data-t="${c[2]}">${esc(c[1])} · ${mmss(c[2])}</button>`).join('')}</div>
