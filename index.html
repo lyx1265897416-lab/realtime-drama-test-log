@@ -309,10 +309,14 @@ function film(f, i){
 }
 function compare(films){
   if (films.length < 2) return '';
-  const rows = films[0].stats.map(([k], j) => [k, ...films.map(f => f.stats[j][1])]);
-  return `<div class="cmp"><div class="tw"><table><tr><th>一眼对比</th>${films.map(f => `<th>${esc(f.mode)}</th>`).join('')}</tr>
-    ${rows.map(r => `<tr><td>${esc(r[0])}</td>${r.slice(1).map(v => `<td><b>${esc(kRange(String(v)))}</b></td>`).join('')}</tr>`).join('')}
-    <tr><td>成片里每条实时片段</td>${films.map(f => `<td><b>${f.mode === '10+10' ? '20 秒' : '15 秒'}</b></td>`).join('')}</tr></table></div></div>`;
+  // 按统计项名称对齐（不同版本的成片统计项不完全一样，没有的项显示“—”）
+  const keys = []; films.forEach(f => f.stats.forEach(([k]) => { if (!keys.includes(k)) keys.push(k); }));
+  const val = (f, k) => { const s = f.stats.find(x => x[0] === k); return s ? kRange(String(s[1])) : '—'; };
+  const head = f => (f.title || f.mode).replace(/ · 完整成片/, '').replace(/^上一版 · /, '');
+  const seg = f => /15 秒整段/.test(f.mode) ? '15 秒（一段）' : f.mode === '10+10' || / 10\+10$/.test(f.mode) ? '20 秒' : '15 秒';
+  return `<div class="cmp"><div class="tw"><table><tr><th>一眼对比</th>${films.map(f => `<th>${esc(head(f))}</th>`).join('')}</tr>
+    ${keys.map(k => `<tr><td>${esc(k)}</td>${films.map(f => `<td><b>${esc(val(f, k))}</b></td>`).join('')}</tr>`).join('')}
+    <tr><td>成片里每条实时片段</td>${films.map(f => `<td><b>${seg(f)}</b></td>`).join('')}</tr></table></div></div>`;
 }
 function group(g){
   return `<div class="ghead"><h3>${esc(g.title)}</h3><span>${esc(g.when)}</span></div>
