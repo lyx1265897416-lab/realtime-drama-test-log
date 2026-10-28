@@ -415,7 +415,7 @@ function film(f, i){
       <div class="kv">${short.map(([k, v]) => `<div>${esc(k)}<b>${esc(v)}</b></div>`).join('')}</div>
       ${long.length ? `<div class="lines">${long.map(([k, v]) => `<div title="点开看全部"><span>${esc(k)}</span>${esc(kRange(String(v)))}</div>`).join('')}</div>` : ''}
     </div>
-    ${SC.films[f.video] ? `<details class="fs"><summary>${scSpans(SC.films[f.video])}</summary>${scDetail(SC.films[f.video])}</details>` : ''}
+    ${SC.films[f.video] ? `<details class="fs"${fsOpen ? ' open' : ''}><summary>${scSpans(SC.films[f.video])}</summary>${scDetail(SC.films[f.video])}</details>` : ''}
   </div>`;
 }
 function compare(films){
@@ -473,7 +473,7 @@ function sample(x){
         ${x.picks.map(p => `<tr><td>${esc(p.point)} ${esc(p.scene)}</td><td><span class="k ${p.k === 'B' ? 'b' : ''}">${esc(p.k)}</span> ${esc(p.text)}</td><td class="why">${esc(p.why)}</td></tr>`).join('')}</table></div>
       ${x.cmp ? `<figure class="srcmp"><img src="${esc(M(x.cmp))}" alt="四个超分模型的脸部局部对比" loading="lazy"><figcaption>${esc(x.cmp_note)}</figcaption></figure>` : ''}
     </div>
-    ${SC.films[x.video] ? `<details class="fs"><summary>${scSpans(SC.films[x.video])}</summary>${scDetail(SC.films[x.video])}</details>` : ''}
+    ${SC.films[x.video] ? `<details class="fs"${fsOpen ? ' open' : ''}><summary>${scSpans(SC.films[x.video])}</summary>${scDetail(SC.films[x.video])}</details>` : ''}
   </div>`;
 }
 function drama(d){
@@ -489,7 +489,7 @@ function drama(d){
     </div>
   </section>`;
 }
-let cur = 0, moreOpen = false, syncing = false;
+let cur = 0, moreOpen = false, fsOpen = false, syncing = false;
 function render(){
   $('dtabs').innerHTML = L.dramas.map((d, i) => `<button class="tab" role="tab" data-d="${i}" aria-selected="${i === cur}">${esc(d.title)}</button>`).join('');
   $('root').innerHTML = drama(L.dramas[cur]);
@@ -515,9 +515,13 @@ document.addEventListener('click', e => {
 });
 // 「细节」联动：展开一个就全部展开，收起一个就全部收起；切换分组后的新卡片沿用当前状态
 document.addEventListener('toggle', e => {
-  const d = e.target; if (syncing || !d.matches || !d.matches('details.more')) return;
-  moreOpen = d.open; syncing = true;
-  document.querySelectorAll('details.more').forEach(x => { if (x !== d) x.open = moreOpen; });
+  const d = e.target; if (syncing || !d.matches) return;
+  // 「细节」和评分「理由」各自联动：展开一个就全部展开，收起一个就全部收起；切换剧集、分组后新出现的沿用当前状态
+  const sel = d.matches('details.more') ? 'details.more' : d.matches('details.fs') ? 'details.fs' : null;
+  if (!sel) return;
+  if (sel === 'details.more') moreOpen = d.open; else fsOpen = d.open;
+  syncing = true;
+  document.querySelectorAll(sel).forEach(x => { if (x !== d) x.open = d.open; });
   setTimeout(() => { syncing = false; }, 0);  // toggle 事件是异步派发的，等这一轮派发完再放开
 }, true);
 // 同一时间只放一条
