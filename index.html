@@ -170,6 +170,54 @@ details.more[open]>summary::after{content:" ↑"}
 .vtab tr:last-child td{border-bottom:0}
 .vtab .w{color:var(--green);font-weight:650}
 .vnote{font-size:11.5px;color:var(--muted);margin:8px 0 0;line-height:1.55}
+/* 评分（按《抖音｜图像&视频效果评测标准》V_2.0 视频部分，1–5 分） */
+.sc{display:inline-flex;align-items:center;justify-content:center;min-width:34px;font-size:12px;font-weight:700;border-radius:7px;padding:1px 7px;font-variant-numeric:tabular-nums;border:1px solid}
+.sc.hi{color:var(--ok);background:var(--okbg);border-color:var(--okline)}
+.sc.mid{color:#8a5a1c;background:#fbf3e6;border-color:#e8d2ad}
+.sc.lo{color:var(--bad);background:var(--badbg);border-color:var(--badline)}
+.sc.na{color:var(--muted);background:var(--bg);border-color:var(--line)}
+.scl{display:flex;flex-wrap:wrap;gap:3px 6px;align-items:center;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+.scl .tot{font-size:12px;color:var(--ink);font-weight:650;margin-right:2px}
+.scl .tot .sc{font-size:12.5px;margin-left:3px}
+.scl span.l b{color:var(--ink);font-weight:650;margin-left:2px}
+.scl span.l b.lo{color:var(--bad)}
+.sdet{display:flex;flex-direction:column;gap:6px}
+.sdet .ov{color:var(--ink)}
+.sdet .iss{color:var(--bad)}
+.sdet .l1{background:var(--bg);border-radius:8px;padding:6px 8px}
+.sdet .l1h{display:flex;align-items:center;gap:6px;font-weight:650;color:var(--ink);font-size:12px;margin-bottom:3px}
+.sdet .l2{display:grid;grid-template-columns:58px 24px minmax(0,1fr);gap:5px;align-items:start;font-size:11.5px;line-height:1.45;padding:2px 0}
+.sdet .l2 .n{color:var(--ink)}
+.sdet .l2 .sc{min-width:22px;padding:0 4px;font-size:11px}
+.scoring{margin:22px 0 0;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px 20px}
+.scoring .vh{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
+.scoring a{color:var(--accent);font-weight:600}
+.scoring .stab{margin-top:12px}
+.scoring h2{font-size:20px;margin:0;letter-spacing:-.015em}
+.scoring .vtl{font-size:14.5px;line-height:1.65;margin:8px 0 10px}
+.scoring .vtl b{color:var(--green)}
+.scoring>ul{margin:14px 0 6px;padding-left:18px;font-size:12.5px;line-height:1.65;color:var(--muted)}
+.stab{border-collapse:collapse;width:100%;font-size:12.5px;font-variant-numeric:tabular-nums}
+.stab th,.stab td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--line);white-space:nowrap}
+.stab th{font-weight:500;color:var(--muted);font-size:11.5px;background:var(--bg)}
+.stab td.t{white-space:normal;min-width:220px}
+.stab tr[data-g]{cursor:pointer}
+.stab tr[data-g]:hover td{background:var(--soft)}
+.stab tr:last-child td{border-bottom:0}
+.stab .win{color:var(--green);font-weight:650}
+.sbox{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;margin:0 0 14px}
+.sbox .cap{padding:10px 14px 0;font-size:12px;color:var(--muted);line-height:1.55}
+.gscore{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:-6px 0 14px;font-size:12px;color:var(--muted)}
+.gscore .lab{font-weight:650;color:var(--ink)}
+.gscore .dv{flex-basis:100%;font-size:12px;line-height:1.55}
+.film details.fs,.sample details.fs{grid-column:1/-1;border-top:1px solid var(--line);padding-top:9px}
+.film details.fs .sdet{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:6px}
+.film details.fs .sdet .ov,.film details.fs .sdet .iss{grid-column:1/-1}
+.film details.fs>summary{cursor:pointer;list-style:none;display:flex;flex-wrap:wrap;gap:3px 6px;align-items:center;font-size:11px;color:var(--muted)}
+.film details.fs>summary::-webkit-details-marker{display:none}
+.film details.fs>summary::after{content:"理由 ↓";color:var(--accent);font-weight:600}
+.film details.fs[open]>summary::after{content:"收起 ↑"}
+.film details.fs .sdet{margin-top:8px}
 footer{margin-top:44px;font-size:12px;color:var(--muted)}
 </style>
 </head>
@@ -231,16 +279,52 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
     </table></div>
     <p class="vnote">口径：只算两种方案用同一版规则、同一组或同类输入跑的测试组；规则还在迭代的早期轮次、修复验证、只测了一种方案的组（V0.17c、V0.17d 实验）不计入，V0.17b 的 10+10 组和 V0.16 两组已从网页隐藏，也不计入。绿色是该项更好的一方。多数组两种方案不在同一时段跑，就绪时间受 Vivix 负载影响；跨版本审片标准越来越严，只看同一版两组之间的差。</p>
   </section>
+  <section class="scoring" id="scoring" aria-labelledby="st">
+    <div class="vh"><div class="eyebrow">评分 · <span id="scAt"></span></div><h2 id="st">按视频效果评测标准打分</h2></div>
+    <p class="vtl">491 条实时片段平均 <b>3.5 分</b>（满分 5），五个剧集都在 3.5 上下。<b>画质、台词、音色、音频质量</b>接近 4 分；拉分的是<b>动态和衔接</b>：执行指令 3.1、剪辑节奏 3.1、参考保持 3.1、镜头运动 3.2、结构 3.3。按组打的多样性平均约 2.7，动态多样性普遍只有 2 分（机位和动作套路反复）。28 条完整成片平均 <b>3.3 分</b>，比单条低，扣在跨轮次的人物一致和轮与轮接缝。评分支持现在的结论：<b>5+10 比 10+10 好或持平</b>。</p>
+    <div class="vgrid">
+      <div class="vc"><span class="tag ok">判断成立 · 5+10（评分核对）</span><h3>5+10 对 10+10：同版本、同一组输入的 9 对</h3><ul>
+        <li>5+10 更高 <b>6 对</b>，持平 <b>3 对</b>（相差 ±0.01），10+10 没有一对明显更高。</li>
+        <li>差得最多：Magnus 开放式 V0.19 <b>3.65 / 3.49</b>、第三视角 V1.0 <b>3.67 / 3.51</b>、V0.15 <b>3.67 / 3.56</b>、咪预设新版 PE <b>3.58 / 3.49</b>。</li>
+        <li>完整成片也一样：成对的 8 组里 5+10 更高 <b>6 组</b>，持平 1 组（预设版 3.31 / 3.30），只有 V0.19 是 10+10 更高（3.36 / 3.29）。</li>
+        <li>第三视角：按硬错误计数是 10+10 略好，按评分是 5+10 更好（V1.0）或持平（V1.1）。“第三视角用 10+10”目前<b>评分不支持</b>，复测时两种口径一起看。</li>
+      </ul></div>
+      <div class="vc"><span class="tag ok">判断成立 · 按内容分开</span><h3>15 秒整段对 5+10，MD-A 对 MD-B</h3><ul>
+        <li>Magnus：15 秒整段和 5+10 持平（MD-A <b>3.46 / 3.47</b>，MD-B <b>3.57 / 3.59</b>），5+10 略高，和硬错误计数的结论一致。</li>
+        <li>咪：15 秒整段略高（MD v1 <b>3.51 / 3.42</b>，MD v2 <b>3.41 / 3.39</b>），高在运动质量（一段到底没有接缝跳变），但主体保持两种都只有 2.8–3.0（换猫、围兜消失）。</li>
+        <li>换 MD：Magnus 的 MD-B 明显好于 MD-A（3.57–3.59 对 3.46–3.47，主体保持 3.5–3.6 对 3.1–3.2）；咪的 MD v2 不如 v1（3.39–3.41 对 3.42–3.51）。</li>
+      </ul></div>
+      <div class="vc"><span class="tag next">下一步</span><h3>先修拉分最多的四项</h3><ul>
+        <li><b>执行指令 3.1</b>：一条塞 5–6 拍，模型常漏拍（低分理由大多是“没做到某一拍”）。每段压到 3 拍以内，关键动作放前面。</li>
+        <li><b>剪辑节奏、参考保持 3.1</b>：低分理由多是第 5 / 10 秒接缝跳切、背景道具跳变、前几秒画面静止。接缝两边同景别同机位，第 1 段别写成原地不动。</li>
+        <li><b>结构 3.3</b>：问题大多在手（多出的手、手指粘连、凭空多出道具），质检继续重点查手。</li>
+        <li><b>镜头运动 3.2、动态多样性 2</b>：大量固定机位、同一种推近。导演层加一条“和上一轮换景别或运镜”。</li>
+      </ul></div>
+      <div class="vc"><span class="tag next">下一步</span><h3>评分补出的漏审：31 条值得复核</h3><ul>
+        <li>人工判“无硬错误”的 295 条里，有 <b>31 条</b>模型在主体保持、参考保持或结构给了 2 分及以下。</li>
+        <li>抽查确认过一条：预设版“P4 壁炉递水”10+10 第 5.5–6.5 秒他手里凭空多出第二个杯子，第 10 秒接缝跳回首帧，人工审片漏了。</li>
+        <li>其余 30 条在卡片“细节”里能看到具体秒数，建议按这个清单复看，再决定改不改原来的标记。</li>
+      </ul></div>
+    </div>
+    <ul>
+      <li>标准：<a href="https://xcndn45lr3fm.feishu.cn/docx/Hr3UdSxiyoHAGIx4pDBccsEwnVg" target="_blank" rel="noopener">《抖音｜图像&amp;视频效果评测标准》V_2.0 · 视频</a>。每条实时片段打 6 个大维度 18 个小项：保持（主体保持、参考保持）、响应（模糊指令、执行指令）、美感（画质、结构、画面美感、角色美感）、运动质量（物理规律、动作流畅、镜头运动）、音频表现（音画同步、音频质量、情景匹配、音色保持）、成片完整度（剧情质量、剪辑节奏、台词质量）。多样性 3 项（视觉、动态、剧情）只在多次生成之间才有意义，按整组、整条成片打。</li>
+      <li>分数 1–5：标准给了 1、3、5 分的锚点，2、4 分介于两者之间；大维度分 = 小项平均，总分 = 大维度平均。不适用的小项（例如整条没有台词）不打、不计入平均。</li>
+      <li>对应到实时互动剧：主体保持对照角色身份母版；参考保持看首帧 / 上一刻画面和地点是否延续；模糊指令 = 你这一轮说的话有没有被理解兑现；执行指令 = 导演分镜里写的动作是否逐拍做到；音色保持看是不是同一个角色的声线。</li>
+      <li>打分方式：<span id="scModel"></span> 逐条看视频、听音轨，同时参考每 0.5 秒一帧的联系表、角色母版、你的输入、他的台词、导演分镜和原有审片标记，每个小项写一句理由（卡片“细节”里可看）。是模型评分，和人工审片的四个标记并列看。</li>
+    </ul>
+    <div class="tw"><table class="stab" id="scTop"></table></div>
+  </section>
   <nav class="bar" id="dtabs" role="tablist" aria-label="剧集"></nav>
   <main id="root"></main>
   <footer id="foot"></footer>
 </div>
 <script src="data.js?v=20261028-md-ab-b"></script>
+<script src="scores.js?v=20261028-score1"></script>
 <script>
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const mmss = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
 const L = window.LOG, $ = id => document.getElementById(id);
-const VTTV = '20261028-013216';  // 字幕版本号：字幕改了就换一个，避免浏览器用缓存里的旧字幕
+const VTTV = '20261028-030448';  // 字幕版本号：字幕改了就换一个，避免浏览器用缓存里的旧字幕
 // 网页不显示的记录（Vicky 要求隐藏，本地存档保留）：按剧集 id + 分组标签 / 成片标题过滤，重建数据时即使被带回来也不显示
 const HIDE = {'magnus-open': ['上一版 · V0.17b · 10+10', '上一版 · V0.17b · 完整成片 · 10+10', '上一版 · V0.16 · 5+10', '上一版 · V0.16 · 10+10', '上一版 · V0.16 · 完整成片 · 5+10', '上一版 · V0.16 · 完整成片 · 10+10'],
   'mii-open': ['上一版 v2 · 5+10', '上一版 v2 · 10+10', 'v3.2 · 10+10', '上一版 v3.1 · 5+10', '完整成片 · v3.2 · 10+10']};
@@ -258,8 +342,32 @@ function probeLocal(){
   return fetch(LOCAL + 'data.js', {method: 'HEAD', cache: 'no-store', signal: ctl.signal}).then(r => { if (r.ok) BASE = LOCAL; }).catch(() => {});
 }
 const allCards = L.dramas.flatMap(d => d.groups.flatMap(g => g.cards));
-$('stats').innerHTML = [['剧集', L.dramas.length], ['完整成片', L.dramas.reduce((n, d) => n + (d.films || []).length, 0)], ['测试条数', allCards.length], ['最后更新', L.updated]]
+// 评分：按《抖音｜图像&视频效果评测标准》V_2.0 视频部分打分，数据在 scores.js（tools/video-eval/score_log.py 生成，和 data.js 分开，重建测试数据不会冲掉评分）
+const SC = window.SCORES || {cards: {}, films: {}, groups: {}};
+const tier = v => v == null ? 'na' : v >= 4 ? 'hi' : v >= 3 ? 'mid' : 'lo';
+const f1 = v => v == null ? '—' : (Math.round(v * 10) / 10).toFixed(1);
+const pill = v => `<span class="sc ${tier(v)}">${f1(v)}</span>`;
+const pillI = v => `<span class="sc ${tier(v)}">${v == null ? '—' : v}</span>`;
+const L1S = {'保持': '保持', '响应': '响应', '美感': '美感', '运动质量': '运动', '音频表现': '音频', '成片完整度': '成片', '多样性': '多样性'};
+const mean = xs => { xs = xs.filter(x => x != null); return xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : null; };
+const scSpans = s => `<span class="tot">评分${pill(s.total)}</span>${s.dims.map(([l1, v]) => `<span class="l">${L1S[l1] || l1}<b class="${v != null && v < 3 ? 'lo' : ''}">${f1(v)}</b></span>`).join('')}`;
+const scLine = s => s ? `<div class="scl" title="满分 5 分；总分 = 各大维度均分的平均">${scSpans(s)}</div>` : '';
+const scDetail = s => s ? `<div class="sdet">${s.overall ? `<div class="ov">评分总评：${esc(s.overall)}</div>` : ''}${s.issue && s.issue !== '无' ? `<div class="iss">最该修：${esc(s.issue)}</div>` : ''}
+  ${s.dims.map(([l1, v, items]) => `<div class="l1"><div class="l1h">${esc(l1)} ${pill(v)}</div>${items.map(([n, x, w]) => `<div class="l2"><span class="n">${esc(n)}</span>${pillI(x)}<span>${esc(w)}</span></div>`).join('')}</div>`).join('')}</div>` : '';
+const gScore = (d, g) => SC.groups[d.id + '|' + g.title];
+const scoredCards = allCards.map(c => SC.cards[c.video]).filter(Boolean);
+$('stats').innerHTML = [['剧集', L.dramas.length], ['完整成片', L.dramas.reduce((n, d) => n + (d.films || []).length, 0)], ['测试条数', allCards.length], ['平均评分', f1(mean(scoredCards.map(s => s.total)))], ['最后更新', L.updated]]
   .map(([k, v]) => `<div class="stat">${k}<b>${esc(v)}</b></div>`).join('');
+$('scAt').textContent = SC.at || '';
+$('scModel').textContent = SC.model ? SC.model.replace('google/', '') : '视频理解模型';
+(() => {  // 顶部：各剧集的评分均分
+  const l1 = (scoredCards[0] || {dims: []}).dims.map(x => x[0]);
+  const rows = L.dramas.map(d => { const cs = d.groups.flatMap(g => g.cards).map(c => SC.cards[c.video]).filter(Boolean), fs = (d.films || []).map(f => SC.films[f.video]).filter(Boolean);
+    return [d, cs, [mean(cs.map(s => s.total))].concat(l1.map((_, i) => mean(cs.map(s => s.dims[i][1])))), mean(fs.map(s => s.total))]; }).filter(r => r[1].length);
+  if (!rows.length) { $('scoring').style.display = 'none'; return; }
+  $('scTop').innerHTML = `<tr><th>剧集</th><th>评过的实时片段</th><th>片段总分</th>${l1.map(x => `<th>${esc(x)}</th>`).join('')}<th>完整成片总分</th></tr>`
+    + rows.map(([d, cs, v, fv]) => `<tr><td class="t">${esc(d.title)}</td><td>${cs.length}</td>${v.map(x => `<td>${pill(x)}</td>`).join('')}<td>${pill(fv)}</td></tr>`).join('');
+})();
 $('foot').textContent = '新剧集的测试往 data.js 的 dramas 里追加；视频放在 v/ 和 film/。';
 
 const SVG_PLAY = '<svg viewBox="0 0 24 24" width="16" height="16" fill="#1f2422"><path d="M8 5.5v13l10.5-6.5z"/></svg>';
@@ -273,12 +381,14 @@ function card(c){
       <p class="say"><i>你</i>${esc(c.her)}</p>
       <p class="say he"><i>他</i>${esc(c.he)}</p>
       <div class="marks">${c.marks.map(m => `<span class="mk ${m[0] ? 'ok' : 'bad'}" title="${esc(m[1] + '：' + m[2])}">${m[0] ? '✓' : '✗'} ${esc(shortMark(m))}</span>`).join('')}</div>
+      ${scLine(SC.cards[c.video])}
       <details class="more"${moreOpen ? ' open' : ''}><summary>细节</summary><div class="in">
         ${c.rule ? `<div class="rule">规则：${esc(c.rule)}</div>` : ''}
         ${c.he_zh ? `<div>${esc(c.he_zh)}</div>` : ''}
         <div>那一下：${esc(c.beat)}</div>
         <div class="sg">${c.stats.map(([k, v]) => `<div>${esc(k)}<b>${esc(v)}</b></div>`).join('')}</div>
         <div class="notes">${c.marks.map(m => `<div class="${m[0] ? 'ok' : 'bad'}"><b>${esc(m[1])}</b>${esc(m[2])}</div>`).join('')}</div>
+        ${scDetail(SC.cards[c.video])}
         <div class="job">${esc(c.job)}</div>
       </div></details>
     </div>
@@ -305,6 +415,7 @@ function film(f, i){
       <div class="kv">${short.map(([k, v]) => `<div>${esc(k)}<b>${esc(v)}</b></div>`).join('')}</div>
       ${long.length ? `<div class="lines">${long.map(([k, v]) => `<div title="点开看全部"><span>${esc(k)}</span>${esc(kRange(String(v)))}</div>`).join('')}</div>` : ''}
     </div>
+    ${SC.films[f.video] ? `<details class="fs"><summary>${scSpans(SC.films[f.video])}</summary>${scDetail(SC.films[f.video])}</details>` : ''}
   </div>`;
 }
 function compare(films){
@@ -316,13 +427,37 @@ function compare(films){
   const seg = f => /15 秒整段/.test(f.mode) ? '15 秒（一段）' : f.mode === '10+10' || / 10\+10$/.test(f.mode) ? '20 秒' : '15 秒';
   return `<div class="cmp"><div class="tw"><table><tr><th>一眼对比</th>${films.map(f => `<th>${esc(head(f))}</th>`).join('')}</tr>
     ${keys.map(k => `<tr><td>${esc(k)}</td>${films.map(f => `<td><b>${esc(val(f, k))}</b></td>`).join('')}</tr>`).join('')}
-    <tr><td>成片里每条实时片段</td>${films.map(f => `<td><b>${seg(f)}</b></td>`).join('')}</tr></table></div></div>`;
+    <tr><td>成片里每条实时片段</td>${films.map(f => `<td><b>${seg(f)}</b></td>`).join('')}</tr>
+    ${films.some(f => SC.films[f.video]) ? scoreRows(films.map(f => SC.films[f.video])) : ''}</table></div></div>`;
+}
+// 对比表里的评分行：总分 + 各大维度，最高的一格标绿
+function scoreRows(ss){
+  const ref = ss.find(Boolean); if (!ref) return '';
+  const rows = [['评分 · 总分', s => s && s.total]].concat(ref.dims.map(([l1], i) => [`评分 · ${l1}`, s => s && s.dims[i] && s.dims[i][1]]));
+  return rows.map(([k, get]) => { const vs = ss.map(get), top = Math.max(...vs.filter(v => v != null));
+    return `<tr><td>${esc(k)}</td>${vs.map(v => `<td><b class="${v != null && vs.filter(x => x != null).length > 1 && v === top ? 'win' : ''}">${f1(v)}</b></td>`).join('')}</tr>`; }).join('');
+}
+// 剧集内各测试组评分总览（点一行切到那一组）
+function scoreTable(d){
+  const gs = d.groups.map((g, i) => [g, i, gScore(d, g)]).filter(x => x[2]);
+  if (!gs.length) return '';
+  const l1 = gs[0][2].dims.map(x => x[0]);
+  const cols = gs.map(([, , s]) => [s.total].concat(s.dims.map(x => x[1]), [s.div ? s.div[1] : null]));
+  const best = cols[0].map((_, j) => Math.max(...cols.map(c => c[j]).filter(v => v != null)));
+  const cell = (v, j) => `<td>${v === best[j] && gs.length > 1 ? `<b class="win">${f1(v)}</b>` : f1(v)}</td>`;
+  return `<h3>评分总览 · 各测试组</h3><p class="sub">按《抖音｜图像&视频效果评测标准》V_2.0 视频部分，每条实时片段 6 个大维度 18 个小项各打 1–5 分；多样性 3 项按整组打。表里是整组平均，绿色是该列最高。点一行看那一组的逐条评分。</p>
+  <div class="sbox"><div class="tw"><table class="stab"><tr><th>测试组</th><th>条数</th><th>总分</th>${l1.map(x => `<th>${esc(x)}</th>`).join('')}<th>多样性</th></tr>
+  ${gs.map(([g, i, s], k) => `<tr data-g="${i}"><td class="t">${esc(g.tab || g.title)}</td><td>${s.n}</td>${cols[k].map(cell).join('')}</tr>`).join('')}</table></div></div>`;
 }
 function group(g){
+  const s = gScore(L.dramas[cur], g);
   return `<div class="ghead"><h3>${esc(g.title)}</h3><span>${esc(g.when)}</span></div>
     ${g.note ? `<p class="sub">${esc(g.note)}</p>` : ''}
     <details class="params"><summary>参数和计时口径</summary><div class="pgrid">${g.params.map(([k, v]) => `<div><b>${esc(k)}</b>${esc(v)}</div>`).join('')}</div></details>
     <div class="gsum">${g.summary.map(([k, v]) => `<span>${esc(k)} <b>${esc(v)}</b></span>`).join('')}</div>
+    ${s ? `<div class="gscore"><span class="lab">本组评分均分</span>${scSpans(s).replace('<span class="tot">评分', '<span class="tot">')}
+      ${s.div ? `<span class="lab" style="margin-left:8px">多样性</span>${s.div[2].map(([n, v]) => `<span class="l">${esc(n.replace('多样性', ''))} ${pillI(v)}</span>`).join('')}
+      <div class="dv">${s.div[2].map(([n, v, w]) => `<b>${esc(n)}</b> ${esc(w)}`).join('；')}</div>` : ''}</div>` : ''}
     <div class="grid">${g.cards.map(card).join('')}</div>`;
 }
 function sample(x){
@@ -338,6 +473,7 @@ function sample(x){
         ${x.picks.map(p => `<tr><td>${esc(p.point)} ${esc(p.scene)}</td><td><span class="k ${p.k === 'B' ? 'b' : ''}">${esc(p.k)}</span> ${esc(p.text)}</td><td class="why">${esc(p.why)}</td></tr>`).join('')}</table></div>
       ${x.cmp ? `<figure class="srcmp"><img src="${esc(M(x.cmp))}" alt="四个超分模型的脸部局部对比" loading="lazy"><figcaption>${esc(x.cmp_note)}</figcaption></figure>` : ''}
     </div>
+    ${SC.films[x.video] ? `<details class="fs"><summary>${scSpans(SC.films[x.video])}</summary>${scDetail(SC.films[x.video])}</details>` : ''}
   </div>`;
 }
 function drama(d){
@@ -347,7 +483,7 @@ function drama(d){
     ${d.sample ? sample(d.sample) : ''}
     ${d.films && d.films.length ? `<h3>实时生成 · 完整成片</h3><p class="sub">预设剧情 + 每个选择点的实时片段，按观众实际走过的顺序接成一条；选择点前停 2.5 秒显示“你”说的话。字幕是外挂中英字幕，可在播放器里关。点下面的选择点直接跳过去。</p>
       <div class="films">${d.films.map(film).join('')}</div>${compare(d.films)}` : ''}
-    <div class="records"><h3>测试记录</h3>
+    <div class="records">${scoreTable(d)}<h3>测试记录</h3>
       <div class="seg" role="tablist" aria-label="测试分组">${d.groups.map((g, i) => `<button class="tab" role="tab" data-g="${i}" aria-selected="${i === 0}">${esc(g.tab || g.title)}</button>`).join('')}</div>
       <div class="gpanel">${group(d.groups[0])}</div>
     </div>
@@ -365,8 +501,9 @@ probeLocal().then(() => {
 document.addEventListener('click', e => {
   const dt = e.target.closest('[data-d]'); if (dt){ cur = +dt.dataset.d; render(); return; }
   const gt = e.target.closest('[data-g]');
-  if (gt){ const sec = gt.closest('section'); sec.querySelectorAll('[data-g]').forEach(b => b.setAttribute('aria-selected', b === gt));
-    sec.querySelector('.gpanel').innerHTML = group(L.dramas[cur].groups[+gt.dataset.g]); return; }
+  if (gt){ const sec = gt.closest('section'); sec.querySelectorAll('.seg [data-g]').forEach(b => b.setAttribute('aria-selected', b.dataset.g === gt.dataset.g));
+    sec.querySelector('.gpanel').innerHTML = group(L.dramas[cur].groups[+gt.dataset.g]);
+    if (gt.tagName === 'TR') sec.querySelector('.seg').scrollIntoView({behavior: 'smooth', block: 'start'}); return; }
   const ch = e.target.closest('.chip[data-t]');
   if (ch){ const v = ch.closest('.film').querySelector('video'), t = +ch.dataset.t;
     const go = () => { v.currentTime = t; v.play().catch(() => {}); };  // 元数据没到时先等它，否则跳转会被重置到 0
