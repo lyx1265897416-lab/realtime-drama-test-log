@@ -238,6 +238,14 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
         <li>等待：5+10 发送到可播中位 MD-A 137.3 → MD-B 152.9 → MD-C <b>112.7 秒</b>，第 1 段就绪 54.4 秒；快检重生成从 15–16 次降到 5 次，导演层现写中位 18.8 秒（MD-B 25.6）。</li>
         <li>结论：用一份轻量 Harness（v3.0-lite）就够，不用再分两份；生成方式仍用 5+10，15 秒整段三版都更差（长镜头中途漂背景、变白天）。</li>
       </ul></div>
+      <div class="vc"><span class="tag ok">判断成立 · 持平（15 秒整段略好）· 模板 v1.0 好于 v2.0-lite</span><h3>导演层模板：MD-A / MD-B · 15 秒整段 vs 5+10 · Magnus 观众第三视角 · 同 12 句输入</h3><ul>
+        <li>画面：无硬错误 15 秒整段 MD-A <b>6/12</b>、MD-B <b>7/12</b>；5+10 MD-A <b>7/12</b>、MD-B <b>4/12</b>。合计 15 秒 13/24、5+10 11/24，和第一视角相反，差距不大。</li>
+        <li>评分：测试组均分 15 秒 MD-A <b>3.57</b> / MD-B 3.54，5+10 都是 3.54；完整成片 15 秒 MD-A <b>3.50</b> 最高（5+10 3.37，MD-B 3.35 / 3.32）。第三视角正式版 V1.1 两组是 3.58。</li>
+        <li>等待：发送到可播中位 MD-A 15 秒 <b>126.1</b> / 5+10 166.8 秒，MD-B 15 秒 162.5 / 5+10 <b>138.2</b> 秒，没有一致的快慢；5+10 两段同时提交常被 Vivix 并发上限挡回（MD-A 一组 84 次）。</li>
+        <li>MD-B（v2.0-lite）在第三视角的缺口：通用规则只列了 cast 字段，导演层没把 Selene 写进去，两组都拍出了认错的“Selene”；5+10 有 4 轮他的西装变棕；导演层 9–11/12 轮被中转打回（选项带问号、拉扯词）；吻戏标记不准。</li>
+        <li>两份 MD 都没禁“颈侧”“手机”：MD-A 15 秒第 2、3 轮写了“颈侧”，Vivix 参考图模式连续判失败、退回首帧，女主走样；亮屏手机四组都出现过。</li>
+        <li>下一步：第三视角还没跑过 MD-C（v3.0-lite）。第一视角里它把 5+10 提到 12/12，值得在第三视角用同一组 12 句输入再测一次，确认 15 秒和 5+10 的差距是否还在。</li>
+      </ul></div>
       <div class="vc"><span class="tag ok">判断成立 · 5+10</span><h3>简单内容（小猫这类）· 预设链路和开放式链路</h3><ul>
         <li>画面更稳：无硬错误预设链路 5+10 <b>27/33</b>（82%），10+10 <b>15/22</b>（68%）；开放式链路 <b>8/14</b> 对 <b>5/14</b>。</li>
         <li>等得更短：预设链路就绪中位 5+10 <b>29.9 秒</b>，10+10 <b>43.2 秒</b>；30 秒内就绪 <b>6/11</b> 对 <b>1/11</b>。开放式链路 10+10 快一些（99.9 对 139.7 秒），但两种都远超 30 秒目标。</li>
@@ -318,8 +326,8 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
   <main id="root"></main>
   <footer id="foot"></footer>
 </div>
-<script src="data.js?v=20261028-md-c"></script>
-<script src="scores.js?v=20261028-score-mdc"></script>
+<script src="data.js?v=20261028-third-mdb"></script>
+<script src="scores.js?v=20261028-score-third-mdb"></script>
 <script>
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const mmss = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
