@@ -183,12 +183,12 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
     <div class="vh"><div class="eyebrow">结论 · 2026-10-28</div><h2 id="vt">选 5+10 还是 10+10</h2></div>
     <p class="vtl">简单内容和 Magnus 这类第一视角的复杂内容都用 <b>5+10</b>：画面错误更少、等得更短、剧情不慢。10+10 的错误大多来自锁帧的第 1 段，还没解决。只有 Magnus 观众第三视角目前 <b>10+10</b> 略好，但只跑过一组，待复测。每一条都是综合画面错误、等待时间和内容量后，数据更支持的那个方案。</p>
     <div class="vgrid">
-      <div class="vc"><span class="tag ok">判断成立 · 5+10（对 15 秒整段，MD-A）</span><h3>15 秒整段 vs 5+10 · Magnus 第一视角 · 同 12 句输入</h3><ul>
-        <li>用的 MD（标签 MD-A）：<b>realtime-system-prompt-template-v1.0.md</b>（导演层 PE）+ <b>realtime-记忆压缩与视频Prompt产品设计.md</b>（会话状态）。换一份 MD 再测会按 MD-B 加一组。</li>
-        <li>画面更稳：无硬错误 5+10 <b>7/12</b>，15 秒整段 <b>3/12</b>。整段的长镜头中途会跳成灰色影棚或别的房间，多出来的手也更多。</li>
-        <li>等得差不多，5+10 略短：发送到可播中位 5+10 <b>137.3 秒</b>，整段 <b>149.0 秒</b>（扣掉导演层 113.7 对 125.7 秒）。Vivix 生成一条 15 秒本身只要 36.5 秒，时间主要花在导演层和段内快检重生成上，两种都远超 90 秒。</li>
-        <li>节奏和推进一样：每条约 5–6 个镜头、3 句台词，12/12 当轮兑现，第 10–11 轮吻戏、第 10–12 轮到 K12。</li>
-        <li>这份 MD 自己的缺口：没禁手机、“托住/埋进镜头前”，硬校验不查“写了切到新地点却没标换场”。</li>
+      <div class="vc"><span class="tag ok">判断成立 · 5+10（对 15 秒整段，两份 MD 都是）</span><h3>15 秒整段 vs 5+10 · Magnus 第一视角 · 同 12 句输入 · MD-A / MD-B</h3><ul>
+        <li>用的 MD：MD-A＝<b>realtime-system-prompt-template-v1.0.md</b>（完整版，system prompt 约 8300 字）；MD-B＝<b>realtime-system-prompt-template-v2.0-lite.md</b>（轻量版，约 1900 字，怎么拍的规则移进资料包 director）。会话状态都按 <b>realtime-记忆压缩与视频Prompt产品设计.md</b>。</li>
+        <li>画面：两份 MD 都是 5+10 更稳。无硬错误 MD-A 5+10 <b>7/12</b>、整段 <b>3/12</b>；MD-B 5+10 <b>8/12</b>、整段 <b>4/12</b>。整段的长镜头中途会跳成灰色影棚或别的房间，多出来的手也更多。</li>
+        <li>等待：发送到可播中位 MD-A 5+10 <b>137.3 秒</b> / 整段 149.0 秒；MD-B 5+10 <b>152.9 秒</b> / 整段 184.9 秒。Vivix 生成本身不慢（整段一条约 37 秒），时间主要花在导演层和段内快检重生成上，四组都远超 90 秒。</li>
+        <li>MD-B 比 MD-A：画面各多 1 轮无硬错误，剧情推得更快（5+10 第 11 轮演到长老会撕契约），但导演层更慢（现写中位 26–34 秒，12 轮里 9–10 轮因选项带拉扯词或问号被打回），还出了新问题：Selene 外形错、误标吻戏导致整集没吻戏、让第一视角的她开口。</li>
+        <li>两份 MD 共同的缺口：没禁手机和“托住/埋进镜头前”；lite 还缺选项规则和 reveal、cards_done 的含义。</li>
       </ul></div>
       <div class="vc"><span class="tag ok">判断成立 · 5+10</span><h3>简单内容（小猫这类）· 预设链路和开放式链路</h3><ul>
         <li>画面更稳：无硬错误预设链路 5+10 <b>27/33</b>（82%），10+10 <b>15/22</b>（68%）；开放式链路 <b>8/14</b> 对 <b>5/14</b>。</li>
@@ -235,7 +235,7 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
   <main id="root"></main>
   <footer id="foot"></footer>
 </div>
-<script src="data.js?v=20261028-md-ab-a"></script>
+<script src="data.js?v=20261028-md-ab-b"></script>
 <script>
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const mmss = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
