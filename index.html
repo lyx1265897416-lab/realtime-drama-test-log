@@ -231,12 +231,12 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
     <div class="vh"><div class="eyebrow">结论 · 2026-10-28</div><h2 id="vt">选 5+10 还是 10+10</h2></div>
     <p class="vtl">简单内容和 Magnus 这类第一视角的复杂内容都用 <b>5+10</b>：画面错误更少、等得更短、剧情不慢。10+10 的错误大多来自锁帧的第 1 段，还没解决。只有 Magnus 观众第三视角目前 <b>10+10</b> 略好，但只跑过一组，待复测。每一条都是综合画面错误、等待时间和内容量后，数据更支持的那个方案。</p>
     <div class="vgrid">
-      <div class="vc"><span class="tag ok">判断成立 · 5+10（对 15 秒整段，两份 MD 都是）</span><h3>15 秒整段 vs 5+10 · Magnus 第一视角 · 同 12 句输入 · MD-A / MD-B</h3><ul>
-        <li>用的 MD：MD-A＝<b>realtime-system-prompt-template-v1.0.md</b>（完整版，system prompt 约 8300 字）；MD-B＝<b>realtime-system-prompt-template-v2.0-lite.md</b>（轻量版，约 1900 字，怎么拍的规则移进资料包 director）。会话状态都按 <b>realtime-记忆压缩与视频Prompt产品设计.md</b>。</li>
-        <li>画面：两份 MD 都是 5+10 更稳。无硬错误 MD-A 5+10 <b>7/12</b>、整段 <b>3/12</b>；MD-B 5+10 <b>8/12</b>、整段 <b>4/12</b>。整段的长镜头中途会跳成灰色影棚或别的房间，多出来的手也更多。</li>
-        <li>等待：发送到可播中位 MD-A 5+10 <b>137.3 秒</b> / 整段 149.0 秒；MD-B 5+10 <b>152.9 秒</b> / 整段 184.9 秒。Vivix 生成本身不慢（整段一条约 37 秒），时间主要花在导演层和段内快检重生成上，四组都远超 90 秒。</li>
-        <li>MD-B 比 MD-A：画面各多 1 轮无硬错误，剧情推得更快（5+10 第 11 轮演到长老会撕契约），但导演层更慢（现写中位 26–34 秒，12 轮里 9–10 轮因选项带拉扯词或问号被打回），还出了新问题：Selene 外形错、误标吻戏导致整集没吻戏、让第一视角的她开口。</li>
-        <li>两份 MD 共同的缺口：没禁手机和“托住/埋进镜头前”；lite 还缺选项规则和 reveal、cards_done 的含义。</li>
+      <div class="vc"><span class="tag ok">判断成立 · 5+10 + 模板 v3.0-lite</span><h3>导演层模板：MD-A / MD-B / MD-C · 15 秒整段 vs 5+10 · Magnus 第一视角 · 同 12 句输入</h3><ul>
+        <li>模板：MD-A＝v1.0 完整版（约 8300 字）；MD-B＝v2.0-lite（约 1900 字，拍法移进资料包）；<b>MD-C＝v3.0-lite</b>（约 3100 字，按前两版 8 组测试和视频效果评分复盘后合成的一份轻量 Harness：分镜写法评分前置、选项规则和字段含义写回 Harness，项目细节仍在资料包）。会话状态都按记忆压缩设计。</li>
+        <li>画面：无硬错误 5+10 MD-A <b>7/12</b> → MD-B <b>8/12</b> → MD-C <b>12/12</b>；15 秒整段 3/12 → 4/12 → 5/12。手机、多出来的手、凭空的衣料这几类高发错误在 MD-C 里没有再出现。</li>
+        <li>评分（片段均分）：5+10 MD-A 3.47 → MD-B 3.59 → MD-C <b>3.62</b>（正式版 V0.19 5+10 是 3.65）；完整成片 MD-C 5+10 <b>3.45</b>，六条里最高。结构、参考保持涨得最多，执行指令和动作流畅仍在 3.0 左右没动。</li>
+        <li>等待：5+10 发送到可播中位 MD-A 137.3 → MD-B 152.9 → MD-C <b>112.7 秒</b>，第 1 段就绪 54.4 秒；快检重生成从 15–16 次降到 5 次，导演层现写中位 18.8 秒（MD-B 25.6）。</li>
+        <li>结论：用一份轻量 Harness（v3.0-lite）就够，不用再分两份；生成方式仍用 5+10，15 秒整段三版都更差（长镜头中途漂背景、变白天）。</li>
       </ul></div>
       <div class="vc"><span class="tag ok">判断成立 · 5+10</span><h3>简单内容（小猫这类）· 预设链路和开放式链路</h3><ul>
         <li>画面更稳：无硬错误预设链路 5+10 <b>27/33</b>（82%），10+10 <b>15/22</b>（68%）；开放式链路 <b>8/14</b> 对 <b>5/14</b>。</li>
@@ -318,13 +318,13 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
   <main id="root"></main>
   <footer id="foot"></footer>
 </div>
-<script src="data.js?v=20261028-md-ab-b"></script>
-<script src="scores.js?v=20261028-score1"></script>
+<script src="data.js?v=20261028-md-c"></script>
+<script src="scores.js?v=20261028-score-mdc"></script>
 <script>
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const mmss = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
 const L = window.LOG, $ = id => document.getElementById(id);
-const VTTV = '20261028-053530';  // 字幕版本号：字幕改了就换一个，避免浏览器用缓存里的旧字幕
+const VTTV = '20261028-061939';  // 字幕版本号：字幕改了就换一个，避免浏览器用缓存里的旧字幕
 // 网页不显示的记录（Vicky 要求隐藏，本地存档保留）：按剧集 id + 分组标签 / 成片标题过滤，重建数据时即使被带回来也不显示
 const HIDE = {'magnus-open': ['上一版 · V0.17b · 10+10', '上一版 · V0.17b · 完整成片 · 10+10', '上一版 · V0.16 · 5+10', '上一版 · V0.16 · 10+10', '上一版 · V0.16 · 完整成片 · 5+10', '上一版 · V0.16 · 完整成片 · 10+10'],
   'mii-open': ['上一版 v2 · 5+10', '上一版 v2 · 10+10', 'v3.2 · 10+10', '上一版 v3.1 · 5+10', '完整成片 · v3.2 · 10+10']};
