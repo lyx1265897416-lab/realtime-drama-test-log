@@ -180,9 +180,16 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
   <p class="lead">互动剧里，观众在选择点用自己的话对他说（“你”），导演层写出他的回话和动作，<b>Vivix W1 普通档</b>两段并发生成后接进剧情。每个剧集先放<b>两版完整成片</b>（预设剧情 + 实时片段接在一起），再放逐条测试记录。四个标记是用户定的标准：画面有没有硬错误、主线有没有左右她、时延（从提交到两段都就绪 ≤ 30 秒算过）、那一下有没有落在她身上。</p>
   <div class="stats" id="stats"></div>
   <section class="verdict" aria-labelledby="vt">
-    <div class="vh"><div class="eyebrow">结论 · 2026-10-27</div><h2 id="vt">选 5+10 还是 10+10</h2></div>
+    <div class="vh"><div class="eyebrow">结论 · 2026-10-28</div><h2 id="vt">选 5+10 还是 10+10</h2></div>
     <p class="vtl">简单内容和 Magnus 这类第一视角的复杂内容都用 <b>5+10</b>：画面错误更少、等得更短、剧情不慢。10+10 的错误大多来自锁帧的第 1 段，还没解决。只有 Magnus 观众第三视角目前 <b>10+10</b> 略好，但只跑过一组，待复测。每一条都是综合画面错误、等待时间和内容量后，数据更支持的那个方案。</p>
     <div class="vgrid">
+      <div class="vc"><span class="tag ok">判断成立 · 5+10（对 15 秒整段，MD-A）</span><h3>15 秒整段 vs 5+10 · Magnus 第一视角 · 同 12 句输入</h3><ul>
+        <li>用的 MD（标签 MD-A）：<b>realtime-system-prompt-template-v1.0.md</b>（导演层 PE）+ <b>realtime-记忆压缩与视频Prompt产品设计.md</b>（会话状态）。换一份 MD 再测会按 MD-B 加一组。</li>
+        <li>画面更稳：无硬错误 5+10 <b>7/12</b>，15 秒整段 <b>3/12</b>。整段的长镜头中途会跳成灰色影棚或别的房间，多出来的手也更多。</li>
+        <li>等得差不多，5+10 略短：发送到可播中位 5+10 <b>137.3 秒</b>，整段 <b>149.0 秒</b>（扣掉导演层 113.7 对 125.7 秒）。Vivix 生成一条 15 秒本身只要 36.5 秒，时间主要花在导演层和段内快检重生成上，两种都远超 90 秒。</li>
+        <li>节奏和推进一样：每条约 5–6 个镜头、3 句台词，12/12 当轮兑现，第 10–11 轮吻戏、第 10–12 轮到 K12。</li>
+        <li>这份 MD 自己的缺口：没禁手机、“托住/埋进镜头前”，硬校验不查“写了切到新地点却没标换场”。</li>
+      </ul></div>
       <div class="vc"><span class="tag ok">判断成立 · 5+10</span><h3>简单内容（小猫这类）· 预设链路和开放式链路</h3><ul>
         <li>画面更稳：无硬错误预设链路 5+10 <b>27/33</b>（82%），10+10 <b>15/22</b>（68%）；开放式链路 <b>8/14</b> 对 <b>5/14</b>。</li>
         <li>等得更短：预设链路就绪中位 5+10 <b>29.9 秒</b>，10+10 <b>43.2 秒</b>；30 秒内就绪 <b>6/11</b> 对 <b>1/11</b>。开放式链路 10+10 快一些（99.9 对 139.7 秒），但两种都远超 30 秒目标。</li>
@@ -228,12 +235,12 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
   <main id="root"></main>
   <footer id="foot"></footer>
 </div>
-<script src="data.js?v=20261027-magnus-third-v11"></script>
+<script src="data.js?v=20261028-md-ab-a"></script>
 <script>
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const mmss = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
 const L = window.LOG, $ = id => document.getElementById(id);
-const VTTV = '20261027-050932';  // 字幕版本号：字幕改了就换一个，避免浏览器用缓存里的旧字幕
+const VTTV = '20261028-011606';  // 字幕版本号：字幕改了就换一个，避免浏览器用缓存里的旧字幕
 // 网页不显示的记录（Vicky 要求隐藏，本地存档保留）：按剧集 id + 分组标签 / 成片标题过滤，重建数据时即使被带回来也不显示
 const HIDE = {'magnus-open': ['上一版 · V0.17b · 10+10', '上一版 · V0.17b · 完整成片 · 10+10', '上一版 · V0.16 · 5+10', '上一版 · V0.16 · 10+10', '上一版 · V0.16 · 完整成片 · 5+10', '上一版 · V0.16 · 完整成片 · 10+10'],
   'mii-open': ['上一版 v2 · 5+10', '上一版 v2 · 10+10', 'v3.2 · 10+10', '上一版 v3.1 · 5+10', '完整成片 · v3.2 · 10+10']};
