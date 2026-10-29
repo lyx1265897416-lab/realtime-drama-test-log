@@ -312,11 +312,12 @@ const mmss = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2
 const L = window.LOG, $ = id => document.getElementById(id);
 const VTTV = '20261028-224156';  // 字幕版本号：字幕改了就换一个，避免浏览器用缓存里的旧字幕
 // 网页不显示的记录（Vicky 要求隐藏，本地存档保留）：按剧集 id + 分组标签 / 成片标题过滤，重建数据时即使被带回来也不显示
-const HIDE = {'magnus-open': ['上一版 · V0.17b · 10+10', '上一版 · V0.17b · 完整成片 · 10+10', '上一版 · V0.16 · 5+10', '上一版 · V0.16 · 10+10', '上一版 · V0.16 · 完整成片 · 5+10', '上一版 · V0.16 · 完整成片 · 10+10'],
+const HIDE = {'magnus-open': ['上一版 · V0.17b · 10+10', '上一版 · V0.17b · 完整成片 · 10+10', '上一版 · V0.16 · 5+10', '上一版 · V0.16 · 10+10', '上一版 · V0.16 · 完整成片 · 5+10', '上一版 · V0.16 · 完整成片 · 10+10', '上一版 · V0.17b · 完整成片 · 5+10', '上一版 · V0.17c · 完整成片 · 10+10', 'V0.17d 实验 · 完整成片 · 10+10'],
   'mii-open': ['上一版 v2 · 5+10', '上一版 v2 · 10+10', 'v3.2 · 10+10', '上一版 v3.1 · 5+10', '完整成片 · v3.2 · 10+10']};
 // 结论区只展示「判断成立」和「下一步」两类卡片（Vicky 2026-10-27），其他过程卡（已验证、已修复等）不显示
 document.querySelectorAll('.verdict .vc').forEach(c => { const t = (c.querySelector('.tag') || {}).textContent || ''; if (!/^(判断成立|下一步)/.test(t.trim())) c.remove(); });
-L.dramas.forEach(d => { const h = HIDE[d.id] || []; d.groups = d.groups.filter(g => !h.includes(g.tab)); d.films = (d.films || []).filter(f => !h.includes(f.title)); });
+const nmH = t => String(t || '').replace(/^上一版 · /, '');  // 新版本发布时旧内容会被加上「上一版 · 」，比对时忽略这个前缀
+L.dramas.forEach(d => { const h = (HIDE[d.id] || []).map(nmH); d.groups = d.groups.filter(g => !h.includes(nmH(g.tab))); d.films = (d.films || []).filter(f => !h.includes(nmH(f.title))); });
 // 在 Vicky 的 Mac 上：本机预览服务（127.0.0.1:8793，制作成果/test-log 软链到本仓库）连得上，就改从本机读视频、封面和字幕；
 // 实测这台 Mac 经代理到 GitHub Pages 只有几十 KB/s，视频一直转圈。其他人打开时连不上本机，照常走 GitHub。
 const LOCAL = 'http://127.0.0.1:8793/%E5%88%B6%E4%BD%9C%E6%88%90%E6%9E%9C/test-log/';
