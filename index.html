@@ -328,6 +328,7 @@ function probeLocal(){
   const ctl = new AbortController(); setTimeout(() => ctl.abort(), 800);
   return fetch(LOCAL + 'data.js', {method: 'HEAD', cache: 'no-store', signal: ctl.signal}).then(r => { if (r.ok) BASE = LOCAL; }).catch(() => {});
 }
+// 顶部统计只算网页上看得到的：HIDE 清单里隐藏的组和成片在上面已经过滤掉；完整成片含各剧集的完整视频样例
 const allCards = L.dramas.flatMap(d => d.groups.flatMap(g => g.cards));
 // 评分：《互动剧集评分体系 v2》（100 分制），数据在 scores.js（tools/video-eval/score_v2.py 生成，和 data.js 分开，重建测试数据不会冲掉评分；v1 抖音标准的分数存档在 scores-v1.js）
 const SC = window.SCORES || {cards: {}, films: {}, groups: {}, pairs: []};
@@ -349,7 +350,7 @@ const scDetail = (s, v) => s ? `<div class="sdet">${s.overall ? `<div class="ov"
   ${s.record && v ? `<div class="l1"><div class="l1h">两两比较 <span class="mx">${s.record[0]} 胜 ${s.record[1]} 负 ${s.record[2]} 平 · 检查点总分 ${f0(s.check_total)}</span></div>${pairsOf(v)}</div>` : ''}</div>` : '';
 const gScore = (d, g) => SC.groups[d.id + '|' + g.title];
 const scoredCards = allCards.map(c => SC.cards[c.video]).filter(Boolean);
-$('stats').innerHTML = [['剧集', L.dramas.length], ['完整成片', L.dramas.reduce((n, d) => n + (d.films || []).length, 0)], ['测试条数', allCards.length], ['片段平均分', f0(mean(scoredCards.map(s => s.total)))], ['最后更新', L.updated]]
+$('stats').innerHTML = [['剧集', L.dramas.length], ['完整成片', L.dramas.reduce((n, d) => n + (d.films || []).length + (d.sample ? 1 : 0), 0)], ['测试条数', allCards.length], ['片段平均分', f0(mean(scoredCards.map(s => s.total)))], ['最后更新', L.updated]]
   .map(([k, v]) => `<div class="stat">${k}<b>${esc(v)}</b></div>`).join('');
 $('scAt').textContent = SC.at || '';
 if ($('scModel')) $('scModel').textContent = SC.model || '';
