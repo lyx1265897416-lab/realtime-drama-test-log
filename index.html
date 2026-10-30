@@ -242,7 +242,7 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
   <div class="stats" id="stats"></div>
   <section class="verdict" aria-labelledby="vt">
     <div class="vh"><div class="eyebrow">结论 · 2026-10-29</div><h2 id="vt">时长选择判断</h2></div>
-    <p class="vtl">默认用 <b>5+10</b>。Magnus 第一视角里 5+10 同时赢 15 秒整段和 10+10；小猫这类简单内容 5+10 和 15 秒整段画面持平、兑现更好，但 15 秒整段等得短得多，可作备选；Magnus 观众第三视角换成 v3.0-lite 模板后也是 5+10 明显更好。以上数据都来自普通档；ultrafast 目前只有咪的一组 10+10，暂不并入这个判断。</p>
+    <p class="vtl">默认用 <b>5+10</b>。Magnus 第一视角里 5+10 同时赢 15 秒整段和 10+10；小猫这类简单内容 5+10 和 15 秒整段画面持平、兑现更好，但 15 秒整段等得短得多，可作备选；Magnus 观众第三视角换成 v3.0-lite 模板后也是 5+10 明显更好。以上数据都来自普通档；ultrafast 目前只有两组（咪 10+10、Magnus 第三视角 5+15），暂不并入这个判断。</p>
     <div class="vgrid">
       <div class="vc"><span class="tag ok">判断成立 · 5+10</span><h3>Magnus 第一视角（复杂内容）</h3><ul>
         <li>对 15 秒整段：同一组 12 句、三版导演层模板，无硬错误 5+10 <b>7/12</b>、<b>8/12</b>、<b>12/12</b>，15 秒整段 3/12、4/12、5/12；发送到可播中位 5+10 也更短（最新 v3.0-lite <b>112.7 秒</b> 对 143.3 秒）；成片两两比较评分 5+10 胜。</li>
@@ -293,7 +293,7 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
         <li>咪的时长方案还是不一致：MD v1、v2、v3 都是 15 秒整段更高（7.6 / 6.7、6.2 / 5.2、9.1 / 6.8），v4.3 反过来（4.9 / 5.5），要同输入、同轮数再测。</li>
       </ul></div>
       <div class="vc"><span class="tag next">下一步</span><h3>片段级：模型比人工审片报得多</h3><ul>
-        <li>617 条片段里模型复核后判 364 条有硬错误；人工标记有硬错误的 247 条，模型抓到 181 条（v2 是 154），但人工判没有的 370 条里模型报了 183 条。</li>
+        <li>629 条片段里模型复核后判 375 条有硬错误；人工标记有硬错误的 257 条，模型抓到 191 条（v2 是 154），但人工判没有的 372 条里模型报了 184 条。</li>
         <li>多报的主要是道具（凭空多出水杯、手机不见）和定装细节（凭空多出戒指、手表换手）。抽查里不少确实存在、人工审片漏了，也有一些人工明确不算。所以片段分只作逐条诊断，排名以成片评分为准。</li>
       </ul></div>
     </div>
@@ -309,13 +309,13 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
   <main id="root"></main>
   <footer id="foot"></footer>
 </div>
-<script src="data.js?v=20261030-ultrafast"></script>
-<script src="scores.js?v=20261030-ultrafast"></script>
+<script src="data.js?v=20261030-magnus-uf"></script>
+<script src="scores.js?v=20261030-magnus-uf"></script>
 <script>
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const mmss = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
 const L = window.LOG, $ = id => document.getElementById(id);
-const VTTV = '20261030-022632';  // 字幕版本号：字幕改了就换一个，避免浏览器用缓存里的旧字幕
+const VTTV = '20261030-032703';  // 字幕版本号：字幕改了就换一个，避免浏览器用缓存里的旧字幕
 // 网页不显示的记录（Vicky 要求隐藏，本地存档保留）：按剧集 id + 分组标签 / 成片标题过滤，重建数据时即使被带回来也不显示
 const HIDE = {'magnus-open': ['上一版 · V0.17b · 10+10', '上一版 · V0.17b · 完整成片 · 10+10', '上一版 · V0.16 · 5+10', '上一版 · V0.16 · 10+10', '上一版 · V0.16 · 完整成片 · 5+10', '上一版 · V0.16 · 完整成片 · 10+10', '上一版 · V0.17b · 完整成片 · 5+10', '上一版 · V0.17c · 完整成片 · 10+10', 'V0.17d 实验 · 完整成片 · 10+10', '上一版 · V0.17b · 5+10', '上一版 · V0.17c · 10+10', 'V0.17d 实验 · 10+10'],
   'mii-open': ['上一版 v2 · 5+10', '上一版 v2 · 10+10', 'v3.2 · 10+10', '上一版 v3.1 · 5+10', '完整成片 · v3.2 · 10+10']};
@@ -387,7 +387,7 @@ $('foot').textContent = '新剧集的测试往 data.js 的 dramas 里追加；�
 const SVG_PLAY = '<svg viewBox="0 0 24 24" width="16" height="16" fill="#1f2422"><path d="M8 5.5v13l10.5-6.5z"/></svg>';
 const shortMark = m => m[1] === '时延' ? `时延 ${m[2].replace(' 秒', 's')}` : m[1] === '画面硬错误' ? '画面' : m[1];
 function card(c){
-  const len = (c.stats.find(s => s[0] === '方案') || [])[1] === '10+10' ? '0:20' : '0:15';
+  const len = ['10+10', '5+15'].includes((c.stats.find(s => s[0] === '方案') || [])[1]) ? '0:20' : '0:15';
   return `<article class="card">
     <button class="thumb" style="background-image:url('${esc(M(c.poster))}')" data-src="${esc(M(c.video))}" aria-label="播放第 ${c.n} 条"><span class="play">${SVG_PLAY}</span><span class="len">${len}</span></button>
     <div class="body">
@@ -435,7 +435,7 @@ function film(f, i){
 // 测试模式：档位看参数里写的视频模型，时长看组名、时长参数、卡片标签；成片跟对应测试组走
 const tierOf = g => { const p = (g.params || []).find(([k, v]) => /模型/.test(k) && /vivix/i.test(v)), t = p ? p[1] : '';
   return /ultrafast/i.test(t) ? 'ultrafast' : /w1-fast/i.test(t) ? 'fast' : '普通档'; };
-const TM = [[/15 ?秒整段/, '15 秒整段'], [/(^|[^0-9])5 ?\+ ?10|5s \+ 10s/, '5+10'], [/10 ?\+ ?10|10s \+ 10s/, '10+10']];
+const TM = [[/15 ?秒整段/, '15 秒整段'], [/(^|[^0-9])5 ?\+ ?10|5s \+ 10s/, '5+10'], [/10 ?\+ ?10|10s \+ 10s/, '10+10'], [/5 ?\+ ?15|5s \+ 15s/, '5+15']];
 const tmsIn = s => TM.filter(([re]) => re.test(s)).map(x => x[1]);
 const timingOf = g => { const dur = (g.params || []).find(([k]) => k === '时长');
   const a = tmsIn(g.tab || g.title); if (a.length) return a.join(' / ');
@@ -452,7 +452,7 @@ function compare(films){
   const keys = []; films.forEach(f => f.stats.forEach(([k]) => { if (!keys.includes(k)) keys.push(k); }));
   const val = (f, k) => { const s = f.stats.find(x => x[0] === k); return s ? kRange(String(s[1])) : '—'; };
   const head = f => (f.title || f.mode).replace(/ · 完整成片/, '').replace(/^上一版 · /, '');
-  const seg = f => /15 秒整段/.test(f.mode) ? '15 秒（一段）' : f.mode === '10+10' || / 10\+10$/.test(f.mode) ? '20 秒' : '15 秒';
+  const seg = f => /15 秒整段/.test(f.mode) ? '15 秒（一段）' : /(^| )(10\+10|5\+15)$/.test(f.mode) ? '20 秒' : '15 秒';
   return `<div class="cmp"><div class="tw"><table><tr><th>一眼对比</th>${films.map(f => `<th>${esc(head(f))}</th>`).join('')}</tr>
     ${keys.map(k => `<tr><td>${esc(k)}</td>${films.map(f => `<td><b>${esc(val(f, k))}</b></td>`).join('')}</tr>`).join('')}
     <tr><td>测试模式</td>${films.map(f => `<td><b>${esc(filmTier(L.dramas[cur], f))} · ${esc(String(f.mode).replace(/^.* · /, '').replace(/^15$/, '15 秒整段'))}</b></td>`).join('')}</tr>
