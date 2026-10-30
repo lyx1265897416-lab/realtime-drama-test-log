@@ -47,6 +47,12 @@ h3{font-size:17px;margin:0 0 4px;letter-spacing:-.01em}
 .badge{align-self:flex-start;font-size:12px;font-weight:650;color:#fff;background:var(--accent);border-radius:7px;padding:3px 9px}
 .fhead .badge{align-self:center;font-size:11px;padding:2px 7px;border-radius:6px}
 .badge.alt{background:var(--green)}
+.tier{display:inline-block;font-size:11px;font-weight:650;line-height:1.5;color:var(--muted);background:transparent;border:1px solid var(--line,#d8d2c6);border-radius:6px;padding:0 6px;white-space:nowrap}
+.tier.uf{color:#fff;background:var(--bronze);border-color:var(--bronze)}
+.tab .tier{margin-left:6px;font-size:10px;font-weight:600;padding:0 5px}
+.tab[aria-selected=true] .tier:not(.uf){color:#fff;border-color:rgba(255,255,255,.5)}
+.gmode{font-size:12.5px;color:var(--muted)}
+.gmode b{color:var(--ink);font-weight:650}
 .film h4{font-size:15.5px;margin:0;letter-spacing:-.01em;line-height:1.3}
 .film h4 small{color:var(--muted);font-weight:500;font-size:13px}
 .film .desc{font-size:12px;color:var(--muted);line-height:1.5;margin:0}
@@ -236,7 +242,7 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
   <div class="stats" id="stats"></div>
   <section class="verdict" aria-labelledby="vt">
     <div class="vh"><div class="eyebrow">结论 · 2026-10-29</div><h2 id="vt">时长选择判断</h2></div>
-    <p class="vtl">默认用 <b>5+10</b>。Magnus 第一视角里 5+10 同时赢 15 秒整段和 10+10；小猫这类简单内容 5+10 和 15 秒整段画面持平、兑现更好，但 15 秒整段等得短得多，可作备选；Magnus 观众第三视角换成 v3.0-lite 模板后也是 5+10 明显更好。</p>
+    <p class="vtl">默认用 <b>5+10</b>。Magnus 第一视角里 5+10 同时赢 15 秒整段和 10+10；小猫这类简单内容 5+10 和 15 秒整段画面持平、兑现更好，但 15 秒整段等得短得多，可作备选；Magnus 观众第三视角换成 v3.0-lite 模板后也是 5+10 明显更好。以上数据都来自普通档；ultrafast 目前只有咪的一组 10+10，暂不并入这个判断。</p>
     <div class="vgrid">
       <div class="vc"><span class="tag ok">判断成立 · 5+10</span><h3>Magnus 第一视角（复杂内容）</h3><ul>
         <li>对 15 秒整段：同一组 12 句、三版导演层模板，无硬错误 5+10 <b>7/12</b>、<b>8/12</b>、<b>12/12</b>，15 秒整段 3/12、4/12、5/12；发送到可播中位 5+10 也更短（最新 v3.0-lite <b>112.7 秒</b> 对 143.3 秒）；成片两两比较评分 5+10 胜。</li>
@@ -287,7 +293,7 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
         <li>咪的时长方案还是不一致：MD v1、v2、v3 都是 15 秒整段更高（7.6 / 6.7、6.2 / 5.2、9.1 / 6.8），v4.3 反过来（4.9 / 5.5），要同输入、同轮数再测。</li>
       </ul></div>
       <div class="vc"><span class="tag next">下一步</span><h3>片段级：模型比人工审片报得多</h3><ul>
-        <li>601 条片段里模型复核后判 349 条有硬错误；人工标记有硬错误的 239 条，模型抓到 173 条（v2 是 154），但人工判没有的 362 条里模型报了 176 条。</li>
+        <li>617 条片段里模型复核后判 364 条有硬错误；人工标记有硬错误的 247 条，模型抓到 181 条（v2 是 154），但人工判没有的 370 条里模型报了 183 条。</li>
         <li>多报的主要是道具（凭空多出水杯、手机不见）和定装细节（凭空多出戒指、手表换手）。抽查里不少确实存在、人工审片漏了，也有一些人工明确不算。所以片段分只作逐条诊断，排名以成片评分为准。</li>
       </ul></div>
     </div>
@@ -303,13 +309,13 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
   <main id="root"></main>
   <footer id="foot"></footer>
 </div>
-<script src="data.js?v=20261029-third-mdc"></script>
-<script src="scores.js?v=20261029-v3"></script>
+<script src="data.js?v=20261030-ultrafast"></script>
+<script src="scores.js?v=20261030-ultrafast"></script>
 <script>
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const mmss = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
 const L = window.LOG, $ = id => document.getElementById(id);
-const VTTV = '20261029-000702';  // 字幕版本号：字幕改了就换一个，避免浏览器用缓存里的旧字幕
+const VTTV = '20261030-022632';  // 字幕版本号：字幕改了就换一个，避免浏览器用缓存里的旧字幕
 // 网页不显示的记录（Vicky 要求隐藏，本地存档保留）：按剧集 id + 分组标签 / 成片标题过滤，重建数据时即使被带回来也不显示
 const HIDE = {'magnus-open': ['上一版 · V0.17b · 10+10', '上一版 · V0.17b · 完整成片 · 10+10', '上一版 · V0.16 · 5+10', '上一版 · V0.16 · 10+10', '上一版 · V0.16 · 完整成片 · 5+10', '上一版 · V0.16 · 完整成片 · 10+10', '上一版 · V0.17b · 完整成片 · 5+10', '上一版 · V0.17c · 完整成片 · 10+10', 'V0.17d 实验 · 完整成片 · 10+10', '上一版 · V0.17b · 5+10', '上一版 · V0.17c · 10+10', 'V0.17d 实验 · 10+10'],
   'mii-open': ['上一版 v2 · 5+10', '上一版 v2 · 10+10', 'v3.2 · 10+10', '上一版 v3.1 · 5+10', '完整成片 · v3.2 · 10+10']};
@@ -417,7 +423,7 @@ function film(f, i){
   return `<div class="film">
     <video controls playsinline preload="none" crossorigin="anonymous" poster="${esc(M(f.poster))}" src="${esc(M(f.video))}"><track kind="subtitles" srclang="zh" label="中英" src="${esc(M(f.vtt))}?v=${VTTV}" default></video>
     <div class="info">
-      <div class="fhead"><span class="badge ${i % 2 ? 'alt' : ''}">${esc(f.mode)}</span><h4>${esc(f.title)}${f.duration ? ` <small>· ${mmss(f.duration)}</small>` : ''}</h4></div>
+      <div class="fhead"><span class="badge ${i % 2 ? 'alt' : ''}">${esc(f.mode)}</span>${tierTag(filmTier(L.dramas[cur], f))}<h4>${esc(f.title)}${f.duration ? ` <small>· ${mmss(f.duration)}</small>` : ''}</h4></div>
       <p class="desc">${esc(f.desc)}</p>
       <div class="rounds"><span class="lab">跳转</span>${ch.map(chip).join('')}</div>
       <div class="kv">${short.map(([k, v]) => `<div>${esc(k)}<b>${esc(v)}</b></div>`).join('')}</div>
@@ -426,6 +432,20 @@ function film(f, i){
     ${SC.films[f.video] ? `<details class="fs"${fsOpen ? ' open' : ''}><summary>${scSpans(SC.films[f.video])}</summary>${scDetail(SC.films[f.video], f.video)}</details>` : ''}
   </div>`;
 }
+// 测试模式：档位看参数里写的视频模型，时长看组名、时长参数、卡片标签；成片跟对应测试组走
+const tierOf = g => { const p = (g.params || []).find(([k, v]) => /模型/.test(k) && /vivix/i.test(v)), t = p ? p[1] : '';
+  return /ultrafast/i.test(t) ? 'ultrafast' : /w1-fast/i.test(t) ? 'fast' : '普通档'; };
+const TM = [[/15 ?秒整段/, '15 秒整段'], [/(^|[^0-9])5 ?\+ ?10|5s \+ 10s/, '5+10'], [/10 ?\+ ?10|10s \+ 10s/, '10+10']];
+const tmsIn = s => TM.filter(([re]) => re.test(s)).map(x => x[1]);
+const timingOf = g => { const dur = (g.params || []).find(([k]) => k === '时长');
+  const a = tmsIn(g.tab || g.title); if (a.length) return a.join(' / ');
+  const b = dur ? tmsIn(dur[1]) : []; if (b.length) return b.join(' / ');
+  return tmsIn(g.title + ' ' + g.cards.map(c => c.label).join(' ')).join(' / ') || '—'; };
+const filmKey = s => s.replace(/完整成片 · |上一版 · /g, '');
+const filmGroup = (d, f) => { const key = filmKey(f.title), toks = key.split(' · ');
+  return d.groups.find(g => filmKey(g.tab || g.title) === key) || d.groups.find(g => toks.every(t => (g.tab + ' ' + g.title).includes(t))); };
+const filmTier = (d, f) => { const g = filmGroup(d, f); return g ? tierOf(g) : '普通档'; };
+const tierTag = t => `<span class="tier${t === '普通档' ? '' : ' uf'}">${esc(t)}</span>`;
 function compare(films){
   if (films.length < 2) return '';
   // 按统计项名称对齐（不同版本的成片统计项不完全一样，没有的项显示“—”）
@@ -435,6 +455,7 @@ function compare(films){
   const seg = f => /15 秒整段/.test(f.mode) ? '15 秒（一段）' : f.mode === '10+10' || / 10\+10$/.test(f.mode) ? '20 秒' : '15 秒';
   return `<div class="cmp"><div class="tw"><table><tr><th>一眼对比</th>${films.map(f => `<th>${esc(head(f))}</th>`).join('')}</tr>
     ${keys.map(k => `<tr><td>${esc(k)}</td>${films.map(f => `<td><b>${esc(val(f, k))}</b></td>`).join('')}</tr>`).join('')}
+    <tr><td>测试模式</td>${films.map(f => `<td><b>${esc(filmTier(L.dramas[cur], f))} · ${esc(String(f.mode).replace(/^.* · /, '').replace(/^15$/, '15 秒整段'))}</b></td>`).join('')}</tr>
     <tr><td>成片里每条实时片段</td>${films.map(f => `<td><b>${seg(f)}</b></td>`).join('')}</tr>
     ${films.some(f => SC.films[f.video]) ? scoreRows(films.map(f => SC.films[f.video])) : ''}</table></div></div>`;
 }
@@ -459,11 +480,11 @@ function scoreTable(d){
   const cell = (v, j) => `<td>${v != null && v === best[j] && gs.length > 1 ? `<b class="win">${j > 1 ? f2(v) : f1(v)}</b>` : (j > 1 ? f2(v) : f1(v))}</td>`;
   return `<h3>评分总览 · 各测试组</h3><p class="sub">《互动剧集评分体系 v3》，满分 10。<b>成片评分</b>是主分：三成看标签基础分（剧情与高光 3.5、互动 2、角色与表现力 2、画面可信度 1.5、视听与衔接 1），七成看和同剧其他成片正反两次并排比的胜负；感情剧没有看得见的高光最高 6.0，高光弱最高 7.0。<b>片段均分</b>是逐条诊断：互动兑现 3、剧情推进 2.5、表演与声音 2、视听质感 1.5、衔接 1；硬错误复核后才算，有 1 个最高 5.9、2 个及以上最高 3.9。绿色是该列最高；点一行看那一组的逐条评分。</p>
   <div class="sbox"><div class="tw"><table class="stab"><tr><th>测试组</th><th>条数</th><th>成片评分</th><th>片段均分</th>${(SC.clip_dims || []).map(([n, m]) => `<th>${esc(SHORT[n] || n)} /${f2(m)}</th>`).join('')}<th>有硬错误</th></tr>
-  ${gs.map(([g, i, s], k) => `<tr data-g="${i}"><td class="t">${esc(g.tab || g.title)}</td><td>${s.n}</td>${cols[k].map(cell).join('')}<td>${s.hard} 条</td></tr>`).join('')}</table></div></div>`;
+  ${gs.map(([g, i, s], k) => `<tr data-g="${i}"><td class="t">${esc(g.tab || g.title)} ${tierTag(tierOf(g))}</td><td>${s.n}</td>${cols[k].map(cell).join('')}<td>${s.hard} 条</td></tr>`).join('')}</table></div></div>`;
 }
 function group(g){
   const s = gScore(L.dramas[cur], g);
-  return `<div class="ghead"><h3>${esc(g.title)}</h3><span>${esc(g.when)}</span></div>
+  return `<div class="ghead"><h3>${esc(g.title)}</h3><span>${esc(g.when)}</span><span class="gmode">测试模式 <b>${esc(timingOf(g))}</b> ${tierTag(tierOf(g))}</span></div>
     ${g.note ? `<p class="sub">${esc(g.note)}</p>` : ''}
     <details class="params"><summary>参数和计时口径</summary><div class="pgrid">${g.params.map(([k, v]) => `<div><b>${esc(k)}</b>${esc(v)}</div>`).join('')}</div></details>
     <div class="gsum">${g.summary.map(([k, v]) => `<span>${esc(k)} <b>${esc(v)}</b></span>`).join('')}</div>
@@ -494,7 +515,7 @@ function drama(d){
     ${d.films && d.films.length ? `<h3>实时生成 · 完整成片</h3><p class="sub">预设剧情 + 每个选择点的实时片段，按观众实际走过的顺序接成一条；选择点前停 2.5 秒显示“你”说的话。字幕是外挂中英字幕，可在播放器里关。点下面的选择点直接跳过去。</p>
       <div class="films">${d.films.map(film).join('')}</div>${compare(d.films)}` : ''}
     <div class="records">${scoreTable(d)}<h3>测试记录</h3>
-      <div class="seg" role="tablist" aria-label="测试分组">${d.groups.map((g, i) => `<button class="tab" role="tab" data-g="${i}" aria-selected="${i === 0}">${esc(g.tab || g.title)}</button>`).join('')}</div>
+      <div class="seg" role="tablist" aria-label="测试分组">${d.groups.map((g, i) => `<button class="tab" role="tab" data-g="${i}" aria-selected="${i === 0}">${esc(g.tab || g.title)}${tierTag(tierOf(g))}</button>`).join('')}</div>
       <div class="gpanel">${group(d.groups[0])}</div>
     </div>
   </section>`;
