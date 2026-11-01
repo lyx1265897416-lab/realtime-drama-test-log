@@ -290,19 +290,21 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
   <p class="lead">互动剧里，观众在选择点用自己的话对他说（“你”），导演层写出他的回话和动作，<b>Vivix W1 普通档</b>两段并发生成后接进剧情。每个剧集先放<b>两版完整成片</b>（预设剧情 + 实时片段接在一起），再放逐条测试记录。四个标记是用户定的标准：画面有没有硬错误、主线有没有左右她、时延（从提交到两段都就绪 ≤ 30 秒算过）、那一下有没有落在她身上。</p>
   <div class="stats" id="stats"></div>
   <section class="verdict" aria-labelledby="vt">
-    <div class="vh"><div class="eyebrow">结论 · 2026-10-30</div><h2 id="vt">时长选择判断</h2></div>
-    <p class="vtl">默认用 <b>5+15</b>：前 5 秒回应你的话，后面连续 15 秒直接演情节；内容很轻才用 5+10。不再用 10+10。咪和 Magnus 第三视角已经按这个规则跑；Magnus 第一视角还没测 5+15。</p>
+    <div class="vh"><div class="eyebrow">结论 · 2026-11-01</div><h2 id="vt">时长选择判断</h2></div>
+    <p class="vtl">默认用 <b>5+15</b>：前 5 秒回应你的话，后面连续 15 秒直接演情节；内容很轻才用 5+10。不再用 10+10。咪、Magnus 第三视角和 Rafael 第三视角已经按这个规则跑；Magnus 第一视角还没测 5+15。</p>
     <div class="vgrid">
       <div class="vc"><span class="tag ok">判断成立 · 5+15</span><h3>小猫这类简单内容（咪）</h3><ul>
         <li>对 10+10（都是 ultrafast、都是你本人测的）：无硬错误 <b>43/66</b> 对 8/16，“那一下”落到 <b>63/66</b> 对 14/16；两段都就绪 36.8 对 31.0 秒，多等约 6 秒。成片评分 9.4 对 8.5，66 轮的发散指令接得更全。</li>
         <li>10+10 的第 1 段 16 轮都是原地回应，要做的事排到第 10 秒以后；5+15 只回应 5 秒就进情节，上次没响应的潜水、摩托车这次都演出来了。</li>
         <li>连跑 66 轮只有 1 次请求报错，长会话能撑住。</li>
       </ul></div>
-      <div class="vc"><span class="tag ok">判断成立 · 5+15</span><h3>Magnus 观众第三视角</h3><ul>
+      <div class="vc"><span class="tag ok">判断成立 · 5+15</span><h3>观众第三视角（Magnus、Rafael）</h3><ul>
         <li>你本人测的 12 轮（ultrafast）：两段都就绪中位 <b>36.3 秒</b>，“那一下”落到 <b>10/12</b>，吻戏连续 15 秒，时长够。</li>
-        <li>无硬错误只有 2/12，问题是越轴、背景和衣服跳变，要单独修。</li>
+        <li>Rafael 你本人测的 13 轮（ultrafast，12 轮 5+15、1 轮 5+10）：发送到开播中位 <b>46.0 秒</b>，接缝停顿都是 0，“那一下”落到 <b>10/13</b>，吻戏连续约 10 秒。</li>
+        <li>两部的无硬错误都很低：Magnus 2/12，Rafael 的 5+15 是 0/12，问题是衣服配饰跳变、越轴、背景跳变，要单独修。还没有同一组输入的对比，不能算成时长的问题。</li>
       </ul></div>
       <div class="vc"><span class="tag next">下一步</span><h3>还要补的测试</h3><ul>
+        <li>先修第三视角 ultrafast 的连续性（衣服配饰、越轴），修完用 Rafael 这 13 句重放一次，看无硬错误有没有起来。</li>
         <li>5+15 还没和 5+10 用同一组输入、同一档位比过，两种内容各跑一次，确认差距。</li>
         <li>Magnus 第一视角和即兴剧场 APP 还没切到 5+15，切过去再测；第一视角此前的数据是 5+10 赢 15 秒整段和 10+10。</li>
       </ul></div>
@@ -311,6 +313,7 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
       <tr><th>内容 · 测试组</th><th>无硬错误 5+15</th><th>5+10</th><th>10+10</th><th>15 秒整段</th><th>等待中位</th><th>选</th></tr>
       <tr><td>咪 · 你本人测（ultrafast，输入不同）</td><td class="w">43/66</td><td>—</td><td>8/16</td><td>—</td><td>36.8 对 <b>31.0</b> 秒（5+15 对 10+10）</td><td class="w">5+15</td></tr>
       <tr><td>Magnus 第三视角 · 你本人测（ultrafast）</td><td>2/12</td><td>—</td><td>—</td><td>—</td><td>36.3 秒</td><td class="w">5+15</td></tr>
+      <tr><td>Rafael 第三视角 · 你本人测（ultrafast）</td><td>0/12</td><td>1/1</td><td>—</td><td>—</td><td>45.4 秒</td><td class="w">5+15</td></tr>
       <tr><td>Magnus 第一视角 · 模板 v3.0-lite（普通档，同 12 句）</td><td>—</td><td class="w">12/12</td><td>—</td><td>5/12</td><td>112.7 对 143.3 秒（5+10 对 15 秒）</td><td>当时没有 5+15</td></tr>
       <tr><td>Magnus 第一视角 · 模板 v2.0-lite（普通档，同 12 句）</td><td>—</td><td class="w">8/12</td><td>—</td><td>4/12</td><td>152.9 对 184.9 秒（5+10 对 15 秒）</td><td>当时没有 5+15</td></tr>
       <tr><td>Magnus 第一视角 · 模板 v1.0（普通档，同 12 句）</td><td>—</td><td class="w">7/12</td><td>—</td><td>3/12</td><td>137.3 对 149.0 秒（5+10 对 15 秒）</td><td>当时没有 5+15</td></tr>
@@ -343,14 +346,14 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
   <main id="root"></main>
   <footer id="foot"></footer>
 </div>
-<script src="data.js?v=20261030-mii66"></script>
-<script src="scores.js?v=20261031-v4"></script>
-<script src="timing.js?v=20261031-t1"></script>
+<script src="data.js?v=20261101-raf1"></script>
+<script src="scores.js?v=20261101-raf1"></script>
+<script src="timing.js?v=20261101-raf1"></script>
 <script>
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const mmss = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
 const L = window.LOG, $ = id => document.getElementById(id);
-const VTTV = '20261030-050413';  // 字幕版本号：字幕改了就换一个，避免浏览器用缓存里的旧字幕
+const VTTV = '20261101-014005';  // 字幕版本号：字幕改了就换一个，避免浏览器用缓存里的旧字幕
 // 网页不显示的记录（Vicky 要求隐藏，本地存档保留）：按剧集 id + 分组标签 / 成片标题过滤，重建数据时即使被带回来也不显示
 const HIDE = {'magnus-open': ['上一版 · V0.17b · 10+10', '上一版 · V0.17b · 完整成片 · 10+10', '上一版 · V0.16 · 5+10', '上一版 · V0.16 · 10+10', '上一版 · V0.16 · 完整成片 · 5+10', '上一版 · V0.16 · 完整成片 · 10+10', '上一版 · V0.17b · 完整成片 · 5+10', '上一版 · V0.17c · 完整成片 · 10+10', 'V0.17d 实验 · 完整成片 · 10+10', '上一版 · V0.17b · 5+10', '上一版 · V0.17c · 10+10', 'V0.17d 实验 · 10+10'],
   'mii-open': ['上一版 v2 · 5+10', '上一版 v2 · 10+10', 'v3.2 · 10+10', '上一版 v3.1 · 5+10', '完整成片 · v3.2 · 10+10']};
