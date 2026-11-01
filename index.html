@@ -294,7 +294,7 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
     <p class="vtl">默认用 <b>5+15</b>：前 5 秒回应你的话，后面连续 15 秒直接演情节；内容很轻才用 5+10。不再用 10+10。咪和 Magnus 第三视角已经按这个规则跑；Magnus 第一视角还没测 5+15。</p>
     <div class="vgrid">
       <div class="vc"><span class="tag ok">判断成立 · 5+15</span><h3>小猫这类简单内容（咪）</h3><ul>
-        <li>对 10+10（都是 ultrafast、都是你本人测的）：无硬错误 <b>43/66</b> 对 8/16，“那一下”落到 <b>63/66</b> 对 14/16；两段都就绪 36.8 对 31.0 秒，多等约 6 秒。成片评分 3.6 对 3.7 基本持平，两组都因为你把剧情带离居家主线被扣分。</li>
+        <li>对 10+10（都是 ultrafast、都是你本人测的）：无硬错误 <b>43/66</b> 对 8/16，“那一下”落到 <b>63/66</b> 对 14/16；两段都就绪 36.8 对 31.0 秒，多等约 6 秒。成片评分 9.4 对 8.5，66 轮的发散指令接得更全。</li>
         <li>10+10 的第 1 段 16 轮都是原地回应，要做的事排到第 10 秒以后；5+15 只回应 5 秒就进情节，上次没响应的潜水、摩托车这次都演出来了。</li>
         <li>连跑 66 轮只有 1 次请求报错，长会话能撑住。</li>
       </ul></div>
@@ -327,14 +327,16 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
     <div id="ttBody"></div>
   </section>
   <section class="scoring" id="scoring" aria-labelledby="st">
-    <div class="vh"><div class="eyebrow">评分 · <span id="scAt"></span></div><h2 id="st">互动剧集评分体系 v3（10 分制）</h2></div>
+    <div class="vh"><div class="eyebrow">评分 · <span id="scAt"></span></div><h2 id="st">互动剧集评分体系 v4（10 分制）</h2></div>
     <p class="vtl">评分体系文档：<a href="https://japy03oxab.feishu.cn/wiki/Uxt1wiHvBibEw6kqXmEc6cnSnAb" target="_blank" rel="noopener">realtime 评分体系（飞书）</a></p>
     <div class="tw"><table class="stab" id="scTop"></table></div>
     <div class="folds"><details class="fold"><summary>评分规则<small>成片评分、片段评分、分档和参考</small></summary><div class="fbody"><ul>
-      <li><b>成片评分（主分，满分 10）</b>：三成是标签基础分：剧情与高光 3.5（关键情节覆盖 1.5、高光 1.5、起承转合 0.5）、互动 2、角色与表现力 2、画面可信度 1.5（按这条成片的实时片段硬错误率）、视听与衔接 1。七成是两两比较：同一部剧的成片两两并排比，每对正反各比一次，两次胜方一致才算胜，Bradley–Terry 换算后在这部剧平均分上 ±3.5。最后按高光封顶：感情剧没有看得见的高光最高 6.0，高光弱最高 7.0。</li>
-      <li><b>片段评分（逐条诊断，满分 10）</b>：模型盲评，看不到人工审片标记；只记问题和选标签，分数由公式算。问题按固定类别分硬错误（换脸、多出人或手、定装变化、道具错、场景错、昼夜错、第一视角破功、越轴、说话人错、体型突变、肢体崩坏）和瑕疵；每个硬错误再截那一刻前后三帧单独复核。互动兑现 3、剧情推进 2.5、表演与声音 2、视听质感 1.5、衔接 1；第 1 个硬错误扣 2.5、之后每个扣 1.5，有 1 个最高 5.9、2 个及以上最高 3.9；瑕疵每个扣 0.3（最多 1.5）。</li>
+      <li><b>原则</b>：所有分数都看观众的指令和画面的匹配，和预设的剧情、主线、氛围没有关系。观众把故事带到哪里都可以，越发散越要看画面有没有尽情演足；只有观众没有明确指令（嗯、好、继续）时，才看有没有接上前情、按既有路线往下走。</li>
+      <li><b>片段评分（满分 10）</b>：指令与画面匹配 6.5（当轮兑现 2.5、要素对不对 1.5、理解意图 1、演足 1、尊重观众 0.5）、往下接 1、表演与声音 1、视听质感 0.8、衔接 0.7。她要的事没演最高 4.0，只演了一部分最高 7.0。</li>
+      <li><b>硬错误</b>：只算指令和前情都解释不了的问题（无故换脸、无故多出人、场景崩坏、肢体崩坏、台词配错人等）；指令带来的人物、地点、服装、视角、画风变化都不算。每个再截前后三帧单独复核。第 1 个扣 1.5、之后每个扣 1，有 1 个最高 8.0、2 个及以上最高 6.5；瑕疵每个扣 0.2（最多 1）。</li>
+      <li><b>成片评分（主分，满分 10）</b>：一半是标签基础分：指令与画面匹配 6（其中 3.5 直接取这一组片段的实测匹配度，指令影响走向 1、发散跟得住 1、尊重观众 0.5）、高光与表现力 2（高光由观众要过的事决定）、画面可信度 1、视听与衔接 1。一半是两两比较：同一部剧的成片并排比各自对各自指令的兑现，每对正反各比一次，两次胜方一致才算胜，Bradley–Terry 换算后在这部剧平均分上 ±3。她明确要过的高潮没演最高 7.0，演得弱最高 8.0。</li>
       <li><b>分档</b>：9 分以上接近预制正片，7–9 可以直接用，5–7 能看但有明显问题，3–5 出戏，3 以下不能用。</li>
-      <li><b>参考</b>：DramaBench（模型只打标签、分数由公式算）、Video-Bench（用参考片段给尺子定刻度）、LLM 评委的盲评与正反顺序两两比较、互动叙事 UX 研究的能动性和好奇 / 悬念维度。模型 <span id="scModel"></span>。v2 百分制分数存档在 scores-v2.js。</li>
+      <li><b>参考</b>：模型只打标签、分数由公式算（DramaBench）；盲评，看不到人工审片标记；两两比较正反各一次。模型 <span id="scModel"></span>。v3、v2 分数存档在 scores-v3.js、scores-v2.js。</li>
     </ul></div></details></div>
   </section>
   <nav class="bar" id="dtabs" role="tablist" aria-label="剧集"></nav>
@@ -342,7 +344,7 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
   <footer id="foot"></footer>
 </div>
 <script src="data.js?v=20261030-mii66"></script>
-<script src="scores.js?v=20261030-mii66"></script>
+<script src="scores.js?v=20261031-v4"></script>
 <script src="timing.js?v=20261031-t1"></script>
 <script>
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -368,7 +370,7 @@ function probeLocal(){
 }
 // 顶部统计只算网页上看得到的：HIDE 清单里隐藏的组和成片在上面已经过滤掉；完整成片含各剧集的完整视频样例
 const allCards = L.dramas.flatMap(d => d.groups.flatMap(g => g.cards));
-// 评分：《互动剧集评分体系 v3》（10 分制，一位小数），数据在 scores.js（tools/video-eval/score_v3.py 生成，和 data.js 分开；v2 百分制存档在 scores-v2.js，v1 在 scores-v1.js）
+// 评分：《互动剧集评分体系 v4》（10 分制，一位小数），数据在 scores.js（tools/video-eval/score_v4.py 生成，和 data.js 分开；v2 百分制存档在 scores-v2.js，v1 在 scores-v1.js）
 const SC = window.SCORES || {cards: {}, films: {}, groups: {}, pairs: []};
 const tier = v => v == null ? 'na' : v >= 8 ? 'hi' : v >= 6 ? 'mid' : 'lo';
 const f1 = v => v == null ? '—' : (Math.round(v * 10) / 10).toFixed(1);
@@ -376,17 +378,17 @@ const f0 = f1;
 const f2 = v => v == null ? '—' : (Math.round(v * 10) / 10).toString();
 const pill = v => `<span class="sc ${tier(v)}">${f1(v)}</span>`;
 const dimTier = (v, m) => v == null || !m ? '' : v / m >= 0.8 ? '' : v / m >= 0.6 ? 'mid' : 'lo';
-const SHORT = {'互动兑现': '互动', '剧情推进': '剧情', '表演与声音': '表演', '视听质感': '视听', '衔接': '衔接', '剧情与高光': '剧情高光', '互动': '互动', '角色与表现力': '表现力', '画面可信度': '画面', '视听与衔接': '视听'};
+const SHORT = {'互动兑现': '互动', '剧情推进': '剧情', '表演与声音': '表演', '视听质感': '视听', '衔接': '衔接', '剧情与高光': '剧情高光', '互动': '互动', '角色与表现力': '表现力', '画面可信度': '画面', '视听与衔接': '视听', '指令与画面匹配': '指令匹配', '往下接': '往下接', '高光与表现力': '高光表现力'};
 const LAB = {deliver: '当轮兑现', intent: '理解意图', agency: '尊重她', beat: '推进', hook: '钩子', moment: '那一下', acting: '表演', lines: '台词', sync: '口型', sound: '声音', look: '质感档', camera: '镜头', seam: '接缝', prev: '接前一刻',
-  arc: '起承转合', catch: '接住输入', impact: '选择影响', respect: '主动权', express: '表现力', intimacy: '亲密戏', char: '人设'};
+  detail: '要素对不对', commit: '演足', follow: '发散跟得住', arc: '起承转合', catch: '接住输入', impact: '指令影响走向', respect: '主动权', express: '表现力', intimacy: '亲密戏', char: '角色连贯'};
 const mean = xs => { xs = xs.filter(x => x != null); return xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : null; };
 const hl = s => s.info && s.info.highlight ? String(s.info.highlight.v || '') : '';
-const scSpans = s => `<span class="tot">评分${pill(s.total)}</span>${s.band ? `<span class="l">${esc(s.band)}</span>` : ''}`
+const scSpans = s => `<span class="tot">评分${pill(s.total)}</span>${s.band ? `<span class="l">${esc(s.band)}</span>` : ''}${s.kind ? `<span class="l">${esc(s.kind)}</span>` : ''}`
   + (s.hard && s.hard.length ? `<span class="cap" title="${esc(s.hard.map(h => h[0] + ' ' + h[2]).join('；'))}">硬错误 ${s.hard.length}</span>` : '')
-  + (s.info ? `<span class="l">高光<b class="${hl(s) === '完整呈现' ? '' : 'lo'}">${esc(hl(s) || '—')}</b></span>${s.capped ? `<span class="cap" title="高光${esc(hl(s))}，成片最高 ${hl(s) === '没有' ? '6.0' : '7.0'} 分">封顶</span>` : ''}` : '')
+  + (s.info ? `<span class="l">高光<b class="${hl(s) === '完整呈现' ? '' : 'lo'}">${esc(hl(s) || '—')}</b></span>${s.capped ? `<span class="cap" title="她明确要过这件事，高光${esc(hl(s))}，成片最高 ${hl(s) === '没有' ? '7.0' : '8.0'} 分">封顶</span>` : ''}` : '')
   + (s.record ? `<span class="l">两两比较<b>${s.record[0]}胜${s.record[1]}负${s.record[2] ? s.record[2] + '平' : ''}</b></span>` : '')
   + s.dims.map(([n, v, m]) => `<span class="l">${SHORT[n] || n}<b class="${dimTier(v, m)}">${f2(v)}</b><i>/${f2(m)}</i></span>`).join('');
-const scLine = s => s ? `<div class="scl" title="满分 10：互动兑现 3、剧情推进 2.5、表演与声音 2、视听质感 1.5、衔接 1；硬错误第 1 个扣 2.5、之后每个扣 1.5，有 1 个最高 5.9、2 个及以上最高 3.9；瑕疵每个扣 0.3（最多 1.5）">${scSpans(s)}</div>` : '';
+const scLine = s => s ? `<div class="scl" title="满分 10：指令与画面匹配 6.5、往下接 1、表演与声音 1、视听质感 0.8、衔接 0.7；她要的事没演最高 4.0，只演一部分最高 7.0；硬错误第 1 个扣 1.5、之后每个扣 1，有 1 个最高 8.0、2 个及以上最高 6.5；瑕疵每个扣 0.2（最多 1）">${scSpans(s)}</div>` : '';
 const nameOf = v => { for (const d of L.dramas) { const f = (d.films || []).find(x => x.video === v) || (d.sample && d.sample.video === v ? d.sample : null); if (f) return (d.title.split(' · ')[0] === 'MAGNUS' ? d.title.replace('MAGNUS · ', '') : d.title) + ' · ' + f.title.replace(/ · 完整成片/, '').replace(/^上一版 · /, ''); } return v; };
 const pairsOf = v => (SC.pairs || []).filter(p => p[0] === v || p[1] === v).map(p => { const other = p[0] === v ? p[1] : p[0];
   const res = p[2] === v ? '胜' : p[2] ? '负' : '平'; const note = p[5] < 2 ? '（只比了一次）' : !p[6] ? '（正反两次结论不一致）' : '';
@@ -397,7 +399,7 @@ const scDetail = (s, v) => s ? `<div class="sdet">${s.overall ? `<div class="ov"
   ${lst('瑕疵', s.minor, h => `${esc(h[0])} 秒 · ${esc(h[1])}：${esc(h[2])}`)}
   ${lst('复核去掉或降级的', s.dropped, h => `${esc(h[0])} 秒 · ${esc(h[1])} → ${esc(h[3])}：${esc(h[4])}`)}
   ${s.info ? `<div class="l1"><div class="l1h">高光 <span class="mx">${esc(hl(s))}</span></div><div class="why">${esc((s.info.highlight || {}).t || '')} ${esc((s.info.highlight || {}).what || '')}</div></div>
-    <div class="l1"><div class="l1h">关键情节 <span class="mx">覆盖 ${Math.round((s.info.cov || 0) * 100)}%${s.info.hard_rate != null ? ` · 实时片段硬错误率 ${Math.round(s.info.hard_rate * 100)}%` : ''}</span></div><div class="why">${s.info.skipped && s.info.skipped.length ? '跳过：' + esc(s.info.skipped.join('、')) + '。' : ''}${s.info.weak && s.info.weak.length ? '演得弱：' + esc(s.info.weak.join('、')) + '。' : ''}${!(s.info.skipped || []).length && !(s.info.weak || []).length ? '演到的都演清楚了' : ''}</div></div>` : ''}
+    <div class="l1"><div class="l1h">指令与画面匹配 <span class="mx">${s.info.match != null ? Math.round(s.info.match * 100) + '%' : '—'}${s.info.hard_rate != null ? ` · 实时片段硬错误率 ${Math.round(s.info.hard_rate * 100)}%` : ''}</span></div><div class="why">${s.info.catch ? '观众的输入被接住：' + esc(s.info.catch) : ''}</div></div>` : ''}
   ${s.labels ? `<div class="l1"><div class="l1h">各项标签</div><div class="why">${Object.entries(s.labels).map(([k, x]) => `${esc(LAB[k] || k)} <b>${esc(x)}</b>`).join(' · ')}</div>${s.why ? Object.entries(s.why).map(([k, w]) => `<div class="why">${esc(LAB[k] || k)}：${esc(w)}</div>`).join('') : ''}</div>` : ''}
   ${s.record && v ? `<div class="l1"><div class="l1h">两两比较 <span class="mx">${s.record[0]} 胜 ${s.record[1]} 负 ${s.record[2]} 平 · 标签基础分 ${f1(s.base)}</span></div>${pairsOf(v)}</div>` : ''}</div>` : '';
 const gScore = (d, g) => SC.groups[d.id + '|' + g.title];
@@ -492,11 +494,11 @@ function compare(films){
     <tr><td>成片里每条实时片段</td>${films.map(f => `<td><b>${seg(f)}</b></td>`).join('')}</tr>
     ${films.some(f => SC.films[f.video]) ? scoreRows(films.map(f => SC.films[f.video])) : ''}</table></div></div>`;
 }
-// 对比表里的评分行：总分 + 高光 + 关键情节 + 胜负 + 各项，最高的一格标绿
+// 对比表里的评分行：总分 + 高光 + 指令匹配 + 胜负 + 各项，最高的一格标绿
 function scoreRows(ss){
   const ref = ss.find(Boolean); if (!ref) return '';
   const rows = [['评分 · 总分（满分 10）', s => s && s.total, f1], ['评分 · 高光', s => s && ({'完整呈现': 2, '弱': 1, '没有': 0})[hl(s)], (v, s) => s ? esc(hl(s) || '—') : '—'],
-    ['评分 · 关键情节覆盖', s => s && s.info && s.info.cov, (v, s) => v == null ? '—' : Math.round(v * 100) + '%'],
+    ['评分 · 指令与画面匹配', s => s && s.info && s.info.match, (v, s) => v == null ? '—' : Math.round(v * 100) + '%'],
     ['评分 · 两两比较', s => s && s.record && (s.record[0] + s.record[2] / 2) / Math.max(1, s.record[0] + s.record[1] + s.record[2]), (v, s) => s && s.record ? `${s.record[0]} 胜 ${s.record[1]} 负${s.record[2] ? ' ' + s.record[2] + ' 平' : ''}` : '—']]
     .concat(ref.dims.map(([n, , m], i) => [`评分 · ${n} /${f2(m)}`, s => s && s.dims[i] && s.dims[i][1], f2]));
   return rows.map(([k, get, fmt]) => { const vs = ss.map(get), top = Math.max(...vs.filter(v => v != null));
@@ -511,7 +513,7 @@ function scoreTable(d){
   const cols = gs.map(([, , s]) => [fsc(s), s.total].concat(s.dims.map(x => x[1])));
   const best = cols[0].map((_, j) => Math.max(...cols.map(c => c[j]).filter(v => v != null)));
   const cell = (v, j) => `<td>${v != null && v === best[j] && gs.length > 1 ? `<b class="win">${j > 1 ? f2(v) : f1(v)}</b>` : (j > 1 ? f2(v) : f1(v))}</td>`;
-  return `<h3>评分总览 · 各测试组</h3><p class="sub">《互动剧集评分体系 v3》，满分 10。<b>成片评分</b>是主分：三成看标签基础分（剧情与高光 3.5、互动 2、角色与表现力 2、画面可信度 1.5、视听与衔接 1），七成看和同剧其他成片正反两次并排比的胜负；感情剧没有看得见的高光最高 6.0，高光弱最高 7.0。<b>片段均分</b>是逐条诊断：互动兑现 3、剧情推进 2.5、表演与声音 2、视听质感 1.5、衔接 1；硬错误复核后才算，有 1 个最高 5.9、2 个及以上最高 3.9。绿色是该列最高；点一行看那一组的逐条评分。</p>
+  return `<h3>评分总览 · 各测试组</h3><p class="sub">《互动剧集评分体系 v4》，满分 10，所有分数都看观众的指令和画面的匹配。<b>成片评分</b>是主分：一半看标签基础分（指令与画面匹配 6、高光与表现力 2、画面可信度 1、视听与衔接 1），一半看和同剧其他成片正反两次并排比的胜负。<b>片段均分</b>是逐条诊断：指令与画面匹配 6.5、往下接 1、表演与声音 1、视听质感 0.8、衔接 0.7；她要的事没演最高 4.0；硬错误只算指令和前情都解释不了的，有 1 个最高 8.0、2 个及以上最高 6.5。绿色是该列最高；点一行看那一组的逐条评分。</p>
   <div class="sbox"><div class="tw"><table class="stab"><tr><th>测试组</th><th>条数</th><th>成片评分</th><th>片段均分</th>${(SC.clip_dims || []).map(([n, m]) => `<th>${esc(SHORT[n] || n)} /${f2(m)}</th>`).join('')}<th>有硬错误</th></tr>
   ${gs.map(([g, i, s], k) => `<tr data-g="${i}"><td class="t">${esc(g.tab || g.title)} ${tierTag(tierOf(g))}</td><td>${s.n}</td>${cols[k].map(cell).join('')}<td>${s.hard} 条</td></tr>`).join('')}</table></div></div>`;
 }
