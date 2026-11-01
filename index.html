@@ -159,7 +159,7 @@ details.more[open]>summary::after{content:" ↑"}
 .verdict h2{font-size:20px;margin:0;letter-spacing:-.015em}
 .verdict .vtl{font-size:15px;line-height:1.65;margin:8px 0 14px}
 .verdict .vtl b{color:var(--green)}
-.vgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.vgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 @media (max-width:900px){.vgrid{grid-template-columns:minmax(0,1fr)}}
 .vc{background:var(--bg);border-radius:12px;padding:12px 14px;font-size:12.5px;line-height:1.6;color:var(--ink)}
 .vc h3{font-size:14px;margin:0 0 2px}
@@ -178,37 +178,53 @@ details.more[open]>summary::after{content:" ↑"}
 .vnote{font-size:11.5px;color:var(--muted);margin:8px 0 0;line-height:1.55}
 /* 生成耗时：环节色只用在条形图上，文字一律用文字色 */
 .timing{--st-wait:#b5562a;--st-submit:#4f6fd6;--st-queue:#e0a526;--st-gen:#0b8a72}
-.timing h3.th{font-size:14px;margin:20px 0 8px}
+.timing h3.th{font-size:13.5px;font-weight:650;margin:16px 0 8px}
 .tgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 @media (max-width:760px){.tgrid{grid-template-columns:minmax(0,1fr)}}
-.tcard{background:var(--bg);border-radius:12px;padding:12px 14px}
-.tcard h4{font-size:14px;margin:0;font-weight:650}
-.tcard .tm{font-size:11.5px;color:var(--muted);margin:2px 0 10px}
+.tcard{background:var(--bg);border-radius:12px;padding:10px 14px}
+.tcard .tn{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px;margin-bottom:8px}
+.tcard h4{font-size:13.5px;margin:0;font-weight:650}
+.tcard .tm{font-size:11.5px;color:var(--muted)}
 .tcols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
-.tk{font-size:12px;color:var(--muted);margin-bottom:4px;white-space:nowrap}
+.tk{font-size:11.5px;color:var(--muted);margin-bottom:2px;white-space:nowrap}
 .tv{display:flex;align-items:baseline;gap:5px;font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums}
-.tv b{font-size:20px;color:var(--ink);font-weight:650;letter-spacing:-.01em}
-.tlegend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--muted);margin:0 0 10px}
-.tlegend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
-.tlegend i.tgoal{width:0;height:12px;border-radius:0;border-left:1px dashed var(--muted);vertical-align:-2px}
-.trow{display:grid;grid-template-columns:150px minmax(0,1fr);gap:4px 10px;align-items:center;margin:9px 0;font-size:12.5px}
-@media (max-width:560px){.trow{grid-template-columns:minmax(0,1fr)}}
+.tv b{font-size:17px;color:var(--ink);font-weight:650;letter-spacing:-.01em}
+.thead{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 16px;margin:16px 0 8px}
+.thead h3.th{margin:0}
+.tlegend{display:flex;flex-wrap:wrap;gap:3px 12px;font-size:11.5px;color:var(--muted)}
+.tlegend i{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:4px;vertical-align:0}
+.tlegend i.tgoal{width:0;height:11px;border-radius:0;border-left:1px dashed var(--muted);vertical-align:-1px}
+.trow{display:grid;grid-template-columns:136px minmax(0,1fr);gap:2px 10px;align-items:center;margin:6px 0;font-size:12px}
+@media (max-width:560px){.trow{grid-template-columns:minmax(0,1fr);margin:8px 0}}
 .ttrack{position:relative;display:flex;align-items:center;gap:8px;min-width:0;--tlabel:68px}
-.tbar{display:flex;gap:2px;height:20px;flex:none}
+.tbar{display:flex;gap:2px;height:18px;flex:none}
 .tseg{display:flex;align-items:center;justify-content:center;min-width:2px;font-size:11px;font-variant-numeric:tabular-nums;color:#fff;white-space:nowrap;outline-offset:1px}
 .tseg:first-child{border-radius:4px 0 0 4px}
 .tseg:last-child{border-radius:0 4px 4px 0}
 .tseg.dk{color:#1f2422}
 .tseg.nolab span{visibility:hidden}
 .ttot{position:relative;z-index:1;background:var(--panel);padding:0 3px;font-size:12px;font-weight:650;white-space:nowrap;font-variant-numeric:tabular-nums}
-.tgoal-l{position:absolute;top:-4px;bottom:-4px;width:0;border-left:1px dashed var(--muted);pointer-events:none}
+.tgoal-l{position:absolute;top:-3px;bottom:-3px;width:0;border-left:1px dashed var(--muted);pointer-events:none}
 .ttip{position:fixed;z-index:20;background:var(--ink);color:#fff;font-size:12px;line-height:1.45;padding:5px 9px;border-radius:7px;pointer-events:none;white-space:nowrap;font-variant-numeric:tabular-nums}
-.timing .stab{margin-top:0}
+.stab.tight th,.stab.tight td{padding:5px 9px}
+.stab td.tg{color:var(--muted);vertical-align:top}
+/* 折叠行：详细表默认收起。不用 details.more，那个 class 会和卡片「细节」联动 */
+.folds{margin-top:16px}
+details.fold{border-top:1px solid var(--line)}
+details.fold:last-child{border-bottom:1px solid var(--line)}
+details.fold>summary{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 10px;cursor:pointer;list-style:none;padding:9px 4px 9px 18px;position:relative;font-size:13px;font-weight:600}
+details.fold>summary::-webkit-details-marker{display:none}
+details.fold>summary::before{content:"";position:absolute;left:4px;top:14px;width:6px;height:6px;border-right:1.5px solid var(--muted);border-bottom:1.5px solid var(--muted);transform:rotate(-45deg);transition:transform .12s}
+details.fold[open]>summary::before{transform:rotate(45deg);top:12px}
+details.fold>summary:hover{background:var(--soft)}
+details.fold>summary small{font-size:11.5px;font-weight:400;color:var(--muted)}
+.fbody{padding:2px 0 12px}
+.fbody .vnote:first-child{margin-top:0}
+.fbody ul{margin:0}
 .stab td.t2{white-space:normal;min-width:136px}
 .stab tr.tsec td{font-size:11.5px;color:var(--muted);background:var(--bg);padding-top:9px}
 .stab tr.tkey td{font-weight:650}
 .stab th.tc,.stab td.tc{text-align:center}
-details.more.tdet{margin-top:14px}
 /* 评分（按《抖音｜图像&视频效果评测标准》V_2.0 视频部分，1–5 分） */
 .sc{display:inline-flex;align-items:center;justify-content:center;min-width:34px;font-size:12px;font-weight:700;border-radius:7px;padding:1px 7px;font-variant-numeric:tabular-nums;border:1px solid}
 .sc.hi{color:var(--ok);background:var(--okbg);border-color:var(--okline)}
@@ -291,7 +307,7 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
         <li>Magnus 第一视角和即兴剧场 APP 还没切到 5+15，切过去再测；第一视角此前的数据是 5+10 赢 15 秒整段和 10+10。</li>
       </ul></div>
     </div>
-    <div class="tw"><table class="vtab">
+    <div class="folds"><details class="fold"><summary>各版本对比<small>无硬错误、等待时间和当时选哪个</small></summary><div class="fbody"><div class="tw"><table class="vtab">
       <tr><th>内容 · 测试组</th><th>无硬错误 5+15</th><th>5+10</th><th>10+10</th><th>15 秒整段</th><th>等待中位</th><th>选</th></tr>
       <tr><td>咪 · 你本人测（ultrafast，输入不同）</td><td class="w">43/66</td><td>—</td><td>8/16</td><td>—</td><td>36.8 对 <b>31.0</b> 秒（5+15 对 10+10）</td><td class="w">5+15</td></tr>
       <tr><td>Magnus 第三视角 · 你本人测（ultrafast）</td><td>2/12</td><td>—</td><td>—</td><td>—</td><td>36.3 秒</td><td class="w">5+15</td></tr>
@@ -303,24 +319,23 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
       <tr><td>咪 · 预设版（普通档，同 11 句）</td><td>—</td><td class="w">10/11</td><td>8/11</td><td>—</td><td>29.9 对 43.2 秒（5+10 对 10+10）</td><td>当时没有 5+15</td></tr>
       <tr><td>Magnus 第三视角 · 模板 v3.0-lite（普通档，同 12 句）</td><td>—</td><td class="w">10/12</td><td>—</td><td>6/12</td><td>94.0 对 220.6 秒（5+10 对 15 秒）</td><td>当时没有 5+15</td></tr>
     </table></div>
-    <p class="vnote">口径：这个判断结合了你的实际体验和下表数据。5+15 两组都是 ultrafast、你本人输入，和普通档的组不是同一档位，等待和硬错误不能直接相比；只有绿色标出的同一行内才是同类比较。早期轮次、修复验证和已从网页隐藏的组不计入。导演层模板的对比结论：用 v3.0-lite 一份轻量 Harness 就够，人物主角和动物主角都适用，详见各测试组说明。</p>
+    <p class="vnote">口径：这个判断结合了你的实际体验和下表数据。5+15 两组都是 ultrafast、你本人输入，和普通档的组不是同一档位，等待和硬错误不能直接相比；只有绿色标出的同一行内才是同类比较。早期轮次、修复验证和已从网页隐藏的组不计入。导演层模板的对比结论：用 v3.0-lite 一份轻量 Harness 就够，人物主角和动物主角都适用，详见各测试组说明。</p></div></details></div>
   </section>
   <section class="verdict timing" id="timing" aria-labelledby="tt">
     <div class="vh"><div class="eyebrow">速度 · <span id="ttAt"></span></div><h2 id="tt">生成耗时</h2></div>
     <p class="vtl" id="ttLead"></p>
     <div id="ttBody"></div>
-    <p class="vnote">口径（单位都是秒）：开播 = 从点发送到视频开始播放，只有你在播放页真实看过的测试才有。等规划 = 观众实际等编剧/导演层写完的时间；点选项时剧情已提前写好，所以是 0，大模型仍在后台用了规划用时那么久。提交 = 规划写好到 Vivix 接单；排队、生成是 Vivix 服务端的两段；就绪从规划写好算起。排队和生成的拆分只有 ultrafast 的测试有记录。“—”是这组没有记录这一项，不是 0，也没有估算。</p>
   </section>
   <section class="scoring" id="scoring" aria-labelledby="st">
     <div class="vh"><div class="eyebrow">评分 · <span id="scAt"></span></div><h2 id="st">互动剧集评分体系 v3（10 分制）</h2></div>
     <p class="vtl">评分体系文档：<a href="https://japy03oxab.feishu.cn/wiki/Uxt1wiHvBibEw6kqXmEc6cnSnAb" target="_blank" rel="noopener">realtime 评分体系（飞书）</a></p>
-    <ul>
+    <div class="tw"><table class="stab" id="scTop"></table></div>
+    <div class="folds"><details class="fold"><summary>评分规则<small>成片评分、片段评分、分档和参考</small></summary><div class="fbody"><ul>
       <li><b>成片评分（主分，满分 10）</b>：三成是标签基础分：剧情与高光 3.5（关键情节覆盖 1.5、高光 1.5、起承转合 0.5）、互动 2、角色与表现力 2、画面可信度 1.5（按这条成片的实时片段硬错误率）、视听与衔接 1。七成是两两比较：同一部剧的成片两两并排比，每对正反各比一次，两次胜方一致才算胜，Bradley–Terry 换算后在这部剧平均分上 ±3.5。最后按高光封顶：感情剧没有看得见的高光最高 6.0，高光弱最高 7.0。</li>
       <li><b>片段评分（逐条诊断，满分 10）</b>：模型盲评，看不到人工审片标记；只记问题和选标签，分数由公式算。问题按固定类别分硬错误（换脸、多出人或手、定装变化、道具错、场景错、昼夜错、第一视角破功、越轴、说话人错、体型突变、肢体崩坏）和瑕疵；每个硬错误再截那一刻前后三帧单独复核。互动兑现 3、剧情推进 2.5、表演与声音 2、视听质感 1.5、衔接 1；第 1 个硬错误扣 2.5、之后每个扣 1.5，有 1 个最高 5.9、2 个及以上最高 3.9；瑕疵每个扣 0.3（最多 1.5）。</li>
       <li><b>分档</b>：9 分以上接近预制正片，7–9 可以直接用，5–7 能看但有明显问题，3–5 出戏，3 以下不能用。</li>
       <li><b>参考</b>：DramaBench（模型只打标签、分数由公式算）、Video-Bench（用参考片段给尺子定刻度）、LLM 评委的盲评与正反顺序两两比较、互动叙事 UX 研究的能动性和好奇 / 悬念维度。模型 <span id="scModel"></span>。v2 百分制分数存档在 scores-v2.js。</li>
-    </ul>
-    <div class="tw"><table class="stab" id="scTop"></table></div>
+    </ul></div></details></div>
   </section>
   <nav class="bar" id="dtabs" role="tablist" aria-label="剧集"></nav>
   <main id="root"></main>
@@ -595,14 +610,14 @@ document.addEventListener('play', e => document.querySelectorAll('video').forEac
   // 结论
   const [A, B] = [cur[0], cur[1] || cur[0]];
   const ka = A.g.kinds, kb = B.g.kinds;
-  const over = Math.max(0, Math.round(ka.free.play[1] - 30)) + '–' + Math.max(0, Math.round(kb.free.play[1] - 30));
-  $('ttLead').innerHTML = `当前版本（${esc(A.g.models.join('、'))} · ${esc(A.g.modes.join('、'))}）：点选项平均 <b>${mean(ka.option, 'play')} 秒</b>（咪）、<b>${mean(kb.option, 'play')} 秒</b>（Magnus）开播，已在 30 秒内，最快 ${fast(ka.option, 'play')} 秒。`
-    + `自由输入平均 <b>${mean(ka.free, 'play')} 秒</b>、<b>${mean(kb.free, 'play')} 秒</b>，最快 ${fast(ka.free, 'play')} 秒，还比 30 秒多 ${over} 秒。`
-    + `多出来的基本就是现写剧情的编剧/导演层（平均 ${mean(ka.free, 'wait')}、${mean(kb.free, 'wait')} 秒）；开播要等第 2 段，它平均 ${mean(A.g.all, 's2_ready')}、${mean(B.g.all, 's2_ready')} 秒就绪，其中 Vivix 排队 ${mean(A.g.all, 's2_queue')}、${mean(B.g.all, 's2_queue')} 秒。`;
+  const span = (a, b) => { const [x, y] = [Math.round(a), Math.round(b)].sort((m, n) => m - n); return x === y ? `${x}` : `${x}–${y}`; };
+  const pOpt = [ka.option.play[1], kb.option.play[1]], pFree = [ka.free.play[1], kb.free.play[1]];
+  $('ttLead').innerHTML = `当前版本（${esc(A.g.models.join('、'))} · ${esc(A.g.modes.join('、'))}）：点选项平均 <b>${span(...pOpt)} 秒</b>开播，${Math.max(...pOpt) <= 30 ? '已在 30 秒内' : '还没进 30 秒'}；`
+    + `自由输入平均 <b>${span(...pFree)} 秒</b>，比 30 秒多 ${span(pFree[0] - 30, pFree[1] - 30)} 秒，多出来的主要是现写剧情的编剧/导演层（约 ${span(ka.free.wait[1], kb.free.wait[1])} 秒）。`;
 
   // 开播：最快 / 平均，按输入类型
   const cols = [['全部', c => c.g.all, c => c.g.n], ['点选项', c => c.g.kinds.option, c => c.g.counts.option], ['自由输入', c => c.g.kinds.free, c => c.g.counts.free]];
-  const cards = cur.map(c => `<div class="tcard"><h4>${esc(c.name)}</h4><div class="tm">${c.g.n} 轮 · ${esc(c.g.models.join('、'))} · ${esc(c.g.modes.join('、'))} · ${esc(c.g.when)}</div>
+  const cards = cur.map(c => `<div class="tcard"><div class="tn"><h4>${esc(c.name)}</h4><span class="tm">${c.g.n} 轮</span></div>
     <div class="tcols">${cols.map(([t, o, n]) => `<div><div class="tk">${t} · ${n(c)} 轮</div><div class="tv">最快 <b>${fast(o(c), 'play')}</b></div><div class="tv">平均 <b>${mean(o(c), 'play')}</b></div></div>`).join('')}</div></div>`).join('');
 
   // 时间花在哪：等规划 + 第 2 段的提交、排队、生成
@@ -622,23 +637,21 @@ document.addEventListener('play', e => document.querySelectorAll('video').forEac
   const legend = ST.map(([, label, color]) => `<span><i style="background:var(${color})"></i>${label}</span>`).join('') + '<span><i class="tgoal"></i>目标 30 秒</span>';
 
   // 每个环节
-  const segLabel = (c, i) => { const m = (c.g.modes[0] || '').split('+'); return m[i] ? `（${m[i]} 秒）` : ''; };
+  const segLabel = (c, i) => { const m = (c.g.modes[0] || '').split('+'); return m[i] ? `第 ${i + 1} 段（${m[i]} 秒）` : `第 ${i + 1} 段`; };
   const STAGE = [
-    ['编剧/导演层'], ['观众实际等规划', 'wait'], ['大模型规划用时', 'llm'],
-    ['第 1 段' + segLabel(A, 0)], ['提交', 's1_submit'], ['Vivix 排队', 's1_queue'], ['Vivix 生成', 's1_gen'], ['就绪（从规划写好算）', 's1_ready'],
-    ['第 2 段' + segLabel(A, 1)], ['提交', 's2_submit'], ['Vivix 排队', 's2_queue'], ['Vivix 生成', 's2_gen'], ['就绪（从规划写好算）', 's2_ready'],
-    ['其他'], ['配音', 'tts'],
-    ['整体'], ['发送到开播', 'play', 1], ['两段接缝停顿', 'stall'],
+    ['整体', [['发送到开播', 'play', 1], ['两段接缝停顿', 'stall']]],
+    ['编剧/导演层', [['观众实际等', 'wait'], ['大模型用时', 'llm']]],
+    [segLabel(A, 0), [['提交', 's1_submit'], ['Vivix 排队', 's1_queue'], ['Vivix 生成', 's1_gen'], ['就绪', 's1_ready']]],
+    [segLabel(A, 1), [['提交', 's2_submit'], ['Vivix 排队', 's2_queue'], ['Vivix 生成', 's2_gen'], ['就绪', 's2_ready']]],
+    ['其他', [['配音', 'tts']]],
   ];
-  const stageTable = `<table class="stab"><tr><th rowspan="2">环节</th>${cur.map(c => `<th class="tc" colspan="2">${esc(c.name)}</th>`).join('')}</tr>
-    <tr>${cur.map(() => '<th>最快</th><th>平均</th>').join('')}</tr>
-    ${STAGE.map(([label, k, key]) => k
-      ? `<tr${key ? ' class="tkey"' : ''}><td>${label}</td>${cur.map(c => `<td>${fast(c.g.all, k)}</td><td>${mean(c.g.all, k)}</td>`).join('')}</tr>`
-      : `<tr class="tsec"><td colspan="${1 + cur.length * 2}">${label}</td></tr>`).join('')}</table>`;
+  const short = c => c.name.split(' · ')[0];
+  const stageTable = `<table class="stab tight"><tr><th>阶段</th><th>环节</th>${cur.map(c => `<th>${esc(short(c))} 最快</th><th>${esc(short(c))} 平均</th>`).join('')}</tr>
+    ${STAGE.map(([group, rows]) => rows.map(([label, k, key], i) => `<tr${key ? ' class="tkey"' : ''}>${i ? '' : `<td class="tg" rowspan="${rows.length}">${group}</td>`}<td>${label}</td>${cur.map(c => `<td>${fast(c.g.all, k)}</td><td>${mean(c.g.all, k)}</td>`).join('')}</tr>`).join('')).join('')}</table>`;
 
   // 不同输入类型
   const KCOL = [['等规划', 'wait'], ['第 1 段就绪', 's1_ready'], ['第 2 段排队', 's2_queue'], ['第 2 段生成', 's2_gen'], ['第 2 段就绪', 's2_ready'], ['配音', 'tts'], ['发送到开播', 'play', 1]];
-  const kindTable = `<table class="stab"><tr><th>版本</th><th>输入类型</th><th>轮数</th>${KCOL.map(([t]) => `<th>${t}<br>最快 / 平均</th>`).join('')}</tr>
+  const kindTable = `<table class="stab tight"><tr><th>版本</th><th>输入类型</th><th>轮数</th>${KCOL.map(([t]) => `<th>${t}<br>最快 / 平均</th>`).join('')}</tr>
     ${cur.flatMap(c => ['option', 'free'].map(k => `<tr><td>${esc(c.name)}</td><td>${KIND[k]}</td><td>${c.g.counts[k]}</td>${KCOL.map(([, s, key]) => `<td${key ? ' class="win"' : ''}>${pair(c.g.kinds[k], s)}</td>`).join('')}</tr>`)).join('')}</table>`;
 
   // 每部剧整体、每组明细
@@ -650,18 +663,21 @@ document.addEventListener('play', e => document.querySelectorAll('video').forEac
   };
   const DCOL = [['导演层', 'llm'], ['第 1 段就绪', 's1_ready'], ['第 2 段就绪', 's2_ready'], ['整段就绪', 'whole'], ['配音', 'tts'], ['发送到开播', 'play']];
   const byDrama = L.dramas.map(d => ({ d, gs: groups.filter(g => g.drama === d.id) })).filter(x => x.gs.length);
-  const overall = `<table class="stab"><tr><th>剧集</th><th>测试组</th><th>轮数</th>${DCOL.map(([t]) => `<th>${t}<br>最快 / 平均</th>`).join('')}</tr>
+  const overall = `<table class="stab tight"><tr><th>剧集</th><th>测试组</th><th>轮数</th>${DCOL.map(([t]) => `<th>${t}<br>最快 / 平均</th>`).join('')}</tr>
     ${byDrama.map(({ d, gs }) => { const m = {}; DCOL.forEach(([, k]) => { m[k] = merge(gs, k); }); return `<tr><td>${esc(d.title)}</td><td>${gs.length}</td><td>${gs.reduce((s, g) => s + g.n, 0)}</td>${DCOL.map(([, k]) => `<td>${pair(m, k)}</td>`).join('')}</tr>`; }).join('')}</table>`;
-  const detail = `<table class="stab"><tr><th>测试组</th><th>模型</th><th>时长</th><th>轮数</th><th>点选项 / 自由输入</th>${DCOL.map(([t]) => `<th>${t}<br>最快 / 平均</th>`).join('')}<th>开播 · 点选项<br>最快 / 平均</th><th>开播 · 自由输入<br>最快 / 平均</th></tr>
+  const detail = `<table class="stab tight"><tr><th>测试组</th><th>模型</th><th>时长</th><th>轮数</th><th>点选项 / 自由输入</th>${DCOL.map(([t]) => `<th>${t}<br>最快 / 平均</th>`).join('')}<th>开播 · 点选项<br>最快 / 平均</th><th>开播 · 自由输入<br>最快 / 平均</th></tr>
     ${byDrama.map(({ d, gs }) => `<tr class="tsec"><td colspan="${5 + DCOL.length + 2}">${esc(d.title)}</td></tr>` + gs.map(g => `<tr><td class="t2">${esc(g.tab)}</td><td>${esc(g.models.join('、')) || '—'}</td><td>${esc(g.modes.join('、')) || '—'}</td><td>${g.n}</td><td>${g.counts.other ? '预设版' : `${g.counts.option} / ${g.counts.free}`}</td>${DCOL.map(([, k]) => `<td>${pair(g.all, k)}</td>`).join('')}<td>${pair(g.kinds.option, 'play')}</td><td>${pair(g.kinds.free, 'play')}</td></tr>`).join('')).join('')}</table>`;
 
-  $('ttBody').innerHTML = `<h3 class="th">发送到开播 · 当前版本（秒）</h3><div class="tgrid">${cards}</div>
-    <h3 class="th">开播前的时间花在哪（平均，秒）</h3><div class="tlegend">${legend}</div><div id="ttBars">${barRows}</div>
-    <h3 class="th">每个环节 · 最快和平均（秒）</h3><div class="tw">${stageTable}</div>
-    <h3 class="th">不同输入类型 · 最快 / 平均（秒）</h3><div class="tw">${kindTable}</div>
-    <h3 class="th">每部剧整体 · 所有测试轮次（秒）</h3><div class="tw">${overall}</div>
-    <p class="vnote">整体这张表把各版本混在一起算，早期用的是普通模型，所以平均偏慢；看现在的速度以上面当前版本为准。发送到开播只算有这项记录的组。</p>
-    <details class="more tdet"><summary>展开全部 ${groups.length} 组明细</summary><div class="tw" style="margin-top:8px">${detail}</div></details>`;
+  const fold = (title, hint, body) => `<details class="fold"><summary>${title}<small>${hint}</small></summary><div class="fbody">${body}</div></details>`;
+  $('ttBody').innerHTML = `<h3 class="th">发送到开播（秒）</h3><div class="tgrid">${cards}</div>
+    <div class="thead"><h3 class="th">平均时间花在哪（秒）</h3><div class="tlegend">${legend}</div></div><div id="ttBars">${barRows}</div>
+    <div class="folds">
+    ${fold('每个环节', '编剧/导演层、第 1 段、第 2 段、配音的最快和平均', `<div class="tw">${stageTable}</div>`)}
+    ${fold('不同输入类型', '点选项和自由输入逐环节对比', `<div class="tw">${kindTable}</div>`)}
+    ${fold('每部剧整体', '所有测试轮次，混了早期普通模型', `<div class="tw">${overall}</div><p class="vnote">早期用的是普通模型，所以平均偏慢；看现在的速度以上面的当前版本为准。发送到开播只算有这项记录的组。</p>`)}
+    ${fold(`全部 ${groups.length} 组明细`, '每组的最快和平均', `<div class="tw">${detail}</div>`)}
+    ${fold('口径', '每个数字从哪算到哪', `<p class="vnote">单位都是秒。开播 = 从点发送到视频开始播放，只有你在播放页真实看过的测试才有。等规划 = 观众实际等编剧/导演层写完的时间；点选项时剧情已提前写好，所以是 0，大模型仍在后台用了那么久。提交 = 规划写好到 Vivix 接单；排队、生成是 Vivix 服务端的两段；就绪从规划写好算起。排队和生成的拆分只有 ultrafast 的测试有记录。“—”是这组没有记录这一项，不是 0，也没有估算。</p>`)}
+    </div>`;
 
   // 条里放得下才写数字，放不下靠图例、悬停和表格
   const fit = () => document.querySelectorAll('#ttBars .tseg').forEach(s => { s.classList.remove('nolab'); if (s.firstChild.getBoundingClientRect().width + 8 > s.getBoundingClientRect().width) s.classList.add('nolab'); });
