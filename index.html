@@ -176,6 +176,39 @@ details.more[open]>summary::after{content:" ↑"}
 .vtab tr:last-child td{border-bottom:0}
 .vtab .w{color:var(--green);font-weight:650}
 .vnote{font-size:11.5px;color:var(--muted);margin:8px 0 0;line-height:1.55}
+/* 生成耗时：环节色只用在条形图上，文字一律用文字色 */
+.timing{--st-wait:#b5562a;--st-submit:#4f6fd6;--st-queue:#e0a526;--st-gen:#0b8a72}
+.timing h3.th{font-size:14px;margin:20px 0 8px}
+.tgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (max-width:760px){.tgrid{grid-template-columns:minmax(0,1fr)}}
+.tcard{background:var(--bg);border-radius:12px;padding:12px 14px}
+.tcard h4{font-size:14px;margin:0;font-weight:650}
+.tcard .tm{font-size:11.5px;color:var(--muted);margin:2px 0 10px}
+.tcols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.tk{font-size:12px;color:var(--muted);margin-bottom:4px;white-space:nowrap}
+.tv{display:flex;align-items:baseline;gap:5px;font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.tv b{font-size:20px;color:var(--ink);font-weight:650;letter-spacing:-.01em}
+.tlegend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--muted);margin:0 0 10px}
+.tlegend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.tlegend i.tgoal{width:0;height:12px;border-radius:0;border-left:1px dashed var(--muted);vertical-align:-2px}
+.trow{display:grid;grid-template-columns:150px minmax(0,1fr);gap:4px 10px;align-items:center;margin:9px 0;font-size:12.5px}
+@media (max-width:560px){.trow{grid-template-columns:minmax(0,1fr)}}
+.ttrack{position:relative;display:flex;align-items:center;gap:8px;min-width:0;--tlabel:68px}
+.tbar{display:flex;gap:2px;height:20px;flex:none}
+.tseg{display:flex;align-items:center;justify-content:center;min-width:2px;font-size:11px;font-variant-numeric:tabular-nums;color:#fff;white-space:nowrap;outline-offset:1px}
+.tseg:first-child{border-radius:4px 0 0 4px}
+.tseg:last-child{border-radius:0 4px 4px 0}
+.tseg.dk{color:#1f2422}
+.tseg.nolab span{visibility:hidden}
+.ttot{position:relative;z-index:1;background:var(--panel);padding:0 3px;font-size:12px;font-weight:650;white-space:nowrap;font-variant-numeric:tabular-nums}
+.tgoal-l{position:absolute;top:-4px;bottom:-4px;width:0;border-left:1px dashed var(--muted);pointer-events:none}
+.ttip{position:fixed;z-index:20;background:var(--ink);color:#fff;font-size:12px;line-height:1.45;padding:5px 9px;border-radius:7px;pointer-events:none;white-space:nowrap;font-variant-numeric:tabular-nums}
+.timing .stab{margin-top:0}
+.stab td.t2{white-space:normal;min-width:136px}
+.stab tr.tsec td{font-size:11.5px;color:var(--muted);background:var(--bg);padding-top:9px}
+.stab tr.tkey td{font-weight:650}
+.stab th.tc,.stab td.tc{text-align:center}
+details.more.tdet{margin-top:14px}
 /* 评分（按《抖音｜图像&视频效果评测标准》V_2.0 视频部分，1–5 分） */
 .sc{display:inline-flex;align-items:center;justify-content:center;min-width:34px;font-size:12px;font-weight:700;border-radius:7px;padding:1px 7px;font-variant-numeric:tabular-nums;border:1px solid}
 .sc.hi{color:var(--ok);background:var(--okbg);border-color:var(--okline)}
@@ -272,6 +305,12 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
     </table></div>
     <p class="vnote">口径：这个判断结合了你的实际体验和下表数据。5+15 两组都是 ultrafast、你本人输入，和普通档的组不是同一档位，等待和硬错误不能直接相比；只有绿色标出的同一行内才是同类比较。早期轮次、修复验证和已从网页隐藏的组不计入。导演层模板的对比结论：用 v3.0-lite 一份轻量 Harness 就够，人物主角和动物主角都适用，详见各测试组说明。</p>
   </section>
+  <section class="verdict timing" id="timing" aria-labelledby="tt">
+    <div class="vh"><div class="eyebrow">速度 · <span id="ttAt"></span></div><h2 id="tt">生成耗时</h2></div>
+    <p class="vtl" id="ttLead"></p>
+    <div id="ttBody"></div>
+    <p class="vnote">口径（单位都是秒）：开播 = 从点发送到视频开始播放，只有你在播放页真实看过的测试才有。等规划 = 观众实际等编剧/导演层写完的时间；点选项时剧情已提前写好，所以是 0，大模型仍在后台用了规划用时那么久。提交 = 规划写好到 Vivix 接单；排队、生成是 Vivix 服务端的两段；就绪从规划写好算起。排队和生成的拆分只有 ultrafast 的测试有记录。“—”是这组没有记录这一项，不是 0，也没有估算。</p>
+  </section>
   <section class="scoring" id="scoring" aria-labelledby="st">
     <div class="vh"><div class="eyebrow">评分 · <span id="scAt"></span></div><h2 id="st">互动剧集评分体系 v3（10 分制）</h2></div>
     <p class="vtl">评分体系文档：<a href="https://japy03oxab.feishu.cn/wiki/Uxt1wiHvBibEw6kqXmEc6cnSnAb" target="_blank" rel="noopener">realtime 评分体系（飞书）</a></p>
@@ -289,6 +328,7 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
 </div>
 <script src="data.js?v=20261030-mii66"></script>
 <script src="scores.js?v=20261030-mii66"></script>
+<script src="timing.js?v=20261031-t1"></script>
 <script>
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const mmss = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
@@ -535,6 +575,108 @@ document.addEventListener('toggle', e => {
 }, true);
 // 同一时间只放一条
 document.addEventListener('play', e => document.querySelectorAll('video').forEach(v => { if (v !== e.target) v.pause(); }), true);
+</script>
+<script>
+// 生成耗时：数字全部来自 timing.js（build_timing.py 汇总），这里只负责渲染；被 HIDE 隐藏的组不算在内
+(function () {
+  const T = window.TIMING;
+  if (!T) { $('timing').remove(); return; }
+  const shown = new Set(L.dramas.flatMap(d => d.groups.map(g => d.id + '|' + (g.tab || g.title))));
+  const groups = T.groups.filter(g => shown.has(g.drama + '|' + g.tab));
+  const cur = T.current.map(c => Object.assign({}, c, { g: groups.find(g => g.drama === c.drama && g.tab === c.tab) })).filter(c => c.g);
+  if (!cur.length) { $('timing').remove(); return; }
+  const n1 = v => Number(v).toFixed(1);
+  const pair = (o, k) => o && o[k] ? `${n1(o[k][0])} / ${n1(o[k][1])}` : '—';
+  const fast = (o, k) => o && o[k] ? n1(o[k][0]) : '—';
+  const mean = (o, k) => o && o[k] ? n1(o[k][1]) : '—';
+  const KIND = { option: '点选项', free: '自由输入', other: '预设版选择点' };
+  $('ttAt').textContent = T.updated || '';
+
+  // 结论
+  const [A, B] = [cur[0], cur[1] || cur[0]];
+  const ka = A.g.kinds, kb = B.g.kinds;
+  const over = Math.max(0, Math.round(ka.free.play[1] - 30)) + '–' + Math.max(0, Math.round(kb.free.play[1] - 30));
+  $('ttLead').innerHTML = `当前版本（${esc(A.g.models.join('、'))} · ${esc(A.g.modes.join('、'))}）：点选项平均 <b>${mean(ka.option, 'play')} 秒</b>（咪）、<b>${mean(kb.option, 'play')} 秒</b>（Magnus）开播，已在 30 秒内，最快 ${fast(ka.option, 'play')} 秒。`
+    + `自由输入平均 <b>${mean(ka.free, 'play')} 秒</b>、<b>${mean(kb.free, 'play')} 秒</b>，最快 ${fast(ka.free, 'play')} 秒，还比 30 秒多 ${over} 秒。`
+    + `多出来的基本就是现写剧情的编剧/导演层（平均 ${mean(ka.free, 'wait')}、${mean(kb.free, 'wait')} 秒）；开播要等第 2 段，它平均 ${mean(A.g.all, 's2_ready')}、${mean(B.g.all, 's2_ready')} 秒就绪，其中 Vivix 排队 ${mean(A.g.all, 's2_queue')}、${mean(B.g.all, 's2_queue')} 秒。`;
+
+  // 开播：最快 / 平均，按输入类型
+  const cols = [['全部', c => c.g.all, c => c.g.n], ['点选项', c => c.g.kinds.option, c => c.g.counts.option], ['自由输入', c => c.g.kinds.free, c => c.g.counts.free]];
+  const cards = cur.map(c => `<div class="tcard"><h4>${esc(c.name)}</h4><div class="tm">${c.g.n} 轮 · ${esc(c.g.models.join('、'))} · ${esc(c.g.modes.join('、'))} · ${esc(c.g.when)}</div>
+    <div class="tcols">${cols.map(([t, o, n]) => `<div><div class="tk">${t} · ${n(c)} 轮</div><div class="tv">最快 <b>${fast(o(c), 'play')}</b></div><div class="tv">平均 <b>${mean(o(c), 'play')}</b></div></div>`).join('')}</div></div>`).join('');
+
+  // 时间花在哪：等规划 + 第 2 段的提交、排队、生成
+  const ST = [['wait', '等规划（编剧/导演层）', '--st-wait', 0], ['s2_submit', '提交', '--st-submit', 0], ['s2_queue', 'Vivix 排队', '--st-queue', 1], ['s2_gen', 'Vivix 生成', '--st-gen', 0]];
+  const bars = cur.flatMap(c => ['option', 'free'].map(k => ({ name: `${c.name.split(' · ')[0]} · ${KIND[k]}`, o: c.g.kinds[k] })));
+  const total = b => ST.reduce((s, [k]) => s + (b.o[k] ? b.o[k][1] : 0), 0);
+  const top = Math.ceil(Math.max(30, ...bars.map(total), ...bars.map(b => b.o.play ? b.o.play[1] : 0)) / 5) * 5;
+  const wOf = v => `calc((100% - var(--tlabel)) * ${(v / top).toFixed(4)})`;
+  const barRows = bars.map(b => {
+    const segs = ST.map(([k, label, color, dark]) => {
+      const v = b.o[k] ? b.o[k][1] : 0;
+      if (v < 0.05) return '';
+      return `<div class="tseg${dark ? ' dk' : ''}" style="flex:${v} 0 0;background:var(${color})" tabindex="0" data-tip="${esc(b.name)}&#10;${esc(label)}：平均 ${n1(v)} 秒" aria-label="${esc(label)} 平均 ${n1(v)} 秒"><span>${n1(v)}</span></div>`;
+    }).join('');
+    return `<div class="trow"><div>${esc(b.name)}</div><div class="ttrack"><div class="tbar" style="width:${wOf(total(b))}">${segs}</div><div class="ttot">开播 ${mean(b.o, 'play')}</div><div class="tgoal-l" style="left:${wOf(30)}"></div></div></div>`;
+  }).join('');
+  const legend = ST.map(([, label, color]) => `<span><i style="background:var(${color})"></i>${label}</span>`).join('') + '<span><i class="tgoal"></i>目标 30 秒</span>';
+
+  // 每个环节
+  const segLabel = (c, i) => { const m = (c.g.modes[0] || '').split('+'); return m[i] ? `（${m[i]} 秒）` : ''; };
+  const STAGE = [
+    ['编剧/导演层'], ['观众实际等规划', 'wait'], ['大模型规划用时', 'llm'],
+    ['第 1 段' + segLabel(A, 0)], ['提交', 's1_submit'], ['Vivix 排队', 's1_queue'], ['Vivix 生成', 's1_gen'], ['就绪（从规划写好算）', 's1_ready'],
+    ['第 2 段' + segLabel(A, 1)], ['提交', 's2_submit'], ['Vivix 排队', 's2_queue'], ['Vivix 生成', 's2_gen'], ['就绪（从规划写好算）', 's2_ready'],
+    ['其他'], ['配音', 'tts'],
+    ['整体'], ['发送到开播', 'play', 1], ['两段接缝停顿', 'stall'],
+  ];
+  const stageTable = `<table class="stab"><tr><th rowspan="2">环节</th>${cur.map(c => `<th class="tc" colspan="2">${esc(c.name)}</th>`).join('')}</tr>
+    <tr>${cur.map(() => '<th>最快</th><th>平均</th>').join('')}</tr>
+    ${STAGE.map(([label, k, key]) => k
+      ? `<tr${key ? ' class="tkey"' : ''}><td>${label}</td>${cur.map(c => `<td>${fast(c.g.all, k)}</td><td>${mean(c.g.all, k)}</td>`).join('')}</tr>`
+      : `<tr class="tsec"><td colspan="${1 + cur.length * 2}">${label}</td></tr>`).join('')}</table>`;
+
+  // 不同输入类型
+  const KCOL = [['等规划', 'wait'], ['第 1 段就绪', 's1_ready'], ['第 2 段排队', 's2_queue'], ['第 2 段生成', 's2_gen'], ['第 2 段就绪', 's2_ready'], ['配音', 'tts'], ['发送到开播', 'play', 1]];
+  const kindTable = `<table class="stab"><tr><th>版本</th><th>输入类型</th><th>轮数</th>${KCOL.map(([t]) => `<th>${t}<br>最快 / 平均</th>`).join('')}</tr>
+    ${cur.flatMap(c => ['option', 'free'].map(k => `<tr><td>${esc(c.name)}</td><td>${KIND[k]}</td><td>${c.g.counts[k]}</td>${KCOL.map(([, s, key]) => `<td${key ? ' class="win"' : ''}>${pair(c.g.kinds[k], s)}</td>`).join('')}</tr>`)).join('')}</table>`;
+
+  // 每部剧整体、每组明细
+  const merge = (gs, k) => {
+    const hit = gs.filter(g => g.all[k]);
+    if (!hit.length) return null;
+    const n = hit.reduce((s, g) => s + g.all[k][2], 0);
+    return [Math.min(...hit.map(g => g.all[k][0])), hit.reduce((s, g) => s + g.all[k][1] * g.all[k][2], 0) / n, n];
+  };
+  const DCOL = [['导演层', 'llm'], ['第 1 段就绪', 's1_ready'], ['第 2 段就绪', 's2_ready'], ['整段就绪', 'whole'], ['配音', 'tts'], ['发送到开播', 'play']];
+  const byDrama = L.dramas.map(d => ({ d, gs: groups.filter(g => g.drama === d.id) })).filter(x => x.gs.length);
+  const overall = `<table class="stab"><tr><th>剧集</th><th>测试组</th><th>轮数</th>${DCOL.map(([t]) => `<th>${t}<br>最快 / 平均</th>`).join('')}</tr>
+    ${byDrama.map(({ d, gs }) => { const m = {}; DCOL.forEach(([, k]) => { m[k] = merge(gs, k); }); return `<tr><td>${esc(d.title)}</td><td>${gs.length}</td><td>${gs.reduce((s, g) => s + g.n, 0)}</td>${DCOL.map(([, k]) => `<td>${pair(m, k)}</td>`).join('')}</tr>`; }).join('')}</table>`;
+  const detail = `<table class="stab"><tr><th>测试组</th><th>模型</th><th>时长</th><th>轮数</th><th>点选项 / 自由输入</th>${DCOL.map(([t]) => `<th>${t}<br>最快 / 平均</th>`).join('')}<th>开播 · 点选项<br>最快 / 平均</th><th>开播 · 自由输入<br>最快 / 平均</th></tr>
+    ${byDrama.map(({ d, gs }) => `<tr class="tsec"><td colspan="${5 + DCOL.length + 2}">${esc(d.title)}</td></tr>` + gs.map(g => `<tr><td class="t2">${esc(g.tab)}</td><td>${esc(g.models.join('、')) || '—'}</td><td>${esc(g.modes.join('、')) || '—'}</td><td>${g.n}</td><td>${g.counts.other ? '预设版' : `${g.counts.option} / ${g.counts.free}`}</td>${DCOL.map(([, k]) => `<td>${pair(g.all, k)}</td>`).join('')}<td>${pair(g.kinds.option, 'play')}</td><td>${pair(g.kinds.free, 'play')}</td></tr>`).join('')).join('')}</table>`;
+
+  $('ttBody').innerHTML = `<h3 class="th">发送到开播 · 当前版本（秒）</h3><div class="tgrid">${cards}</div>
+    <h3 class="th">开播前的时间花在哪（平均，秒）</h3><div class="tlegend">${legend}</div><div id="ttBars">${barRows}</div>
+    <h3 class="th">每个环节 · 最快和平均（秒）</h3><div class="tw">${stageTable}</div>
+    <h3 class="th">不同输入类型 · 最快 / 平均（秒）</h3><div class="tw">${kindTable}</div>
+    <h3 class="th">每部剧整体 · 所有测试轮次（秒）</h3><div class="tw">${overall}</div>
+    <p class="vnote">整体这张表把各版本混在一起算，早期用的是普通模型，所以平均偏慢；看现在的速度以上面当前版本为准。发送到开播只算有这项记录的组。</p>
+    <details class="more tdet"><summary>展开全部 ${groups.length} 组明细</summary><div class="tw" style="margin-top:8px">${detail}</div></details>`;
+
+  // 条里放得下才写数字，放不下靠图例、悬停和表格
+  const fit = () => document.querySelectorAll('#ttBars .tseg').forEach(s => { s.classList.remove('nolab'); if (s.firstChild.getBoundingClientRect().width + 8 > s.getBoundingClientRect().width) s.classList.add('nolab'); });
+  fit(); addEventListener('resize', fit);
+  const tip = document.createElement('div'); tip.className = 'ttip'; tip.hidden = true; document.body.appendChild(tip);
+  const show = el => {
+    tip.innerHTML = esc(el.dataset.tip).replace(/\n/g, '<br>'); tip.hidden = false;
+    const r = el.getBoundingClientRect(), w = tip.offsetWidth;
+    tip.style.left = Math.max(8, Math.min(innerWidth - w - 8, r.left + r.width / 2 - w / 2)) + 'px';
+    tip.style.top = Math.max(8, r.top - tip.offsetHeight - 6) + 'px';
+  };
+  const box = $('ttBars');
+  ['pointerover', 'focusin'].forEach(ev => box.addEventListener(ev, e => { const s = e.target.closest('.tseg'); if (s) show(s); else tip.hidden = true; }));
+  ['pointerleave', 'focusout'].forEach(ev => box.addEventListener(ev, () => { tip.hidden = true; }));
+})();
 </script>
 </body>
 </html>

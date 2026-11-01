@@ -19,6 +19,7 @@
 ## 结构
 
 - `index.html`：页面，只负责渲染，不用改。
+- `timing.js`：「生成耗时」区块的数据，由 `build_timing.py` 从每轮记录和卡片数字汇总；加了测试组后重跑 `python3 build_timing.py`，并改 `index.html` 里 `timing.js?v=` 的版本号。主力版本换了就改脚本顶部的 `CURRENT`。
 - `data.js`：全部数据，`window.LOG = {updated, dramas: [...]}`。
   - 每个剧集：`{id, title, sub, links, groups}`
   - 每组：`{title, when, note, params: [[名, 值]], summary: [[名, 值]], cards}`
