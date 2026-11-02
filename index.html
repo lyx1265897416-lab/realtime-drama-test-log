@@ -300,11 +300,11 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
       </ul></div>
       <div class="vc"><span class="tag ok">判断成立 · 5+15</span><h3>观众第三视角（Magnus、Rafael）</h3><ul>
         <li>你本人测的 12 轮（ultrafast）：两段都就绪中位 <b>36.3 秒</b>，“那一下”落到 <b>10/12</b>，吻戏连续 15 秒，时长够。</li>
-        <li>Rafael 你本人测的 13 轮（ultrafast，12 轮 5+15、1 轮 5+10）：发送到开播中位 <b>46.0 秒</b>，接缝停顿都是 0，“那一下”落到 <b>10/13</b>，吻戏连续约 10 秒。</li>
-        <li>两部的无硬错误都很低：Magnus 2/12，Rafael 的 5+15 是 0/12，问题是衣服配饰跳变、越轴、背景跳变，要单独修。还没有同一组输入的对比，不能算成时长的问题。</li>
+        <li>Rafael 你本人测两次（ultrafast）：V2.3 的 22 轮比第 1 次的 13 轮好，“那一下”落到 <b>20/22</b>（第 1 次 10/13），骑车真的开起来了；发送到开播中位 <b>51.0 秒</b>（第 1 次 46.0 秒），多出来的主要是状态关键帧。</li>
+        <li>无硬错误还是低：Magnus 2/12，Rafael 第 1 次 1/13、第 2 次 <b>2/22</b>。第 2 次的问题是越轴、脱衣服之后的穿着状态、配饰和脸。这次通过的 2 轮都走 5+10，但那 9 轮多是前面的轻内容，还没有同一组输入的对比，不能算成时长的问题。</li>
       </ul></div>
       <div class="vc"><span class="tag next">下一步</span><h3>还要补的测试</h3><ul>
-        <li>先修第三视角 ultrafast 的连续性（衣服配饰、越轴），修完用 Rafael 这 13 句重放一次，看无硬错误有没有起来。</li>
+        <li>先修第三视角的越轴和状态漂移（脱衣服之后的穿着、配饰、脸），修完用 Rafael 第 2 次这 22 句重放一次，看无硬错误有没有起来。</li>
         <li>5+15 还没和 5+10 用同一组输入、同一档位比过，两种内容各跑一次，确认差距。</li>
         <li>Magnus 第一视角和即兴剧场 APP 还没切到 5+15，切过去再测；第一视角此前的数据是 5+10 赢 15 秒整段和 10+10。</li>
       </ul></div>
@@ -313,7 +313,8 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
       <tr><th>内容 · 测试组</th><th>无硬错误 5+15</th><th>5+10</th><th>10+10</th><th>15 秒整段</th><th>等待中位</th><th>选</th></tr>
       <tr><td>咪 · 你本人测（ultrafast，输入不同）</td><td class="w">43/66</td><td>—</td><td>8/16</td><td>—</td><td>36.8 对 <b>31.0</b> 秒（5+15 对 10+10）</td><td class="w">5+15</td></tr>
       <tr><td>Magnus 第三视角 · 你本人测（ultrafast）</td><td>2/12</td><td>—</td><td>—</td><td>—</td><td>36.3 秒</td><td class="w">5+15</td></tr>
-      <tr><td>Rafael 第三视角 · 你本人测（ultrafast）</td><td>0/12</td><td>1/1</td><td>—</td><td>—</td><td>45.4 秒</td><td class="w">5+15</td></tr>
+      <tr><td>Rafael 第三视角 · 你本人测第 2 次（ultrafast，V2.3，输入不分方案）</td><td>0/13</td><td>2/9</td><td>—</td><td>—</td><td>49.6 秒</td><td class="w">5+15</td></tr>
+      <tr><td>Rafael 第三视角 · 你本人测第 1 次（ultrafast）</td><td>0/12</td><td>1/1</td><td>—</td><td>—</td><td>45.4 秒</td><td class="w">5+15</td></tr>
       <tr><td>Magnus 第一视角 · 模板 v3.0-lite（普通档，同 12 句）</td><td>—</td><td class="w">12/12</td><td>—</td><td>5/12</td><td>112.7 对 143.3 秒（5+10 对 15 秒）</td><td>当时没有 5+15</td></tr>
       <tr><td>Magnus 第一视角 · 模板 v2.0-lite（普通档，同 12 句）</td><td>—</td><td class="w">8/12</td><td>—</td><td>4/12</td><td>152.9 对 184.9 秒（5+10 对 15 秒）</td><td>当时没有 5+15</td></tr>
       <tr><td>Magnus 第一视角 · 模板 v1.0（普通档，同 12 句）</td><td>—</td><td class="w">7/12</td><td>—</td><td>3/12</td><td>137.3 对 149.0 秒（5+10 对 15 秒）</td><td>当时没有 5+15</td></tr>
@@ -347,14 +348,14 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
   <main id="root"></main>
   <footer id="foot"></footer>
 </div>
-<script src="data.js?v=20261101-tabs"></script>
-<script src="scores.js?v=20261101-v5"></script>
-<script src="timing.js?v=20261101-raf1"></script>
+<script src="data.js?v=20261101-raf2"></script>
+<script src="scores.js?v=20261101-raf2"></script>
+<script src="timing.js?v=20261101-raf2"></script>
 <script>
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const mmss = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
 const L = window.LOG, $ = id => document.getElementById(id);
-const VTTV = '20261101-014005';  // 字幕版本号：字幕改了就换一个，避免浏览器用缓存里的旧字幕
+const VTTV = '20261101-195803';  // 字幕版本号：字幕改了就换一个，避免浏览器用缓存里的旧字幕
 // 网页不显示的记录（Vicky 要求隐藏，本地存档保留）：按剧集 id + 分组标签 / 成片标题过滤，重建数据时即使被带回来也不显示
 const HIDE = {'magnus-open': ['上一版 · V0.17b · 10+10', '上一版 · V0.17b · 完整成片 · 10+10', '上一版 · V0.16 · 5+10', '上一版 · V0.16 · 10+10', '上一版 · V0.16 · 完整成片 · 5+10', '上一版 · V0.16 · 完整成片 · 10+10', '上一版 · V0.17b · 完整成片 · 5+10', '上一版 · V0.17c · 完整成片 · 10+10', 'V0.17d 实验 · 完整成片 · 10+10', '上一版 · V0.17b · 5+10', '上一版 · V0.17c · 10+10', 'V0.17d 实验 · 10+10'],
   'mii-open': ['上一版 v2 · 5+10', '上一版 v2 · 10+10', 'v3.2 · 10+10', '上一版 v3.1 · 5+10', '完整成片 · v3.2 · 10+10']};
