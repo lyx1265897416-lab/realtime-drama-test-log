@@ -31,7 +31,7 @@ Don't hang up. Tell me how to prove it's me.
 00:00:33.969 --> 00:00:36.269
 她：让她举两根手指，说“蓝伞”
 Her: Have her raise two fingers and say "blue umbrella"
-（实时生成 · 5+15 · 第 1 轮）
+（实时生成 · 5+15 · 第 1 轮 · Realtime round 1）
 
 00:00:36.469 --> 00:00:40.269
 蓝伞。看到了吗？现在就是我。
@@ -48,7 +48,7 @@ Someone's trying the door. Help me with the latch.
 00:00:56.553 --> 00:00:58.853
 她：让她看门闩，指挥她压到底
 Her: Have her show the latch and push it all the way
-（实时生成 · 5+15 · 第 2 轮）
+（实时生成 · 5+15 · 第 2 轮 · Realtime round 2）
 
 00:00:59.053 --> 00:01:02.353
 好，我拍给你看门闩。
@@ -65,7 +65,7 @@ It held. But they're still out there.
 00:01:19.137 --> 00:01:21.437
 她：让她拍墙上的终端
 Her: Have her film the wall terminal
-（实时生成 · 5+15 · 第 3 轮）
+（实时生成 · 5+15 · 第 3 轮 · Realtime round 3）
 
 00:01:21.637 --> 00:01:25.437
 好。终端。等一下，我在看。
@@ -82,7 +82,7 @@ Do you believe me? Or should I keep looking?
 00:01:41.721 --> 00:01:44.021
 她：让她拍下完整条目
 Her: Have her capture the full entry
-（实时生成 · 5+15 · 第 4 轮）
+（实时生成 · 5+15 · 第 4 轮 · Realtime round 4）
 
 00:01:44.221 --> 00:01:48.421
 好。完整条目。我全都拍下来。
@@ -103,7 +103,7 @@ We can't stay here. I'm taking the side door.
 00:02:04.305 --> 00:02:06.605
 她：让她先检查侧门的把手
 Her: Have her check the side door handle first
-（实时生成 · 5+15 · 第 5 轮）
+（实时生成 · 5+15 · 第 5 轮 · Realtime round 5）
 
 00:02:06.805 --> 00:02:10.105
 先看把手，然后我们走。
@@ -124,7 +124,7 @@ Please switch off auto-backup. It's interfering.
 00:02:26.889 --> 00:02:29.189
 她：保持备份开启，让Lena走侧门
 Her: Keep backup on. Lena takes the side door.
-（实时生成 · 5+15 · 第 6 轮）
+（实时生成 · 5+15 · 第 6 轮 · Realtime round 6）
 
 00:02:29.389 --> 00:02:31.689
 备份保持开启，我不会动它。
@@ -145,7 +145,7 @@ Someone's coming up. Keys.
 00:02:49.473 --> 00:02:51.773
 她：让她躲到拐角后观察
 Her: Have her hide at the corner and watch
-（实时生成 · 5+15 · 第 7 轮）
+（实时生成 · 5+15 · 第 7 轮 · Realtime round 7）
 
 00:02:51.973 --> 00:02:54.873
 好。我躲好了，我在看。
@@ -162,7 +162,7 @@ He has a key. Do I trust him?
 00:03:12.057 --> 00:03:14.357
 她：让她举起两根手指给他看
 Her: Have her hold up two fingers to him
-（实时生成 · 5+15 · 第 8 轮）
+（实时生成 · 5+15 · 第 8 轮 · Realtime round 8）
 
 00:03:14.557 --> 00:03:17.857
 两根手指。还是我。实时的。
