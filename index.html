@@ -296,7 +296,7 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
       <div class="vc"><span class="tag ok">判断成立 · 15+15</span><h3>默认：一轮演完整的一小集</h3><ul>
         <li>等待不比 5+15 长：别信这段直播你本人测 V4 的 10 轮全部 15+15，发送到开播中位 <b>35.6 秒</b>（你测 V3 的 5+15 是 37.3 秒）；同一部剧交替实测 25 对 27 秒、复测 29 对 25 秒。Vivix 两段基本排队生成，总时长差不多，内容多 10 秒。</li>
         <li>剧情推得更快：V4 第 7 轮就到封存库，V3 要第 9 轮；一轮能走完“事件 → 主角主动 → 新信息 → 后果”。</li>
-        <li>代价是 15 秒的第 1 段更容易漂（背影、换衣服）：改成第 1 段只拍自拍、第 2 段用参考图后好转，模拟 10 轮无硬错误 2/10，还要你人工测确认。</li>
+        <li>代价是第一视角更容易破功：你本人测 V4.4 的 7 轮（全部 15+15，5 轮打字）无硬错误只有 <b>1/7</b>，问题集中在背影、双手同时做事、后脑勺；发送到开播中位 48.0 秒，打字要现写分镜所以比点选项慢。15+15 的内容量成立，第一视角的镜头规则还要再修。</li>
         <li>第三视角三部已接入，真跑 9/9 成功；但你测《今天，再喜欢我一次》4 轮发送到开播约 <b>115 秒</b>，等待和内容都还要再测。</li>
       </ul></div>
       <div class="vc"><span class="tag ok">判断成立 · 5+15</span><h3>需要连续 15 秒动作的轮次（咪的默认）</h3><ul>
@@ -316,6 +316,7 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
       <tr><td>Magnus 第三视角 · 你本人测（ultrafast）</td><td>2/12</td><td>—</td><td>—</td><td>—</td><td>36.3 秒</td><td class="w">5+15</td></tr>
       <tr><td>Rafael 第三视角 · 你本人测第 2 次（ultrafast，V2.3，输入不分方案）</td><td>0/13</td><td>2/9</td><td>—</td><td>—</td><td>49.6 秒</td><td class="w">5+15</td></tr>
       <tr><td>Rafael 第三视角 · 你本人测第 1 次（ultrafast）</td><td>0/12</td><td>1/1</td><td>—</td><td>—</td><td>45.4 秒</td><td class="w">5+15</td></tr>
+      <tr><td>别信这段直播 · 第一视角悬疑 · 你本人测第 4 次（ultrafast，V4.4，15+15）</td><td>—</td><td>—</td><td>—</td><td>—</td><td>58.6 秒</td><td class="w">15+15（无硬错误 1/7）</td></tr>
       <tr><td>别信这段直播 · 第一视角悬疑 · 你本人测第 3 次（ultrafast，V3）</td><td>4/12</td><td>—</td><td>—</td><td>—</td><td>31.9 秒</td><td class="w">5+15</td></tr>
       <tr><td>别信这段直播 · 第一视角悬疑 · 你本人测第 2 次（ultrafast，V2）</td><td>1/21</td><td>—</td><td>—</td><td>—</td><td>33.8 秒</td><td class="w">5+15</td></tr>
       <tr><td>Magnus 第一视角 · 模板 v3.0-lite（普通档，同 12 句）</td><td>—</td><td class="w">12/12</td><td>—</td><td>5/12</td><td>112.7 对 143.3 秒（5+10 对 15 秒）</td><td>当时没有 5+15</td></tr>
@@ -351,14 +352,14 @@ footer{margin-top:44px;font-size:12px;color:var(--muted)}
   <main id="root"></main>
   <footer id="foot"></footer>
 </div>
-<script src="data.js?v=20261103-dt43"></script>
-<script src="scores.js?v=20261103-v51"></script>
-<script src="timing.js?v=20261103-dt43"></script>
+<script src="data.js?v=20261104-dt4"></script>
+<script src="scores.js?v=20261104-dt4"></script>
+<script src="timing.js?v=20261104-dt4"></script>
 <script>
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const mmss = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
 const L = window.LOG, $ = id => document.getElementById(id);
-const VTTV = '20261102-041225';  // 字幕版本号：字幕改了就换一个，避免浏览器用缓存里的旧字幕
+const VTTV = '20261104-041128';  // 字幕版本号：字幕改了就换一个，避免浏览器用缓存里的旧字幕
 // 网页不显示的记录（Vicky 要求隐藏，本地存档保留）：按剧集 id + 分组标签 / 成片标题过滤，重建数据时即使被带回来也不显示
 const HIDE = {'magnus-open': ['上一版 · V0.17b · 10+10', '上一版 · V0.17b · 完整成片 · 10+10', '上一版 · V0.16 · 5+10', '上一版 · V0.16 · 10+10', '上一版 · V0.16 · 完整成片 · 5+10', '上一版 · V0.16 · 完整成片 · 10+10', '上一版 · V0.17b · 完整成片 · 5+10', '上一版 · V0.17c · 完整成片 · 10+10', 'V0.17d 实验 · 完整成片 · 10+10', '上一版 · V0.17b · 5+10', '上一版 · V0.17c · 10+10', 'V0.17d 实验 · 10+10'],
   'mii-open': ['上一版 v2 · 5+10', '上一版 v2 · 10+10', 'v3.2 · 10+10', '上一版 v3.1 · 5+10', '完整成片 · v3.2 · 10+10']};
