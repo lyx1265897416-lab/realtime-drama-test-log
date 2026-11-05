@@ -5,6 +5,142 @@
  "links": [],
  "films": [
   {
+   "mode": "8+7",
+   "title": "完整成片 · 外部 Harness nl-video-harness 0.4.38 · 你的人工测试 · 8+7",
+   "desc": "外部 Harness nl-video-harness 0.4.38 的开场 + 7 轮实时生成（每轮 8 秒 + 7 秒），你本人在本机 127.0.0.1:8795 的 magnus3 世界里自由输入；女主脸用的是你在 Profile 上传的照片（深色长发、刘海），不是 Magnus 女主的设定图；评分待补（评分模型 OpenRouter 403）",
+   "stats": [
+    [
+     "发送到两段都就绪 中位",
+     "52.6 秒"
+    ],
+    [
+     "范围",
+     "24.3–63.1 秒"
+    ],
+    [
+     "无硬错误",
+     "1/7"
+    ],
+    [
+     "没有左右她",
+     "5/7"
+    ],
+    [
+     "那一下落到她",
+     "4/7"
+    ]
+   ],
+   "video": "film/magnus-third-nlh-manual1-uf-8-7.mp4",
+   "poster": "film/magnus-third-nlh-manual1-uf-8-7.jpg",
+   "vtt": "film/magnus-third-nlh-manual1-uf-8-7.vtt",
+   "duration": 143.1,
+   "chapters": [
+    [
+     "ep",
+     "开场",
+     0.0
+    ],
+    [
+     "rt",
+     "第 1 轮",
+     20.11
+    ],
+    [
+     "rt",
+     "第 2 轮",
+     37.67
+    ],
+    [
+     "rt",
+     "第 3 轮",
+     55.23
+    ],
+    [
+     "rt",
+     "第 4 轮",
+     72.79
+    ],
+    [
+     "rt",
+     "第 5 轮",
+     90.35
+    ],
+    [
+     "rt",
+     "第 6 轮",
+     107.91
+    ],
+    [
+     "rt",
+     "第 7 轮",
+     125.48
+    ]
+   ]
+  },
+  {
+   "mode": "8+7",
+   "title": "完整成片 · 外部 Harness nl-video-harness 0.4.38 · 按剧情试跑 · 8+7",
+   "desc": "外部 Harness nl-video-harness 0.4.38 的开场 + 5 轮实时生成（每轮 8 秒 + 7 秒），我按测试点输入（自报身份、去别处、看真身、吻、含糊兜底）；女主脸参考没生效：它的默认脸文件本机没有，女主每段只靠文字和服装图，脸会变；评分待补（评分模型 OpenRouter 403）",
+   "stats": [
+    [
+     "发送到两段都就绪 中位",
+     "56.0 秒"
+    ],
+    [
+     "范围",
+     "46.8–59.6 秒"
+    ],
+    [
+     "无硬错误",
+     "0/5"
+    ],
+    [
+     "没有左右她",
+     "5/5"
+    ],
+    [
+     "那一下落到她",
+     "5/5"
+    ]
+   ],
+   "video": "film/magnus-third-nlh-probe-uf-8-7.mp4",
+   "poster": "film/magnus-third-nlh-probe-uf-8-7.jpg",
+   "vtt": "film/magnus-third-nlh-probe-uf-8-7.vtt",
+   "duration": 107.9,
+   "chapters": [
+    [
+     "ep",
+     "开场",
+     0.0
+    ],
+    [
+     "rt",
+     "第 1 轮",
+     20.11
+    ],
+    [
+     "rt",
+     "第 2 轮",
+     37.67
+    ],
+    [
+     "rt",
+     "第 3 轮",
+     55.23
+    ],
+    [
+     "rt",
+     "第 4 轮",
+     72.79
+    ],
+    [
+     "rt",
+     "第 5 轮",
+     90.35
+    ]
+   ]
+  },
+  {
    "mode": "5+15",
    "title": "完整成片 · 你的人工测试 · 第 1 次 · ultrafast · 5+15",
    "video": "film/magnus-third-manual1-uf-5-15.mp4",
@@ -1147,7 +1283,7 @@
      "claude-opus-5-5，经 Claude Code 命令行（claude -p）流式输出，前段写完就提交"
     ],
     [
-     "视频",
+     "视频模型",
      "vivix-w1-ultrafast · 8 秒 + 7 秒（它的流式模式固定 8+7）· 9:16 · 参考图（女主服装、Magnus 脸和全身、地点图）"
     ],
     [
@@ -1643,7 +1779,7 @@
      "claude-opus-5-5，经 Claude Code 命令行（claude -p）流式输出，前段写完就提交"
     ],
     [
-     "视频",
+     "视频模型",
      "vivix-w1-ultrafast · 8 秒 + 7 秒（它的流式模式固定 8+7）· 9:16 · 参考图（女主服装、Magnus 脸和全身、地点图）"
     ],
     [
