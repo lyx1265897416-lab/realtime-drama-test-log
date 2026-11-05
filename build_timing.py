@@ -19,7 +19,7 @@ ROOT = os.path.dirname(os.path.dirname(HERE))
 # 结论区用的两组：目前的主力版本（ultrafast，5+15，真人测试）。换了主力版本就改这里
 CURRENT = [('mii-open', '你的人工测试 · 第 5 次 · ultrafast · 5+15', '咪 · 开放式'),
            ('magnus-third', '你的人工测试 · 第 1 次 · ultrafast · 5+15', 'Magnus · 第三视角')]
-FAMILY = {'mii': 'mii', 'mii-open': 'mii', 'magnus-preset': 'magnus', 'magnus-open': 'magnus', 'magnus-third': 'magnus', 'rafael-third': 'rafael', 'dont-trust': 'dont', 'meet-third': 'meet'}
+FAMILY = {'mii': 'mii', 'mii-open': 'mii', 'magnus-preset': 'magnus', 'magnus-open': 'magnus', 'magnus-third': 'magnus', 'rafael-third': 'rafael', 'dont-trust': 'dont', 'meet-third': 'meet', 'rian-third': 'rian', 'island-liars': 'island'}
 STAGES = ['wait', 'llm', 's1_submit', 's1_queue', 's1_gen', 's1_ready', 's2_submit', 's2_queue', 's2_gen', 's2_ready',
           'whole', 'tts', 'play', 'stall']
 CARD_FIELD = {'导演层': 'llm', '第 1 段就绪': 's1_ready', '第 2 段就绪': 's2_ready', '整段就绪': 'whole', '发送到开播': 'play',
