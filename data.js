@@ -32164,10 +32164,10 @@ window.LOG = {
        "待补：评分模型 OpenRouter 403"
       ]
      ],
-     "video": "film/rafael-third-nlh-probe-uf-8-7.mp4",
-     "poster": "film/rafael-third-nlh-probe-uf-8-7.jpg",
-     "vtt": "film/rafael-third-nlh-probe-uf-8-7.vtt",
-     "duration": 125.5,
+     "video": "film/rafael-third-nlh-rafael3-probe-uf-8-7.mp4",
+     "poster": "film/rafael-third-nlh-rafael3-probe-uf-8-7.jpg",
+     "vtt": "film/rafael-third-nlh-rafael3-probe-uf-8-7.vtt",
+     "duration": 235.1,
      "chapters": [
       [
        "ep",
@@ -32177,32 +32177,32 @@ window.LOG = {
       [
        "rt",
        "第 1 轮",
-       20.11
+       129.74
       ],
       [
        "rt",
        "第 2 轮",
-       37.67
+       147.3
       ],
       [
        "rt",
        "第 3 轮",
-       55.23
+       164.86
       ],
       [
        "rt",
        "第 4 轮",
-       72.79
+       182.43
       ],
       [
        "rt",
        "第 5 轮",
-       90.35
+       199.99
       ],
       [
        "rt",
        "第 6 轮",
-       107.91
+       217.55
       ]
      ]
     },
